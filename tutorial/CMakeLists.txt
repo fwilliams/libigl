@@ -154,5 +154,9 @@ if(TUTORIALS_CHAPTER7)
   add_subdirectory("710_SLIM")
   add_subdirectory("711_Subdivision")
   add_subdirectory("712_DataSmoothing")
+  if(LIBIGL_WITH_TETGEN)
+    add_subdirectory("713_MarchingTetrahedra")
+  endif()
+
 endif()
 
