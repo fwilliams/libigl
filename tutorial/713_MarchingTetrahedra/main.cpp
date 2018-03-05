@@ -4,7 +4,6 @@
 #include <igl/colormap.h>
 #include <igl/marching_tets.h>
 
-
 #include "tutorial_shared_path.h"
 
 // Input polygon

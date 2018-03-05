@@ -4,11 +4,13 @@
 #include <vector>
 #include <utility>
 #include <cstdint>
+#include <iostream>
 
-std::int64_t make_edge_key(std::int32_t a, std::int32_t b) {
+
+inline std::int64_t make_edge_key(const std::pair<std::int32_t, std::int32_t>& p) {
     std::int64_t ret = 0;
-    ret |= a;
-    ret |= static_cast<std::int64_t>(b) << 32;
+    ret |= p.first;
+    ret |= static_cast<std::int64_t>(p.second) << 32;
     return ret;
 }
 
@@ -56,11 +58,12 @@ void igl::marching_tets(
 
     vector<Eigen::RowVector3d> vertices;
     vector<Eigen::RowVector3i> faces;
-    unordered_map<std::int64_t, int> edge_table;
+    vector<pair<int, int>> edge_table;
 
-    assert(TT.rows() == 4);
-    assert(TV.rows() == 3);
-    assert(isovals.rows() == 1);
+
+    assert(TT.cols() == 4 && TT.rows() >= 1);
+    assert(TV.cols() == 3 && TV.rows() >= 4);
+    assert(isovals.cols() == 1);
 
     static_assert(sizeof(std::int64_t) == 2*sizeof(std::int32_t), "need to fit 2 ints into a size_t");
 
@@ -75,22 +78,26 @@ void igl::marching_tets(
 
         // Insert the vertices if they don't exist
         int v_ids[4] = {-1, -1, -1, -1}; // This will contain the index in TV of each vertex in the tet
-        for (int e = 0; mt_cell_lookup[key][e] != -1; e++) {
-            std::int64_t edge_table_key = make_edge_key(i, mt_cell_lookup[key][e]);
-            auto edge_id_it = edge_table.find(edge_table_key);
+        for (int e = 0; mt_cell_lookup[key][e] != -1 && e < 4; e++) {
+            const int v1id = mt_edge_lookup[mt_cell_lookup[key][e]][0];
+            const int v2id = mt_edge_lookup[mt_cell_lookup[key][e]][1];
+            const int v1i = TT(i, v1id), v2i = TT(i, v2id);
+            const Eigen::RowVector3d v1 = TV.row(v1i);
+            const Eigen::RowVector3d v2 = TV.row(v2i);
+            const double a = fabs(isovals[v1i] - isovalue), b = fabs(isovals[v2i] - isovalue);
+            const double w = a / (a+b);
 
-            if (edge_id_it == edge_table.end()) {
-                int v1id = mt_edge_lookup[mt_cell_lookup[key][e]][0];
-                int v2id = mt_edge_lookup[mt_cell_lookup[key][e]][1];
-                Eigen::RowVector3d v1 = TV.row(TT(i, v1id));
-                Eigen::RowVector3d v2 = TV.row(TT(i, v2id));
-                vertices.push_back(0.5*(v1 + v2)); // Push back the midpoint
-                edge_table.insert(make_pair(edge_table_key, vertices.size()-1));
-                v_ids[e] = vertices.size()-1;
+            const int vertex_id = vertices.size();
+            vertices.push_back((1-w)*v1 + w*v2); // Push back the midpoint
+            if (v1i < v2i) {
+                edge_table.push_back(make_pair(v1i, v2i));
             } else {
-                v_ids[e] = edge_id_it->second;
+                edge_table.push_back(make_pair(v2i, v1i));
             }
+
+            v_ids[e] = vertex_id;
         }
+
         if (v_ids[0] != -1) {
             bool is_quad = mt_cell_lookup[key][3] != -1;
             if (is_quad) {
@@ -105,14 +112,28 @@ void igl::marching_tets(
         }
     }
 
+    // Deduplicate vertices
+    int num_unique = 0;
     outV.resize(vertices.size(), 3);
     outF.resize(faces.size(), 3);
-    for (int i = 0; i < vertices.size(); i++) {
-        outV.row(i) = vertices[i];
-    }
+    unordered_map<int64_t, int> emap;
     for (int i = 0; i < faces.size(); i++) {
-        outF.row(i) = faces[i];
+        for (int v = 0; v < 3; v++) {
+            const int vi = faces[i][v];
+            const pair<int32_t, int32_t> edge = edge_table[vi];
+            const int64_t key = make_edge_key(edge);
+            auto it = emap.find(key);
+            if (it == emap.end()) { // New unique vertex, insert it
+                outV.row(num_unique) = vertices[vi];
+                outF(i, v) = num_unique;
+                emap.insert(make_pair(key, num_unique));
+                num_unique += 1;
+            } else {
+                outF(i, v) = it->second;
+            }
+        }
     }
+    outV.conservativeResize(num_unique, 3);
 }
 
 #ifdef IGL_STATIC_LIBRARY
@@ -127,4 +148,7 @@ template void igl::marching_tets<typename Eigen::Matrix<double, -1, -1, 0, -1, -
         double isovalue,
         Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1>>&,
         Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1>>&);
+
+
+// template void igl::marching_tets<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, double, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
 #endif // IGL_STATIC_LIBRARY
