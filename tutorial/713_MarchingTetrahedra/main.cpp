@@ -31,7 +31,8 @@ void visualize_tet_wireframe(igl::opengl::glfw::Viewer& viewer,
 {
   // Make a black line for each edge in the tet mesh which we'll draw
   std::vector<std::pair<int, int>> edges;
-  for (int i = 0; i < TT.rows(); i++) {
+  for (int i = 0; i < TT.rows(); i++)
+  {
     int tf1 = TT(i, 0);
     int tf2 = TT(i, 1);
     int tf3 = TT(i, 2);
@@ -45,7 +46,8 @@ void visualize_tet_wireframe(igl::opengl::glfw::Viewer& viewer,
   }
 
   Eigen::MatrixXd v1(edges.size(), 3), v2(edges.size(), 3);
-  for (int i = 0; i < edges.size(); i++) {
+  for (int i = 0; i < edges.size(); i++)
+  {
     v1.row(i) = TV.row(edges[i].first);
     v2.row(i) = TV.row(edges[i].second);
   }
@@ -78,7 +80,8 @@ int main(int argc, char *argv[])
 
   // Make the isovalues of each tet vertex, be the distance form the origin
   isovalues.resize(TV.rows());
-  for (int i = 0; i < isovalues.size(); i++) {
+  for (int i = 0; i < isovalues.size(); i++)
+  {
     isovalues[i] = TV.row(i).norm();
   }
 
