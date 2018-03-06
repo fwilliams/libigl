@@ -1,3 +1,11 @@
+// This file is part of libigl, a simple c++ geometry processing library.
+//
+// Copyright (C) 2018 Foo Bar <foobar@gmail.com>
+//
+// This Source Code Form is subject to the terms of the Mozilla Public License
+// v. 2.0. If a copy of the MPL was not distributed with this file, You can
+// obtain one at http://mozilla.org/MPL/2.0/.
+
 #include "marching_tets.h"
 
 #include <unordered_map>
@@ -24,8 +32,6 @@ void igl::marching_tets(
 
   const auto make_edge_key = [](const pair<int32_t, int32_t>& p) -> int64_t
   {
-    static_assert(sizeof(std::int64_t) == 2*sizeof(std::int32_t),
-                  "need to fit 2 ints into a size_t");
     std::int64_t ret = 0;
     ret |= p.first;
     ret |= static_cast<std::int64_t>(p.second) << 32;
@@ -87,7 +93,7 @@ void igl::marching_tets(
     int v_ids[4] = {-1, -1, -1, -1};
 
     // Insert any vertices if the tet intersects the level surface
-    for (int e = 0; mt_cell_lookup[key][e] != -1 && e < 4; e++)
+    for (int e = 0; e < 4 && mt_cell_lookup[key][e] != -1; e++)
     {
       const int v1_idx = TT(i, mt_edge_lookup[mt_cell_lookup[key][e]][0]);
       const int v2_idx = TT(i,  mt_edge_lookup[mt_cell_lookup[key][e]][1]);
@@ -149,7 +155,7 @@ void igl::marching_tets(
       {
         outV.row(num_unique) = vertices[vi];
         outF(i, v) = num_unique;
-        emap.insert(make_pair(key, num_unique));
+        emap.emplace(key, num_unique);
         num_unique += 1;
       }
       else
