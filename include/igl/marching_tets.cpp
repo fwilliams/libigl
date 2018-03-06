@@ -1,6 +1,6 @@
 // This file is part of libigl, a simple c++ geometry processing library.
 //
-// Copyright (C) 2018 Foo Bar <foobar@gmail.com>
+// Copyright (C) 2018 Francis Williams <francis@fwilliams.info>
 //
 // This Source Code Form is subject to the terms of the Mozilla Public License
 // v. 2.0. If a copy of the MPL was not distributed with this file, You can
@@ -109,11 +109,11 @@ void igl::marching_tets(
       vertices.push_back((1-w)*v1 + w*v2);
       if (v1_idx < v2_idx)
       {
-        edge_table.push_back(make_pair(v1_idx, v2_idx));
+        edge_table.emplace_back(v1_idx, v2_idx);
       }
       else
       {
-        edge_table.push_back(make_pair(v2_idx, v1_idx));
+        edge_table.emplace_back(v2_idx, v1_idx);
       }
 
       v_ids[e] = vertex_id;
