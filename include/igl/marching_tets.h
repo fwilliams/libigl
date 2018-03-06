@@ -5,18 +5,34 @@
 #include <Eigen/Core>
 
 namespace igl {
-template <typename DerivedTV,
-          typename DerivedTT,
-          typename Derivedisovalues,
-          typename DerivedoutV,
-          typename DerivedoutF>
-IGL_INLINE void marching_tets(
-        const Eigen::PlainObjectBase<DerivedTV>& TV,
-        const Eigen::PlainObjectBase<DerivedTT>& TT,
-        const Eigen::PlainObjectBase<Derivedisovalues>& isovals,
-        double isovalue,
-        Eigen::PlainObjectBase<DerivedoutV>& outV,
-        Eigen::PlainObjectBase<DerivedoutF>& outF);
+    // marching_tets( TV, TT, isovals, isovalue, outV, outF _
+    //
+    // performs the marching tetrahedra algorithm on a tet mesh defined by TV and TT with scalar values
+    // defined at each vertex in TV. The output is a triangle mesh approximating the isosurface
+    // coresponding to the value isovalue.
+    //
+    // Input:
+    //  TV  #tet_vertices x 3 array -- The vertices of the tetrahedral mesh
+    //  TT  #tets x 4 array --  The indexes of each tet in the tetrahedral mesh
+    //  isovals  #tet_vertices x 1 array -- The scalar values defined on each tet vertex
+    //  isovalue  scalar -- The isovalue of the level set we want to compute
+    //
+    // Output:
+    //  outV  #V x 3 array -- The vertices of the output level surface mesh
+    //  outF  #F x 3 array -- The face indexes of the output level surface mesh
+    //
+    template <typename DerivedTV,
+              typename DerivedTT,
+              typename Derivedisovalues,
+              typename DerivedoutV,
+              typename DerivedoutF>
+    IGL_INLINE void marching_tets(
+            const Eigen::PlainObjectBase<DerivedTV>& TV,
+            const Eigen::PlainObjectBase<DerivedTT>& TT,
+            const Eigen::PlainObjectBase<Derivedisovalues>& isovals,
+            double isovalue,
+            Eigen::PlainObjectBase<DerivedoutV>& outV,
+            Eigen::PlainObjectBase<DerivedoutF>& outF);
 }
 
 #ifndef IGL_STATIC_LIBRARY
