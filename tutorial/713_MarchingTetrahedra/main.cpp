@@ -27,9 +27,8 @@ Eigen::MatrixXi isoF;
 void visualize_tet_wireframe(igl::opengl::glfw::Viewer& viewer,
                              const Eigen::MatrixXd& TV,
                              const Eigen::MatrixXi& TT,
-                             const Eigen::VectorXd& isovals) {
-  using namespace Eigen;
-
+                             const Eigen::VectorXd& isovals)
+{
   // Make a black line for each edge in the tet mesh which we'll draw
   std::vector<std::pair<int, int>> edges;
   for (int i = 0; i < TT.rows(); i++) {
@@ -56,8 +55,9 @@ void visualize_tet_wireframe(igl::opengl::glfw::Viewer& viewer,
   const double isoval_min = isovals.minCoeff();
   const double isoval_max = isovals.maxCoeff();
   const double isoval_spread = isoval_max - isoval_min;
+  const std::size_t n_isovals = isovals.size();
   Eigen::VectorXd isovals_normalized =
-      (isovals - isoval_min * VectorXd::Ones(isovals.size())) / isoval_spread;
+    (isovals - isoval_min * Eigen::VectorXd::Ones(n_isovals)) / isoval_spread;
 
   // Draw colored vertices of tet mesh based on their isovalue and black
   // lines connecting the vertices
@@ -68,10 +68,8 @@ void visualize_tet_wireframe(igl::opengl::glfw::Viewer& viewer,
 }
 
 
-int main(int argc, char *argv[]) {
-  using namespace Eigen;
-  using namespace std;
-
+int main(int argc, char *argv[])
+{
   // Load a surface mesh
   igl::readOFF(TUTORIAL_SHARED_PATH "/fertility.off",V,F);
 
