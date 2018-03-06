@@ -15,10 +15,10 @@
 namespace igl {
   // marching_tets( TV, TT, isovals, isovalue, outV, outF _
   //
-  // performs the marching tetrahedra algorithm on a tet mesh defined by TV and TT
-  // with scalar values defined at each vertex in TV. The output is a triangle
-  // mesh approximating the isosurface
-  // coresponding to the value isovalue.
+  // performs the marching tetrahedra algorithm on a tet mesh defined by TV and
+  // TT with scalar values defined at each vertex in TV. The output is a
+  // triangle mesh approximating the isosurface coresponding to the value
+  // isovalue.
   //
   // Input:
   //  TV  #tet_vertices x 3 array -- The vertices of the tetrahedral mesh
