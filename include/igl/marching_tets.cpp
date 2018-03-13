@@ -68,7 +68,6 @@ void igl::marching_tets(
     {2, 3},
   };
 
-  vector<Eigen::RowVector3d> vertices;
   vector<Eigen::RowVector3i> faces;
   vector<pair<int, int>> edge_table;
 
@@ -83,11 +82,10 @@ void igl::marching_tets(
     uint8_t key = 0;
     for (int v = 0; v < 4; v++)
     {
-      int vid = TT(i, v);
-      uint8_t flag = isovals[vid] > isovalue;
+      const int vid = TT(i, v);
+      const uint8_t flag = isovals[vid] > isovalue;
       key |= flag << v;
     }
-
 
     // This will contain the index in TV of each vertex in the tet
     int v_ids[4] = {-1, -1, -1, -1};
@@ -95,27 +93,10 @@ void igl::marching_tets(
     // Insert any vertices if the tet intersects the level surface
     for (int e = 0; e < 4 && mt_cell_lookup[key][e] != -1; e++)
     {
-      const int v1_idx = TT(i, mt_edge_lookup[mt_cell_lookup[key][e]][0]);
-      const int v2_idx = TT(i,  mt_edge_lookup[mt_cell_lookup[key][e]][1]);
-      const Eigen::RowVector3d v1 = TV.row(v1_idx);
-      const Eigen::RowVector3d v2 = TV.row(v2_idx);
-
-      // Linearly interpolate between tet vertices along edges
-      const double a = fabs(isovals[v1_idx] - isovalue);
-      const double b = fabs(isovals[v2_idx] - isovalue);
-      const double w = a / (a+b);
-
-      const int vertex_id = vertices.size();
-      vertices.push_back((1-w)*v1 + w*v2);
-      if (v1_idx < v2_idx)
-      {
-        edge_table.emplace_back(v1_idx, v2_idx);
-      }
-      else
-      {
-        edge_table.emplace_back(v2_idx, v1_idx);
-      }
-
+      const int tv1_idx = TT(i, mt_edge_lookup[mt_cell_lookup[key][e]][0]);
+      const int tv2_idx = TT(i, mt_edge_lookup[mt_cell_lookup[key][e]][1]);
+      const int vertex_id = edge_table.size();
+      edge_table.push_back(make_pair(min(tv1_idx, tv2_idx), max(tv1_idx, tv2_idx)));
       v_ids[e] = vertex_id;
     }
 
@@ -125,14 +106,14 @@ void igl::marching_tets(
       bool is_quad = mt_cell_lookup[key][3] != -1;
       if (is_quad)
       {
-        Eigen::RowVector3i f1(v_ids[0], v_ids[1], v_ids[3]);
-        Eigen::RowVector3i f2(v_ids[1], v_ids[2], v_ids[3]);
+        const Eigen::RowVector3i f1(v_ids[0], v_ids[1], v_ids[3]);
+        const Eigen::RowVector3i f2(v_ids[1], v_ids[2], v_ids[3]);
         faces.push_back(f1);
         faces.push_back(f2);
       }
       else
       {
-        Eigen::RowVector3i f(v_ids[0], v_ids[1], v_ids[2]);
+        const Eigen::RowVector3i f(v_ids[0], v_ids[1], v_ids[2]);
         faces.push_back(f);
       }
     }
@@ -140,27 +121,34 @@ void igl::marching_tets(
 
   // Deduplicate vertices
   int num_unique = 0;
-  outV.resize(vertices.size(), 3);
+  outV.resize(edge_table.size(), 3);
   outF.resize(faces.size(), 3);
   unordered_map<int64_t, int> emap;
-  for (int i = 0; i < faces.size(); i++)
+  emap.max_load_factor(0.5);
+  emap.reserve(edge_table.size());
+
+  for (int f = 0; f < faces.size(); f++)
   {
     for (int v = 0; v < 3; v++)
     {
-      const int vi = faces[i][v];
+      const int vi = faces[f][v];
       const pair<int32_t, int32_t> edge = edge_table[vi];
       const int64_t key = make_edge_key(edge);
       auto it = emap.find(key);
       if (it == emap.end()) // New unique vertex, insert it
       {
-        outV.row(num_unique) = vertices[vi];
-        outF(i, v) = num_unique;
+        const Eigen::RowVector3d v1 = TV.row(edge.first);
+        const Eigen::RowVector3d v2 = TV.row(edge.second);
+        const double a = fabs(isovals[edge.first] - isovalue);
+        const double b = fabs(isovals[edge.second] - isovalue);
+        const double w = a / (a+b);
+
+        outV.row(num_unique) = (1-w)*v1 + w*v2;
+        outF(f, v) = num_unique;
         emap.emplace(key, num_unique);
         num_unique += 1;
-      }
-      else
-      {
-        outF(i, v) = it->second;
+      } else {
+        outF(f, v) = it->second;
       }
     }
   }
