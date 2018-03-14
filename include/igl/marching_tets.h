@@ -41,8 +41,23 @@ namespace igl {
       const Eigen::PlainObjectBase<Derivedisovalues>& isovals,
       double isovalue,
       Eigen::PlainObjectBase<DerivedoutV>& outV,
+      Eigen::PlainObjectBase<DerivedoutF>& outF,
+      Eigen::VectorXi& outT);
+
+  template <typename DerivedTV,
+            typename DerivedTT,
+            typename Derivedisovalues,
+            typename DerivedoutV,
+            typename DerivedoutF>
+  IGL_INLINE void marching_tets(
+      const Eigen::PlainObjectBase<DerivedTV>& TV,
+      const Eigen::PlainObjectBase<DerivedTT>& TT,
+      const Eigen::PlainObjectBase<Derivedisovalues>& isovals,
+      double isovalue,
+      Eigen::PlainObjectBase<DerivedoutV>& outV,
       Eigen::PlainObjectBase<DerivedoutF>& outF);
-  }
+
+}
 
 #ifndef IGL_STATIC_LIBRARY
 #  include "marching_tets.cpp"
