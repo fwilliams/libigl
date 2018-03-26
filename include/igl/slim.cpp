@@ -409,7 +409,7 @@ namespace igl
       // solve
       Eigen::VectorXd Uc;
 #ifndef CHOLMOD
-      if (s.dim == 2)
+      if (s.dim == 3)
       {
         SimplicialLDLT<Eigen::SparseMatrix<double> > solver;
         Uc = solver.compute(L).solve(s.rhs);
