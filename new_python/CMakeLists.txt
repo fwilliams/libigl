@@ -7,6 +7,11 @@ message("INC DIR ${PYBIND11_DIR}/include")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${NPE_DIR}/cmake)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${NPE_DIR}/external/pybind11/tools)
 
+set(Python_ADDITIONAL_VERSIONS 3.4 3.5 3.6)
+find_package(PythonLibs REQUIRED)
+find_package(PythonInterp REQUIRED)
+
+
 
 # libigl
 option(LIBIGL_USE_STATIC_LIBRARY "Use libigl as static library" OFF)
@@ -32,9 +37,14 @@ find_package(LIBIGL REQUIRED QUIET)
 include(pybind11Tools)
 include(numpyeigenTools)
 
+file(GLOB PYIGL_SOURCES src/*.cpp)
+MESSAGE(${PYIGL_SOURCES})
 # A module for writing bindings with our framework
 npe_add_module(pyigl
   BINDING_SOURCES
-  matrix_add.cpp)
+  ${PYIGL_SOURCES}
+  )
 target_link_libraries(pyigl PRIVATE igl::core)
 target_include_directories(pyigl PRIVATE ${PYBIND_11_DIR}/include)
+target_link_libraries(pyigl PRIVATE ${PYTHON_LIBRARIES})
+set_target_properties(pyigl PROPERTIES LINK_FLAGS "-Wl,--no-undefined")
