@@ -6,7 +6,7 @@
 
 npe_function(readOFF)
 npe_arg(str, std::string)
-//npe_default_arg(read_normals, bool, true)
+npe_default_arg(read_normals, bool, true)
 
 npe_begin_code()
 using namespace std;
@@ -15,7 +15,7 @@ Eigen::Matrix<std::double_t, Eigen::Dynamic, Eigen::Dynamic> v;
 Eigen::Matrix<std::int32_t, Eigen::Dynamic, Eigen::Dynamic> f;
 Eigen::Matrix<std::double_t, Eigen::Dynamic, Eigen::Dynamic> n;
 bool ret;
-bool read_normals = false;
+//bool read_normals = false;
 
 if (read_normals) {
     ret = igl::readOFF(str, v, f, n);
