@@ -107,11 +107,11 @@ def map_parameter_types(name, cpp_type, parsed_types, errors, enum_types):
 
             if t == "PlainObjectBase" or t == "MatrixBase":
                 if name == "F":
-                    result.append("dense_i32")
+                    result.append("dense_i32, dense_i64")
                 elif name == "V":
-                    result.append("dense_f64")
+                    result.append("dense_f32, dense_f64")
                 else:
-                    result.append("dense_f64")
+                    result.append("dense_f32, dense_f64")
                 break
             if t == "MatrixXi" or t == "VectorXi":
                 result.append("MatrixXi&")
@@ -264,21 +264,21 @@ if __name__ == '__main__':
                         in_parameters.append({"name": inflection.underscore(p[0]), "type": typ})
                     else:
                         out_parameters.append({"name": inflection.underscore(p[0]), "type": typ})
-                if len(out_parameters) > 0:
-                    dtype_def = 'npe_default_arg(dtype, npe::dtype, "float64")'
-                else:
-                    dtype_def = ''
+#                if len(out_parameters) > 0:
+#                    dtype_def = 'npe_default_arg(dtype, npe::dtype, "float64")'
+#                else:
+#                    dtype_def = ''
                 all_parameters = in_parameters.copy()
                 all_parameters.extend(out_parameters)
 
                 docstring = "See " + f.name + " for the documentation."
                 if f.documentation:
-                    docstring = "\nParameters\n----------\n\ndtype : data-type of the returned objects, optional. Default is `float64`.\n(All integer return types are `int32` by default.)\n\nReturns\n-------\n\n\nSee also\n--------\n\n\n"
+                    docstring = "\nParameters\n----------\n\n\nReturns\n-------\n\n\nSee also\n--------\n\n\n"
                     docstring += "Notes\n-----\nNone\n\nExamples\n--------\n\n"
                     docstring += f.documentation
                     docstring = docstring.replace("//", "")
 
-                dici = {"in_parameters": in_parameters, "out_parameters": out_parameters, "all_parameters": all_parameters, "namespaces": d["namespaces"], "name": inflection.underscore(f.name), "orgname":f.name, "docstring": docstring, "dtype_def": dtype_def}
+                dici = {"in_parameters": in_parameters, "out_parameters": out_parameters, "all_parameters": all_parameters, "namespaces": d["namespaces"], "name": inflection.underscore(f.name), "orgname":f.name, "docstring": docstring}
                 if correct_function and len(all_parameters) > 0: #TODO add constants like EPS
                     correct_functions.append(dici)
                 elif len(all_parameters) > 0:
@@ -292,7 +292,7 @@ if __name__ == '__main__':
             try:
                 tpl = Template(filename='basic_function.mako')
                 #print(correct_functions)
-                includes = ["<tuple>", "<Eigen/Core>", "<Eigen/Sparse>", "<npe.h>", "<typedefs.h>"]
+                includes = ["<npe.h>", "<typedefs.h>"]
                 rendered = tpl.render(functions=correct_functions, enums=enums, includes=includes)
                 tpl1 = Template(filename='basic_function.mako')
                 rendered1 = tpl.render(functions=incorrect_functions, enums=enums, includes=[])
@@ -305,9 +305,9 @@ if __name__ == '__main__':
                 else:
                     path += "partial/"
                     with open(path + single_prefix + n[1:] + ".cpp", 'w') as fs:
-                        fs.write("// COMPLETE BINDINGS ========================\n")
+                        #fs.write("// COMPLETE BINDINGS ========================\n")
                         fs.write(rendered)
-                        fs.write("\n\n\n\n// INCOMPLETE BINDINGS ========================\n")
+                        fs.write("\n\n\n\n")#// INCOMPLETE BINDINGS ========================\n")
                         fs.write(rendered1)
 
                     if len(correct_functions) != 0:
