@@ -9,13 +9,14 @@
 #include "is_edge_manifold.h"
 #include <algorithm>
 
-template<typename DerivedV, typename DerivedF>
+template<typename DerivedV, typename DerivedF, 
+typename DerivedEV, typename DerivedFE, typename DerivedEF>
 IGL_INLINE void igl::edge_topology(
-  const Eigen::MatrixBase<DerivedV>& V,
-  const Eigen::MatrixBase<DerivedF>& F,
-  Eigen::MatrixXi& EV,
-  Eigen::MatrixXi& FE,
-  Eigen::MatrixXi& EF)
+    const Eigen::MatrixBase<DerivedV>& V,
+    const Eigen::MatrixBase<DerivedF>& F, 
+    Eigen::PlainObjectBase<DerivedEV>& EV, 
+    Eigen::PlainObjectBase<DerivedFE>& FE, 
+    Eigen::PlainObjectBase<DerivedEF>& EF)
 {
   // Only needs to be edge-manifold
   if (V.rows() ==0 || F.rows()==0)

@@ -34,13 +34,14 @@ namespace igl
   //   - FE uses non-standard and ambiguous order: FE(f,c) is merely an edge
   //     incident on corner c of face f. In contrast, edge_flaps's EMAP(f,c)
   //     reveals the edge _opposite_ corner c of face f
-template <typename DerivedV, typename DerivedF>
+template <typename DerivedV, typename DerivedF, 
+typename DerivedEV, typename DerivedFE, typename DerivedEF>
   IGL_INLINE void edge_topology(
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedF>& F, 
-    Eigen::MatrixXi& EV, 
-    Eigen::MatrixXi& FE, 
-    Eigen::MatrixXi& EF);
+    Eigen::PlainObjectBase<DerivedEV>& EV, 
+    Eigen::PlainObjectBase<DerivedFE>& FE, 
+    Eigen::PlainObjectBase<DerivedEF>& EF);
 }
 
 #ifndef IGL_STATIC_LIBRARY
