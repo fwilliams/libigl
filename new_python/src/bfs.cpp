@@ -38,6 +38,7 @@ npe_doc(ds_bfs)
 npe_arg(A, sparse_i32, sparse_i64)
 npe_arg(s, int)
 npe_begin_code()
+
   if (A.rows() != A.cols()) {
     std::string errmsg = std::string("Invalid Adjacency matrix. Must be a square sparse matrix. Got shape: (") +
                          std::to_string(A.rows()) + std::string(", ") + std::to_string(A.cols()) +
@@ -56,6 +57,7 @@ npe_begin_code()
   EigenDense<npe_Scalar_A> p;
   igl::bfs(A, (size_t)s, d, p);
   return std::make_tuple(npe::move(d), npe::move(p));
+
 npe_end_code()
 
 

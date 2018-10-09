@@ -254,5 +254,10 @@ class TestBasic(unittest.TestCase):
         self.assertEqual(np.max(ev), self.v1.shape[0] - 1)
         self.assertEqual(np.min(ef), 0)
 
+    def test_edges(self):
+        e = igl.edges(self.f1)
+        self.assertTrue(e.shape[0] > self.f1.shape[0])
+        self.assertEqual(e.shape[1], 2)
+
 if __name__ == '__main__':
     unittest.main()
