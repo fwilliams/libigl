@@ -38,7 +38,7 @@ const Eigen::MatrixBase<DerivedF>&F,
 const Eigen::MatrixBase<DerivedV>&FN,
 const Eigen::MatrixXi &E2F,
 const Eigen::MatrixXi &F2E,
-Eigen::MatrixBase<DerivedK>&K);
+Eigen::PlainObjectBase<DerivedK>&K);
 
 };
 

@@ -16,7 +16,7 @@ template <
 IGL_INLINE void igl::inradius(
   const Eigen::MatrixBase<DerivedV> & V, 
   const Eigen::MatrixBase<DerivedF> & F,
-  Eigen::MatrixBase<DerivedR> & r)
+  Eigen::PlainObjectBase<DerivedR> & r)
 {
   Eigen::Matrix<typename DerivedV::Scalar,Eigen::Dynamic,3> l;
   Eigen::Matrix<typename DerivedV::Scalar,Eigen::Dynamic,1> R;

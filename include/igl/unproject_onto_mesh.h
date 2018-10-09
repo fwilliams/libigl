@@ -38,7 +38,7 @@ namespace igl
     const Eigen::MatrixBase<DerivedV> & V,
     const Eigen::MatrixBase<DerivedF> & F,
     int & fid,
-    Eigen::MatrixBase<Derivedbc> & bc);
+    Eigen::PlainObjectBase<Derivedbc> & bc);
   //
   // Inputs:
   //    pos        screen space coordinates
@@ -64,7 +64,7 @@ namespace igl
         igl::Hit  &)
         > & shoot_ray,
     int & fid,
-    Eigen::MatrixBase<Derivedbc> & bc);
+    Eigen::PlainObjectBase<Derivedbc> & bc);
 }
 #ifndef IGL_STATIC_LIBRARY
 #  include "unproject_onto_mesh.cpp"

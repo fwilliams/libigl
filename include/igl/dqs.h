@@ -33,7 +33,7 @@ namespace igl
     const Eigen::MatrixBase<DerivedW> & W,
     const std::vector<Q,QAlloc> & vQ,
     const std::vector<T> & vT,
-    Eigen::MatrixBase<DerivedU> & U);
+    Eigen::PlainObjectBase<DerivedU> & U);
 };
 
 #ifndef IGL_STATIC_LIBRARY

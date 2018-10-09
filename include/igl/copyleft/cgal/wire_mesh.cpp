@@ -20,9 +20,9 @@ IGL_INLINE void igl::copyleft::cgal::wire_mesh(
   const double th,
   const int poly_size,
   const bool solid,
-  Eigen::MatrixBase<DerivedV> & V,
-  Eigen::MatrixBase<DerivedF> & F,
-  Eigen::MatrixBase<DerivedJ> & J)
+  Eigen::PlainObjectBase<DerivedV> & V,
+  Eigen::PlainObjectBase<DerivedF> & F,
+  Eigen::PlainObjectBase<DerivedJ> & J)
 {
 
   typedef typename DerivedWV::Scalar Scalar;
@@ -202,14 +202,14 @@ IGL_INLINE void igl::copyleft::cgal::wire_mesh(
   const Eigen::MatrixBase<DerivedWE> & WE,
   const double th,
   const int poly_size,
-  Eigen::MatrixBase<DerivedV> & V,
-  Eigen::MatrixBase<DerivedF> & F,
-  Eigen::MatrixBase<DerivedJ> & J)
+  Eigen::PlainObjectBase<DerivedV> & V,
+  Eigen::PlainObjectBase<DerivedF> & F,
+  Eigen::PlainObjectBase<DerivedJ> & J)
 {
   return wire_mesh(WV,WE,th,poly_size,true,V,F,J);
 }
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation 
-template void igl::copyleft::cgal::wire_mesh<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, double, int, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::copyleft::cgal::wire_mesh<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, double, int, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
 #endif

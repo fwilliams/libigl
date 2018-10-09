@@ -26,7 +26,7 @@ namespace igl
   IGL_INLINE void internal_angles(
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedF>& F,
-    Eigen::MatrixBase<DerivedK> & K);
+    Eigen::PlainObjectBase<DerivedK> & K);
   // Inputs:
   //   L_sq  #F by 3 list of squared edge lengths
   // Output:
@@ -38,7 +38,7 @@ namespace igl
   template <typename DerivedL, typename DerivedK>
   IGL_INLINE void internal_angles_using_squared_edge_lengths(
     const Eigen::MatrixBase<DerivedL>& L_sq,
-    Eigen::MatrixBase<DerivedK> & K);
+    Eigen::PlainObjectBase<DerivedK> & K);
   // Inputs:
   //   L  #F by 3 list of edge lengths
   // Output:
@@ -51,7 +51,7 @@ namespace igl
   template <typename DerivedL, typename DerivedK>
   IGL_INLINE void internal_angles_using_edge_lengths(
     const Eigen::MatrixBase<DerivedL>& L,
-    Eigen::MatrixBase<DerivedK> & K);}
+    Eigen::PlainObjectBase<DerivedK> & K);}
 
 #ifndef IGL_STATIC_LIBRARY
 #  include "internal_angles.cpp"

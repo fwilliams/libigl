@@ -27,8 +27,8 @@ IGL_INLINE void igl::sort_triangles(
   const Eigen::MatrixBase<DerivedF> & F,
   const Eigen::MatrixBase<DerivedMV> & MV,
   const Eigen::MatrixBase<DerivedP> & P,
-  Eigen::MatrixBase<DerivedFF> & FF,
-  Eigen::MatrixBase<DerivedI> & I)
+  Eigen::PlainObjectBase<DerivedFF> & FF,
+  Eigen::PlainObjectBase<DerivedI> & I)
 {
   using namespace Eigen;
   using namespace std;
@@ -384,8 +384,8 @@ IGL_INLINE void igl::sort_triangles(
 //  const Eigen::MatrixBase<DerivedF> & F,
 //  const Eigen::MatrixBase<DerivedMV> & MV,
 //  const Eigen::MatrixBase<DerivedP> & P,
-//  Eigen::MatrixBase<DerivedFF> & FF,
-//  Eigen::MatrixBase<DerivedI> & I)
+//  Eigen::PlainObjectBase<DerivedFF> & FF,
+//  Eigen::PlainObjectBase<DerivedI> & I)
 //{
 //  assert(false && 
 //    "THIS WILL NEVER WORK because depth sorting is not a numerical sort where"
@@ -468,8 +468,8 @@ IGL_INLINE void igl::sort_triangles(
 //IGL_INLINE void igl::sort_triangles_robust(
 //  const Eigen::MatrixBase<DerivedV> & V,
 //  const Eigen::MatrixBase<DerivedF> & F,
-//  Eigen::MatrixBase<DerivedFF> & FF,
-//  Eigen::MatrixBase<DerivedI> & I)
+//  Eigen::PlainObjectBase<DerivedFF> & FF,
+//  Eigen::PlainObjectBase<DerivedI> & I)
 //{
 //  using namespace Eigen;
 //  using namespace std;
@@ -493,6 +493,6 @@ IGL_INLINE void igl::sort_triangles(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::sort_triangles<Eigen::Matrix<double, -1, 4, 0, -1, 4>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, 4, 0, -1, 4> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, 4, 4, 0, 4, 4> > const&, Eigen::MatrixBase<Eigen::Matrix<double, 4, 4, 0, 4, 4> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
-template void igl::sort_triangles<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, 4, 4, 0, 4, 4> > const&, Eigen::MatrixBase<Eigen::Matrix<double, 4, 4, 0, 4, 4> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::sort_triangles<Eigen::Matrix<double, -1, 4, 0, -1, 4>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 4, 0, -1, 4> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, 4, 4, 0, 4, 4> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, 4, 4, 0, 4, 4> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::sort_triangles<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, 4, 4, 0, 4, 4> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, 4, 4, 0, 4, 4> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
 #endif

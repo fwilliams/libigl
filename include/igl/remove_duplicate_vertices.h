@@ -37,9 +37,9 @@ namespace igl
   IGL_INLINE void remove_duplicate_vertices(
     const Eigen::MatrixBase<DerivedV>& V,
     const double epsilon,
-    Eigen::MatrixBase<DerivedSV>& SV,
-    Eigen::MatrixBase<DerivedSVI>& SVI,
-    Eigen::MatrixBase<DerivedSVJ>& SVJ);
+    Eigen::PlainObjectBase<DerivedSV>& SV,
+    Eigen::PlainObjectBase<DerivedSVI>& SVI,
+    Eigen::PlainObjectBase<DerivedSVJ>& SVJ);
   // Wrapper that also remaps given faces (F) --> (SF) so that SF index SV
   template <
     typename DerivedV, 
@@ -52,10 +52,10 @@ namespace igl
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedF>& F,
     const double epsilon,
-    Eigen::MatrixBase<DerivedSV>& SV,
-    Eigen::MatrixBase<DerivedSVI>& SVI,
-    Eigen::MatrixBase<DerivedSVJ>& SVJ,
-    Eigen::MatrixBase<DerivedSF>& SF);
+    Eigen::PlainObjectBase<DerivedSV>& SV,
+    Eigen::PlainObjectBase<DerivedSVI>& SVI,
+    Eigen::PlainObjectBase<DerivedSVJ>& SVJ,
+    Eigen::PlainObjectBase<DerivedSF>& SF);
 }
 
 #ifndef IGL_STATIC_LIBRARY

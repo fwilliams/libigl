@@ -94,7 +94,7 @@ namespace igl
   IGL_INLINE bool arap_solve(
     const Eigen::MatrixBase<Derivedbc> & bc,
     ARAPData & data,
-    Eigen::MatrixBase<DerivedU> & U);
+    Eigen::PlainObjectBase<DerivedU> & U);
 };
 
 #ifndef IGL_STATIC_LIBRARY

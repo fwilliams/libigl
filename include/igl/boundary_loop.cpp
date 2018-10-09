@@ -131,7 +131,7 @@ IGL_INLINE void igl::boundary_loop(
 template <typename DerivedF, typename DerivedL>
 IGL_INLINE void igl::boundary_loop(
   const Eigen::MatrixBase<DerivedF>& F,
-  Eigen::MatrixBase<DerivedL>& L)
+  Eigen::PlainObjectBase<DerivedL>& L)
 {
   using namespace Eigen;
   using namespace std;
@@ -149,5 +149,5 @@ IGL_INLINE void igl::boundary_loop(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::boundary_loop<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::boundary_loop<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
 #endif

@@ -33,7 +33,7 @@ namespace igl
     const Eigen::MatrixBase<DerivedV> &V, 
     const Eigen::MatrixBase<DerivedF> &F, 
     const Eigen::MatrixBase<DerivedM> &MMatch,
-    Eigen::MatrixBase<DerivedO> &seams);
+    Eigen::PlainObjectBase<DerivedO> &seams);
 }
 #ifndef IGL_STATIC_LIBRARY
 #include "cut_mesh_from_singularities.cpp"

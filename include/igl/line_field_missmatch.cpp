@@ -97,7 +97,7 @@ public:
         igl::triangle_triangle_adjacency(F,TT,TTi);
     }
 
-    inline void calculateMissmatchLine(Eigen::MatrixBase<DerivedO> &Handle_MMatch)
+    inline void calculateMissmatchLine(Eigen::PlainObjectBase<DerivedO> &Handle_MMatch)
     {
         Handle_MMatch.setConstant(F.rows(),3,-1);
         for (unsigned int i=0;i<F.rows();i++)
@@ -121,7 +121,7 @@ IGL_INLINE void igl::line_field_missmatch(const Eigen::MatrixBase<DerivedV> &V,
                                 const Eigen::MatrixBase<DerivedF> &F,
                                 const Eigen::MatrixBase<DerivedV> &PD1,
                                 const bool isCombed,
-                                Eigen::MatrixBase<DerivedO> &missmatch)
+                                Eigen::PlainObjectBase<DerivedO> &missmatch)
 {
     DerivedV PD1_combed;
     DerivedV PD2_combed;

@@ -29,12 +29,12 @@ namespace igl
   template <typename DerivedF, typename DerivedTT, typename DerivedTTi>
   IGL_INLINE void triangle_triangle_adjacency(
     const Eigen::MatrixBase<DerivedF>& F,
-    Eigen::MatrixBase<DerivedTT>& TT,
-    Eigen::MatrixBase<DerivedTTi>& TTi);
+    Eigen::PlainObjectBase<DerivedTT>& TT,
+    Eigen::PlainObjectBase<DerivedTTi>& TTi);
   template <typename DerivedF, typename DerivedTT>
   IGL_INLINE void triangle_triangle_adjacency(
     const Eigen::MatrixBase<DerivedF>& F,
-    Eigen::MatrixBase<DerivedTT>& TT);
+    Eigen::PlainObjectBase<DerivedTT>& TT);
   // Preprocessing
   template <typename DerivedF, typename TTT_type>
   IGL_INLINE void triangle_triangle_adjacency_preprocess(
@@ -45,13 +45,13 @@ namespace igl
   IGL_INLINE void triangle_triangle_adjacency_extractTT(
     const Eigen::MatrixBase<DerivedF>& F,
     std::vector<std::vector<TTT_type> >& TTT,
-    Eigen::MatrixBase<DerivedTT>& TT);
+    Eigen::PlainObjectBase<DerivedTT>& TT);
   // Extract the face adjacencies indices (needed for fast traversal)
   template <typename DerivedF, typename TTT_type, typename DerivedTTi>
   IGL_INLINE void triangle_triangle_adjacency_extractTTi(
     const Eigen::MatrixBase<DerivedF>& F,
     std::vector<std::vector<TTT_type> >& TTT,
-    Eigen::MatrixBase<DerivedTTi>& TTi);
+    Eigen::PlainObjectBase<DerivedTTi>& TTi);
   // Adjacency list version, which works with non-manifold meshes
   //
   // Inputs:

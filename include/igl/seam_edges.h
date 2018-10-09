@@ -54,9 +54,9 @@ namespace igl
     const Eigen::MatrixBase<DerivedTC>& TC,
     const Eigen::MatrixBase<DerivedF>& F,
     const Eigen::MatrixBase<DerivedFTC>& FTC,
-    Eigen::MatrixBase<Derivedseams>& seams,
-    Eigen::MatrixBase<Derivedboundaries>& boundaries,
-    Eigen::MatrixBase<Derivedfoldovers>& foldovers);
+    Eigen::PlainObjectBase<Derivedseams>& seams,
+    Eigen::PlainObjectBase<Derivedboundaries>& boundaries,
+    Eigen::PlainObjectBase<Derivedfoldovers>& foldovers);
 }
 #ifndef IGL_STATIC_LIBRARY
 #  include "seam_edges.cpp"

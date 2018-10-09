@@ -18,7 +18,7 @@ IGL_INLINE void igl::upsample(
   const int n_verts,
   const Eigen::MatrixBase<DerivedF>& F,
   Eigen::SparseMatrix<SType>& S,
-  Eigen::MatrixBase<DerivedNF>& NF)
+  Eigen::PlainObjectBase<DerivedNF>& NF)
 {
   using namespace std;
   using namespace Eigen;
@@ -108,8 +108,8 @@ template <
 IGL_INLINE void igl::upsample(
   const Eigen::MatrixBase<DerivedV>& V,
   const Eigen::MatrixBase<DerivedF>& F,
-  Eigen::MatrixBase<DerivedNV>& NV,
-  Eigen::MatrixBase<DerivedNF>& NF,
+  Eigen::PlainObjectBase<DerivedNV>& NV,
+  Eigen::PlainObjectBase<DerivedNF>& NF,
   const int number_of_subdivs)
 {
   NV = V;
@@ -139,7 +139,7 @@ IGL_INLINE void igl::upsample(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::upsample<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, int);
-template void igl::upsample<Eigen::Matrix<int, -1, -1, 0, -1, -1>, double, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(int, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::SparseMatrix<double, 0, int>&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
+template void igl::upsample<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, int);
+template void igl::upsample<Eigen::Matrix<int, -1, -1, 0, -1, -1>, double, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(int, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::SparseMatrix<double, 0, int>&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
 template void igl::upsample<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::Matrix<int, -1, -1, 0, -1, -1>&, int);
 #endif

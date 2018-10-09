@@ -40,7 +40,7 @@ namespace igl
       const Eigen::MatrixBase<DerivedV>& V,
       Orient2D orient2D,
       InCircle incircle,
-      Eigen::MatrixBase<DerivedF>& F);
+      Eigen::PlainObjectBase<DerivedF>& F);
 }
 
 

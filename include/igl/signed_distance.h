@@ -58,10 +58,10 @@ namespace igl
     const SignedDistanceType sign_type,
     const typename DerivedV::Scalar lower_bound,
     const typename DerivedV::Scalar upper_bound,
-    Eigen::MatrixBase<DerivedS> & S,
-    Eigen::MatrixBase<DerivedI> & I,
-    Eigen::MatrixBase<DerivedC> & C,
-    Eigen::MatrixBase<DerivedN> & N);
+    Eigen::PlainObjectBase<DerivedS> & S,
+    Eigen::PlainObjectBase<DerivedI> & I,
+    Eigen::PlainObjectBase<DerivedC> & C,
+    Eigen::PlainObjectBase<DerivedN> & N);
   // Default bounds
   template <
     typename DerivedP,
@@ -76,10 +76,10 @@ namespace igl
     const Eigen::MatrixBase<DerivedV> & V,
     const Eigen::MatrixBase<DerivedF> & F,
     const SignedDistanceType sign_type,
-    Eigen::MatrixBase<DerivedS> & S,
-    Eigen::MatrixBase<DerivedI> & I,
-    Eigen::MatrixBase<DerivedC> & C,
-    Eigen::MatrixBase<DerivedN> & N);
+    Eigen::PlainObjectBase<DerivedS> & S,
+    Eigen::PlainObjectBase<DerivedI> & I,
+    Eigen::PlainObjectBase<DerivedC> & C,
+    Eigen::PlainObjectBase<DerivedN> & N);
   // Computes signed distance to mesh
   //
   // Inputs:
@@ -130,10 +130,10 @@ namespace igl
     const Eigen::MatrixBase<DerivedVN> & VN,
     const Eigen::MatrixBase<DerivedEN> & EN,
     const Eigen::MatrixBase<DerivedEMAP> & EMAP,
-    Eigen::MatrixBase<DerivedS> & S,
-    Eigen::MatrixBase<DerivedI> & I,
-    Eigen::MatrixBase<DerivedC> & C,
-    Eigen::MatrixBase<DerivedN> & N);
+    Eigen::PlainObjectBase<DerivedS> & S,
+    Eigen::PlainObjectBase<DerivedI> & I,
+    Eigen::PlainObjectBase<DerivedC> & C,
+    Eigen::PlainObjectBase<DerivedN> & N);
   // Outputs:
   //   s  sign
   //   sqrd  squared distance
@@ -163,8 +163,8 @@ namespace igl
     Scalar & s,
     Scalar & sqrd,
     int & i,
-    Eigen::MatrixBase<Derivedc> & c,
-    Eigen::MatrixBase<Derivedn> & n);
+    Eigen::PlainObjectBase<Derivedc> & c,
+    Eigen::PlainObjectBase<Derivedn> & n);
   template <
     typename DerivedV,
     typename DerivedE,
@@ -184,8 +184,8 @@ namespace igl
     Scalar & s,
     Scalar & sqrd,
     int & i,
-    Eigen::MatrixBase<Derivedc> & c,
-    Eigen::MatrixBase<Derivedn> & n);
+    Eigen::PlainObjectBase<Derivedc> & c,
+    Eigen::PlainObjectBase<Derivedn> & n);
   // Inputs:
   //   tree  AABB acceleration tree (see cgal/point_mesh_squared_distance.h)
   //   hier  Winding number evaluation hierarchy
@@ -220,7 +220,7 @@ namespace igl
     Scalar & s,
     Scalar & sqrd,
     int & i,
-    Eigen::MatrixBase<Derivedc> & c);
+    Eigen::PlainObjectBase<Derivedc> & c);
   template <
     typename DerivedV,
     typename DerivedF,
@@ -235,7 +235,7 @@ namespace igl
     Scalar & s,
     Scalar & sqrd,
     int & i,
-    Eigen::MatrixBase<Derivedc> & c);
+    Eigen::PlainObjectBase<Derivedc> & c);
 }
 
 #ifndef IGL_STATIC_LIBRARY

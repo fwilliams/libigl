@@ -6,7 +6,7 @@ template <typename DerivedA, typename DerivedX>
 void igl::pinv(
   const Eigen::MatrixBase<DerivedA> & A,
   typename DerivedA::Scalar tol,
-  Eigen::MatrixBase<DerivedX> & X)
+  Eigen::PlainObjectBase<DerivedX> & X)
 {
   Eigen::JacobiSVD<DerivedA> svd(A, Eigen::ComputeFullU | Eigen::ComputeFullV );
   typedef typename DerivedA::Scalar Scalar;
@@ -29,7 +29,7 @@ void igl::pinv(
 template <typename DerivedA, typename DerivedX>
 void igl::pinv(
   const Eigen::MatrixBase<DerivedA> & A,
-  Eigen::MatrixBase<DerivedX> & X)
+  Eigen::PlainObjectBase<DerivedX> & X)
 {
   return pinv(A,-1,X);
 }

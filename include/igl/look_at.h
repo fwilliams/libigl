@@ -31,7 +31,7 @@ namespace igl
     const Eigen::MatrixBase<Derivedeye> & eye,
     const Eigen::MatrixBase<Derivedcenter> & center,
     const Eigen::MatrixBase<Derivedup> & up,
-    Eigen::MatrixBase<DerivedR> & R);
+    Eigen::PlainObjectBase<DerivedR> & R);
 }
 
 #ifndef IGL_STATIC_LIBRARY

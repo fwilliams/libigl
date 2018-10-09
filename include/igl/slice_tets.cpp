@@ -29,9 +29,9 @@ IGL_INLINE void igl::slice_tets(
   const Eigen::MatrixBase<DerivedV>& V,
   const Eigen::MatrixBase<DerivedT>& T,
   const Eigen::MatrixBase<DerivedS> & S,
-  Eigen::MatrixBase<DerivedSV>& SV,
-  Eigen::MatrixBase<DerivedSF>& SF,
-  Eigen::MatrixBase<DerivedJ>& J,
+  Eigen::PlainObjectBase<DerivedSV>& SV,
+  Eigen::PlainObjectBase<DerivedSF>& SF,
+  Eigen::PlainObjectBase<DerivedJ>& J,
   Eigen::SparseMatrix<BCType> & BC)
 {
   Eigen::MatrixXi sE;
@@ -59,9 +59,9 @@ IGL_INLINE void igl::slice_tets(
   const Eigen::MatrixBase<DerivedV>& V,
   const Eigen::MatrixBase<DerivedT>& T,
   const Eigen::MatrixBase<DerivedS> & S,
-  Eigen::MatrixBase<DerivedSV>& SV,
-  Eigen::MatrixBase<DerivedSF>& SF,
-  Eigen::MatrixBase<DerivedJ>& J)
+  Eigen::PlainObjectBase<DerivedSV>& SV,
+  Eigen::PlainObjectBase<DerivedSF>& SF,
+  Eigen::PlainObjectBase<DerivedJ>& J)
 {
   Eigen::MatrixXi sE;
   Eigen::Matrix<typename DerivedSV::Scalar,Eigen::Dynamic,1> lambda;
@@ -81,11 +81,11 @@ IGL_INLINE void igl::slice_tets(
   const Eigen::MatrixBase<DerivedV>& V,
   const Eigen::MatrixBase<DerivedT>& T,
   const Eigen::MatrixBase<DerivedS> & S,
-  Eigen::MatrixBase<DerivedSV>& SV,
-  Eigen::MatrixBase<DerivedSF>& SF,
-  Eigen::MatrixBase<DerivedJ>& J,
-  Eigen::MatrixBase<DerivedsE>& sE,
-  Eigen::MatrixBase<Derivedlambda>& lambda)
+  Eigen::PlainObjectBase<DerivedSV>& SV,
+  Eigen::PlainObjectBase<DerivedSF>& SF,
+  Eigen::PlainObjectBase<DerivedJ>& J,
+  Eigen::PlainObjectBase<DerivedsE>& sE,
+  Eigen::PlainObjectBase<Derivedlambda>& lambda)
 {
 
   using namespace Eigen;
@@ -195,7 +195,7 @@ IGL_INLINE void igl::slice_tets(
   const auto & apply_sort2 = [] (
      const MatrixX2I & E, 
      const MatrixX2I & sJ, 
-     Eigen::MatrixBase<DerivedsE>& sE)
+     Eigen::PlainObjectBase<DerivedsE>& sE)
   {
     sE.resize(E.rows(),2);
     for(size_t t = 0;t<(size_t)E.rows();t++)
@@ -352,5 +352,5 @@ IGL_INLINE void igl::slice_tets(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::slice_tets<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, double>(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, Eigen::SparseMatrix<double, 0, int>&);
+template void igl::slice_tets<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, double>(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, Eigen::SparseMatrix<double, 0, int>&);
 #endif

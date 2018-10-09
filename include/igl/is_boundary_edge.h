@@ -28,7 +28,7 @@ namespace igl
   void is_boundary_edge(
     const Eigen::MatrixBase<DerivedE> & E,
     const Eigen::MatrixBase<DerivedF> & F,
-    Eigen::MatrixBase<DerivedB> & B);
+    Eigen::PlainObjectBase<DerivedB> & B);
   // Wrapper where Edges should also be computed from F
   //   E  #E by 2 list of edges
   //   EMAP  #F*3 list of indices mapping allE to E
@@ -39,9 +39,9 @@ namespace igl
     typename DerivedEMAP>
   void is_boundary_edge(
     const Eigen::MatrixBase<DerivedF> & F,
-    Eigen::MatrixBase<DerivedB> & B,
-    Eigen::MatrixBase<DerivedE> & E,
-    Eigen::MatrixBase<DerivedEMAP> & EMAP);
+    Eigen::PlainObjectBase<DerivedB> & B,
+    Eigen::PlainObjectBase<DerivedE> & E,
+    Eigen::PlainObjectBase<DerivedEMAP> & EMAP);
 }
 
 #ifndef IGL_STATIC_LIBRARY

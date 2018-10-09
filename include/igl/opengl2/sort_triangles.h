@@ -23,8 +23,8 @@ namespace igl
     IGL_INLINE void sort_triangles(
       const Eigen::MatrixBase<DerivedV> & V,
       const Eigen::MatrixBase<DerivedF> & F,
-      Eigen::MatrixBase<DerivedFF> & FF,
-      Eigen::MatrixBase<DerivedI> & I);
+      Eigen::PlainObjectBase<DerivedFF> & FF,
+      Eigen::PlainObjectBase<DerivedI> & I);
     template <
       typename DerivedV,
       typename DerivedF,
@@ -33,8 +33,8 @@ namespace igl
     IGL_INLINE void sort_triangles_slow(
       const Eigen::MatrixBase<DerivedV> & V,
       const Eigen::MatrixBase<DerivedF> & F,
-      Eigen::MatrixBase<DerivedFF> & FF,
-      Eigen::MatrixBase<DerivedI> & I);
+      Eigen::PlainObjectBase<DerivedFF> & FF,
+      Eigen::PlainObjectBase<DerivedI> & I);
     //template <
     //  typename DerivedV,
     //  typename DerivedF,
@@ -47,8 +47,8 @@ namespace igl
     //  const Eigen::MatrixBase<DerivedF> & F,
     //  const Eigen::MatrixBase<DerivedMV> & MV,
     //  const Eigen::MatrixBase<DerivedP> & P,
-    //  Eigen::MatrixBase<DerivedFF> & FF,
-    //  Eigen::MatrixBase<DerivedI> & I);
+    //  Eigen::PlainObjectBase<DerivedFF> & FF,
+    //  Eigen::PlainObjectBase<DerivedI> & I);
     //template <
     //  typename DerivedV,
     //  typename DerivedF,
@@ -57,8 +57,8 @@ namespace igl
     //IGL_INLINE void sort_triangles_robust(
     //  const Eigen::MatrixBase<DerivedV> & V,
     //  const Eigen::MatrixBase<DerivedF> & F,
-    //  Eigen::MatrixBase<DerivedFF> & FF,
-    //  Eigen::MatrixBase<DerivedI> & I);
+    //  Eigen::PlainObjectBase<DerivedFF> & FF,
+    //  Eigen::PlainObjectBase<DerivedI> & I);
   }
 }
 

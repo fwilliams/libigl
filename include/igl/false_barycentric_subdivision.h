@@ -27,8 +27,8 @@ namespace igl
   IGL_INLINE void false_barycentric_subdivision(
     const Eigen::MatrixBase<Scalar> & V,
     const Eigen::MatrixBase<Index> & F,
-    Eigen::MatrixBase<Scalar> & VD,
-    Eigen::MatrixBase<Index> & FD);
+    Eigen::PlainObjectBase<Scalar> & VD,
+    Eigen::PlainObjectBase<Index> & FD);
 
 }
 

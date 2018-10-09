@@ -86,8 +86,8 @@ namespace igl
     const Eigen::MatrixBase<DerivedB> & B,
     const Eigen::MatrixBase<DerivedY> & Y,
     const Eigen::MatrixBase<DerivedBeq> & Beq,
-    Eigen::MatrixBase<DerivedZ> & Z,
-    Eigen::MatrixBase<Derivedsol> & sol);
+    Eigen::PlainObjectBase<DerivedZ> & Z,
+    Eigen::PlainObjectBase<Derivedsol> & sol);
   // Wrapper without sol
   template <
     typename T,
@@ -100,7 +100,7 @@ namespace igl
     const Eigen::MatrixBase<DerivedB> & B,
     const Eigen::MatrixBase<DerivedY> & Y,
     const Eigen::MatrixBase<DerivedBeq> & Beq,
-    Eigen::MatrixBase<DerivedZ> & Z);
+    Eigen::PlainObjectBase<DerivedZ> & Z);
   template <
     typename T,
     typename Derivedknown,
@@ -116,7 +116,7 @@ namespace igl
     const Eigen::SparseMatrix<T>& Aeq,
     const Eigen::MatrixBase<DerivedBeq> & Beq,
     const bool pd,
-    Eigen::MatrixBase<DerivedZ> & Z);
+    Eigen::PlainObjectBase<DerivedZ> & Z);
 }
 
 template <typename T>

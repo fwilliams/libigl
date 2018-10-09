@@ -26,7 +26,7 @@ namespace igl
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedF>& F,
     const double corner_threshold,
-    Eigen::MatrixBase<DerivedCN> & CN);
+    Eigen::PlainObjectBase<DerivedCN> & CN);
   // Other Inputs:
   //   FN  #F by 3 eigen Matrix of face normals
   template <
@@ -39,7 +39,7 @@ namespace igl
     const Eigen::MatrixBase<DerivedF>& F,
     const Eigen::MatrixBase<DerivedFN>& FN,
     const double corner_threshold,
-    Eigen::MatrixBase<DerivedCN> & CN);
+    Eigen::PlainObjectBase<DerivedCN> & CN);
   // Other Inputs:
   //   VF  map from vertices to list of incident faces
   template <
@@ -54,7 +54,7 @@ namespace igl
     const Eigen::MatrixBase<DerivedFN>& FN,
     const std::vector<std::vector<IndexType> >& VF,
     const double corner_threshold,
-    Eigen::MatrixBase<DerivedCN> & CN);
+    Eigen::PlainObjectBase<DerivedCN> & CN);
 }
 
 #ifndef IGL_STATIC_LIBRARY

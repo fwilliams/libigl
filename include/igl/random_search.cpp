@@ -32,5 +32,5 @@ IGL_INLINE Scalar igl::random_search(
 }
 
 #ifdef IGL_STATIC_LIBRARY
-template float igl::random_search<float, Eigen::Matrix<float, 1, -1, 1, 1, -1>, Eigen::Matrix<float, 1, -1, 1, 1, -1>, Eigen::Matrix<float, 1, -1, 1, 1, -1> >(std::function<float (Eigen::Matrix<float, 1, -1, 1, 1, -1>&)>, Eigen::MatrixBase<Eigen::Matrix<float, 1, -1, 1, 1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<float, 1, -1, 1, 1, -1> > const&, int, Eigen::Matrix<float, 1, -1, 1, 1, -1>&);
+template float igl::random_search<float, Eigen::Matrix<float, 1, -1, 1, 1, -1>, Eigen::Matrix<float, 1, -1, 1, 1, -1>, Eigen::Matrix<float, 1, -1, 1, 1, -1> >(std::function<float (Eigen::Matrix<float, 1, -1, 1, 1, -1>&)>, Eigen::PlainObjectBase<Eigen::Matrix<float, 1, -1, 1, 1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<float, 1, -1, 1, 1, -1> > const&, int, Eigen::Matrix<float, 1, -1, 1, 1, -1>&);
 #endif

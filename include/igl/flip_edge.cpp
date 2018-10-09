@@ -15,10 +15,10 @@ template <
   typename DerivedEMAP,
   typename uE2EType>
 IGL_INLINE void igl::flip_edge(
-  Eigen::MatrixBase<DerivedF> & F,
-  Eigen::MatrixBase<DerivedE> & E,
-  Eigen::MatrixBase<DeriveduE> & uE,
-  Eigen::MatrixBase<DerivedEMAP> & EMAP,
+  Eigen::PlainObjectBase<DerivedF> & F,
+  Eigen::PlainObjectBase<DerivedE> & E,
+  Eigen::PlainObjectBase<DeriveduE> & uE,
+  Eigen::PlainObjectBase<DerivedEMAP> & EMAP,
   std::vector<std::vector<uE2EType> > & uE2E,
   const size_t uei)
 {
@@ -149,5 +149,5 @@ IGL_INLINE void igl::flip_edge(
 
 
 #ifdef IGL_STATIC_LIBRARY
-template void igl::flip_edge<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, int>(Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, unsigned long);
+template void igl::flip_edge<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, int>(Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, unsigned long);
 #endif

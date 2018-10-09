@@ -30,7 +30,7 @@ namespace igl
   template <typename DerivedH, typename DerivedR>
   void hsv_to_rgb(
     const Eigen::MatrixBase<DerivedH> & H,
-    Eigen::MatrixBase<DerivedR> & R);
+    Eigen::PlainObjectBase<DerivedR> & R);
 };
 
 #ifndef IGL_STATIC_LIBRARY

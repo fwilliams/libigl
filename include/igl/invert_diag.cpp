@@ -9,7 +9,7 @@
 
 template <typename T>
 IGL_INLINE void igl::invert_diag(
-  const Eigen::SparseMatrixBase<T>& X, 
+  const Eigen::SparsePlainObjectBase<T>& X, 
   Eigen::SparseMatrix<T>& Y)
 {
 #ifndef NDEBUG
@@ -41,6 +41,6 @@ IGL_INLINE void igl::invert_diag(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::invert_diag<double>(Eigen::SparseMatrixBase<double, 0, int> const&, Eigen::SparseMatrix<double, 0, int>&);
-template void igl::invert_diag<float>(Eigen::SparseMatrixBase<float, 0, int> const&, Eigen::SparseMatrix<float, 0, int>&);
+template void igl::invert_diag<double>(Eigen::SparsePlainObjectBase<double, 0, int> const&, Eigen::SparseMatrix<double, 0, int>&);
+template void igl::invert_diag<float>(Eigen::SparsePlainObjectBase<float, 0, int> const&, Eigen::SparseMatrix<float, 0, int>&);
 #endif

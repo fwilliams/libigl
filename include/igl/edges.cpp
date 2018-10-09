@@ -12,7 +12,7 @@
 template <typename DerivedF, typename DerivedE>
 IGL_INLINE void igl::edges(
   const Eigen::MatrixBase<DerivedF> & F, 
-  Eigen::MatrixBase<DerivedE> & E)
+  Eigen::PlainObjectBase<DerivedE> & E)
 {
   // build adjacency matrix
   typedef typename DerivedF::Scalar Index;
@@ -42,6 +42,6 @@ IGL_INLINE void igl::edges(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::edges<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 2, 0, -1, 2> >(Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 2, 0, -1, 2> >&);
-template void igl::edges<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
+template void igl::edges<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 2, 0, -1, 2> >(Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 2, 0, -1, 2> >&);
+template void igl::edges<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
 #endif

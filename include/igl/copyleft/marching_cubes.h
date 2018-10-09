@@ -49,8 +49,8 @@ namespace igl
         const unsigned x_res,
         const unsigned y_res,
         const unsigned z_res,
-        Eigen::MatrixBase<Derivedvertices> &vertices,
-        Eigen::MatrixBase<DerivedF> &faces);
+        Eigen::PlainObjectBase<Derivedvertices> &vertices,
+        Eigen::PlainObjectBase<DerivedF> &faces);
   }
 }
 

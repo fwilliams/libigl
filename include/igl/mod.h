@@ -22,7 +22,7 @@ namespace igl
   IGL_INLINE void mod(
     const Eigen::MatrixBase<DerivedA> & A,
     const int base,
-    Eigen::MatrixBase<DerivedB> & B);
+    Eigen::PlainObjectBase<DerivedB> & B);
   template <typename DerivedA>
   IGL_INLINE DerivedA mod(
     const Eigen::MatrixBase<DerivedA> & A, const int base);

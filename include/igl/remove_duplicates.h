@@ -35,8 +35,8 @@ namespace igl
   IGL_INLINE void remove_duplicates(
     const Eigen::MatrixBase<DerivedV> &V,
     const Eigen::MatrixBase<DerivedF> &F,
-    Eigen::MatrixBase<DerivedV> &NV,
-    Eigen::MatrixBase<DerivedF> &NF,
+    Eigen::PlainObjectBase<DerivedV> &NV,
+    Eigen::PlainObjectBase<DerivedF> &NF,
     Eigen::Matrix<typename DerivedF::Scalar, Eigen::Dynamic, 1> &I,
     const double epsilon = 2.2204e-15);
   

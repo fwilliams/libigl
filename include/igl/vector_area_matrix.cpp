@@ -50,5 +50,5 @@ IGL_INLINE void igl::vector_area_matrix(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::vector_area_matrix<Eigen::Matrix<int, -1, -1, 0, -1, -1>, double>(Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::SparseMatrix<double, 0, int>&);
+template void igl::vector_area_matrix<Eigen::Matrix<int, -1, -1, 0, -1, -1>, double>(Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::SparseMatrix<double, 0, int>&);
 #endif

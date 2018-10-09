@@ -27,8 +27,8 @@ namespace igl
     typename DerivedT>
   IGL_INLINE bool readMSH(
     const std::string & filename,
-    Eigen::MatrixBase<DerivedV> & V,
-    Eigen::MatrixBase<DerivedT> & T);
+    Eigen::PlainObjectBase<DerivedV> & V,
+    Eigen::PlainObjectBase<DerivedT> & T);
 }
 
 

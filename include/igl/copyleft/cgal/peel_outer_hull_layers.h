@@ -35,8 +35,8 @@ namespace igl
       IGL_INLINE size_t peel_outer_hull_layers(
         const Eigen::MatrixBase<DerivedV > & V,
         const Eigen::MatrixBase<DerivedF > & F,
-        Eigen::MatrixBase<DerivedI > & I,
-        Eigen::MatrixBase<Derivedflip > & flip);
+        Eigen::PlainObjectBase<DerivedI > & I,
+        Eigen::PlainObjectBase<Derivedflip > & flip);
     }
   }
 }

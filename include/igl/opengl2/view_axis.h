@@ -30,7 +30,7 @@ namespace igl
     // Extract mv from current GL state.
     IGL_INLINE void view_axis(double * x, double * y, double * z);
     template <typename DerivedV>
-    IGL_INLINE void view_axis(Eigen::MatrixBase<DerivedV> & V);
+    IGL_INLINE void view_axis(Eigen::PlainObjectBase<DerivedV> & V);
   }
 };
 

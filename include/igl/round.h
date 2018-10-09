@@ -27,7 +27,7 @@ namespace igl
   template < typename DerivedX, typename DerivedY>
   IGL_INLINE void round(
     const Eigen::MatrixBase<DerivedX>& X,
-    Eigen::MatrixBase<DerivedY>& Y);
+    Eigen::PlainObjectBase<DerivedY>& Y);
 }
 
 #ifndef IGL_STATIC_LIBRARY

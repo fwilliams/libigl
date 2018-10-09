@@ -49,10 +49,10 @@ namespace igl
         const Eigen::MatrixBase<DerivedFA> & FA,
         const Eigen::MatrixBase<DerivedVB> & VB,
         const Eigen::MatrixBase<DerivedFB> & FB,
-        Eigen::MatrixBase<DerivedV> & Vd,
-        Eigen::MatrixBase<DerivedF> & F,
-        Eigen::MatrixBase<DerivedD> & D,
-        Eigen::MatrixBase<DerivedJ> & J);
+        Eigen::PlainObjectBase<DerivedV> & Vd,
+        Eigen::PlainObjectBase<DerivedF> & F,
+        Eigen::PlainObjectBase<DerivedD> & D,
+        Eigen::PlainObjectBase<DerivedJ> & J);
     }
   }
 }

@@ -30,8 +30,8 @@ namespace igl
     const Eigen::AlignedBox<Scalar,3> & box, 
     const int s,
     const int pad_count,
-    Eigen::MatrixBase<DerivedGV> & GV,
-    Eigen::MatrixBase<Derivedside> & side);
+    Eigen::PlainObjectBase<DerivedGV> & GV,
+    Eigen::PlainObjectBase<Derivedside> & side);
 }
 #ifndef IGL_STATIC_LIBRARY
 #  include "voxel_grid.cpp"

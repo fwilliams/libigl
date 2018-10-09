@@ -16,12 +16,12 @@ namespace igl
   void pinv(
     const Eigen::MatrixBase<DerivedA> & A,
     typename DerivedA::Scalar tol,
-    Eigen::MatrixBase<DerivedX> & X);
+    Eigen::PlainObjectBase<DerivedX> & X);
   // Wrapper using default tol
   template <typename DerivedA, typename DerivedX>
   void pinv(
     const Eigen::MatrixBase<DerivedA> & A,
-    Eigen::MatrixBase<DerivedX> & X);
+    Eigen::PlainObjectBase<DerivedX> & X);
 }
 #ifndef IGL_STATIC_LIBRARY
 #  include "pinv.cpp"

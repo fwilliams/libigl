@@ -13,7 +13,7 @@ IGL_INLINE void all_pairs_distances(
   const Eigen::MatrixBase<DerivedU> & V,
   const Eigen::MatrixBase<DerivedV> & U,
   const bool squared,
-  Eigen::MatrixBase<DerivedOut> & D)
+  Eigen::PlainObjectBase<DerivedOut> & D)
 {
   // dimension should be the same
   assert(V.cols() == U.cols());

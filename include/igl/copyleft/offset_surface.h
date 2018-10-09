@@ -41,11 +41,11 @@ namespace igl
       const isolevelType isolevel,
       const typename Derivedside::Scalar s,
       const SignedDistanceType & signed_distance_type,
-      Eigen::MatrixBase<DerivedSV> & SV,
-      Eigen::MatrixBase<DerivedSF> & SF,
-      Eigen::MatrixBase<DerivedGV> & GV,
-      Eigen::MatrixBase<Derivedside> & side,
-      Eigen::MatrixBase<DerivedS> & S);
+      Eigen::PlainObjectBase<DerivedSV> & SV,
+      Eigen::PlainObjectBase<DerivedSF> & SF,
+      Eigen::PlainObjectBase<DerivedGV> & GV,
+      Eigen::PlainObjectBase<Derivedside> & side,
+      Eigen::PlainObjectBase<DerivedS> & S);
   }
 }
 #ifndef IGL_STATIC_LIBRARY

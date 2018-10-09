@@ -21,8 +21,8 @@ template <
 void igl::opengl2::sort_triangles(
   const Eigen::MatrixBase<DerivedV> & V,
   const Eigen::MatrixBase<DerivedF> & F,
-  Eigen::MatrixBase<DerivedFF> & FF,
-  Eigen::MatrixBase<DerivedI> & I)
+  Eigen::PlainObjectBase<DerivedFF> & FF,
+  Eigen::PlainObjectBase<DerivedI> & I)
 {
   using namespace Eigen;
   using namespace std;
@@ -52,8 +52,8 @@ template <
 void igl::opengl2::sort_triangles_slow(
   const Eigen::MatrixBase<DerivedV> & V,
   const Eigen::MatrixBase<DerivedF> & F,
-  Eigen::MatrixBase<DerivedFF> & FF,
-  Eigen::MatrixBase<DerivedI> & I)
+  Eigen::PlainObjectBase<DerivedFF> & FF,
+  Eigen::PlainObjectBase<DerivedI> & I)
 {
   using namespace Eigen;
   using namespace std;
@@ -75,6 +75,6 @@ void igl::opengl2::sort_triangles_slow(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::opengl2::sort_triangles<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
-template void igl::opengl2::sort_triangles_slow<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::opengl2::sort_triangles<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::opengl2::sort_triangles_slow<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
 #endif

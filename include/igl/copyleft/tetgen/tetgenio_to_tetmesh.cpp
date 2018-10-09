@@ -96,9 +96,9 @@ IGL_INLINE bool igl::copyleft::tetgen::tetgenio_to_tetmesh(
 template <typename DerivedV, typename DerivedT, typename DerivedF>
 IGL_INLINE bool igl::copyleft::tetgen::tetgenio_to_tetmesh(
   const tetgenio & out,
-  Eigen::MatrixBase<DerivedV>& V,
-  Eigen::MatrixBase<DerivedT>& T,
-  Eigen::MatrixBase<DerivedF>& F)
+  Eigen::PlainObjectBase<DerivedV>& V,
+  Eigen::PlainObjectBase<DerivedT>& T,
+  Eigen::PlainObjectBase<DerivedF>& F)
 {
   using namespace std;
   vector<vector<REAL> > vV;
@@ -133,8 +133,8 @@ IGL_INLINE bool igl::copyleft::tetgen::tetgenio_to_tetmesh(
 template <typename DerivedV, typename DerivedT>
 IGL_INLINE bool igl::copyleft::tetgen::tetgenio_to_tetmesh(
   const tetgenio & out,
-  Eigen::MatrixBase<DerivedV>& V,
-  Eigen::MatrixBase<DerivedT>& T)
+  Eigen::PlainObjectBase<DerivedV>& V,
+  Eigen::PlainObjectBase<DerivedT>& T)
 {
   Eigen::Matrix<typename DerivedT::Scalar,Eigen::Dynamic,3> F;
   return tetgenio_to_tetmesh(out,V,T,F);
@@ -142,5 +142,5 @@ IGL_INLINE bool igl::copyleft::tetgen::tetgenio_to_tetmesh(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template bool igl::copyleft::tetgen::tetgenio_to_tetmesh<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(tetgenio const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
+template bool igl::copyleft::tetgen::tetgenio_to_tetmesh<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(tetgenio const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
 #endif

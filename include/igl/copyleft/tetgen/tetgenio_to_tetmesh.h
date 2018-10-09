@@ -46,14 +46,14 @@ namespace igl
       template <typename DerivedV, typename DerivedT, typename DerivedF>
       IGL_INLINE bool tetgenio_to_tetmesh(
         const tetgenio & out,
-        Eigen::MatrixBase<DerivedV>& V,
-        Eigen::MatrixBase<DerivedT>& T,
-        Eigen::MatrixBase<DerivedF>& F);
+        Eigen::PlainObjectBase<DerivedV>& V,
+        Eigen::PlainObjectBase<DerivedT>& T,
+        Eigen::PlainObjectBase<DerivedF>& F);
       template <typename DerivedV, typename DerivedT>
       IGL_INLINE bool tetgenio_to_tetmesh(
         const tetgenio & out,
-        Eigen::MatrixBase<DerivedV>& V,
-        Eigen::MatrixBase<DerivedT>& T);
+        Eigen::PlainObjectBase<DerivedV>& V,
+        Eigen::PlainObjectBase<DerivedT>& T);
     }
   }
 }

@@ -13,7 +13,7 @@ template <typename DerivedX, typename DerivedY>
 IGL_INLINE void igl::cumsum(
   const Eigen::MatrixBase<DerivedX > & X,
   const int dim,
-  Eigen::MatrixBase<DerivedY > & Y)
+  Eigen::PlainObjectBase<DerivedY > & Y)
 {
   using namespace Eigen;
   using namespace std;
@@ -59,14 +59,14 @@ IGL_INLINE void igl::cumsum(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::cumsum<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, int, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&);
-template void igl::cumsum<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, int, Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >&);
-template void igl::cumsum<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::Matrix<double, 3, 1, 0, 3, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, 3, 1, 0, 3, 1> > const&, int, Eigen::MatrixBase<Eigen::Matrix<double, 3, 1, 0, 3, 1> >&);
-template void igl::cumsum<Eigen::Matrix<unsigned long, 2, 1, 0, 2, 1>, Eigen::Matrix<unsigned long, 2, 1, 0, 2, 1> >(Eigen::MatrixBase<Eigen::Matrix<unsigned long, 2, 1, 0, 2, 1> > const&, int, Eigen::MatrixBase<Eigen::Matrix<unsigned long, 2, 1, 0, 2, 1> >&);
-template void igl::cumsum<Eigen::Matrix<unsigned long, -1, 1, 0, -1, 1>, Eigen::Matrix<unsigned long, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<unsigned long, -1, 1, 0, -1, 1> > const&, int, Eigen::MatrixBase<Eigen::Matrix<unsigned long, -1, 1, 0, -1, 1> >&);
-template void igl::cumsum<Eigen::Matrix<int, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> > const&, int, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::cumsum<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, int, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&);
+template void igl::cumsum<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, int, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >&);
+template void igl::cumsum<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::Matrix<double, 3, 1, 0, 3, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, 3, 1, 0, 3, 1> > const&, int, Eigen::PlainObjectBase<Eigen::Matrix<double, 3, 1, 0, 3, 1> >&);
+template void igl::cumsum<Eigen::Matrix<unsigned long, 2, 1, 0, 2, 1>, Eigen::Matrix<unsigned long, 2, 1, 0, 2, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<unsigned long, 2, 1, 0, 2, 1> > const&, int, Eigen::PlainObjectBase<Eigen::Matrix<unsigned long, 2, 1, 0, 2, 1> >&);
+template void igl::cumsum<Eigen::Matrix<unsigned long, -1, 1, 0, -1, 1>, Eigen::Matrix<unsigned long, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<unsigned long, -1, 1, 0, -1, 1> > const&, int, Eigen::PlainObjectBase<Eigen::Matrix<unsigned long, -1, 1, 0, -1, 1> >&);
+template void igl::cumsum<Eigen::Matrix<int, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> > const&, int, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
 #ifdef WIN32
-template void igl::cumsum<class Eigen::Matrix<unsigned __int64, -1, 1, 0, -1, 1>, class Eigen::Matrix<unsigned __int64, -1, 1, 0, -1, 1>>(class Eigen::MatrixBase<class Eigen::Matrix<unsigned __int64, -1, 1, 0, -1, 1>> const &, int, class Eigen::MatrixBase<class Eigen::Matrix<unsigned __int64, -1, 1, 0, -1, 1>> &);
-template void igl::cumsum<class Eigen::Matrix<unsigned __int64, 2, 1, 0, 2, 1>, class Eigen::Matrix<unsigned __int64, 2, 1, 0, 2, 1>>(class Eigen::MatrixBase<class Eigen::Matrix<unsigned __int64, 2, 1, 0, 2, 1>> const &, int, class Eigen::MatrixBase<class Eigen::Matrix<unsigned __int64, 2, 1, 0, 2, 1>> &);
+template void igl::cumsum<class Eigen::Matrix<unsigned __int64, -1, 1, 0, -1, 1>, class Eigen::Matrix<unsigned __int64, -1, 1, 0, -1, 1>>(class Eigen::PlainObjectBase<class Eigen::Matrix<unsigned __int64, -1, 1, 0, -1, 1>> const &, int, class Eigen::PlainObjectBase<class Eigen::Matrix<unsigned __int64, -1, 1, 0, -1, 1>> &);
+template void igl::cumsum<class Eigen::Matrix<unsigned __int64, 2, 1, 0, 2, 1>, class Eigen::Matrix<unsigned __int64, 2, 1, 0, 2, 1>>(class Eigen::PlainObjectBase<class Eigen::Matrix<unsigned __int64, 2, 1, 0, 2, 1>> const &, int, class Eigen::PlainObjectBase<class Eigen::Matrix<unsigned __int64, 2, 1, 0, 2, 1>> &);
 #endif
 #endif

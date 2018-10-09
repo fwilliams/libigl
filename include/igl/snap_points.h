@@ -33,9 +33,9 @@ namespace igl
   IGL_INLINE void snap_points(
     const Eigen::MatrixBase<DerivedC > & C,
     const Eigen::MatrixBase<DerivedV > & V,
-    Eigen::MatrixBase<DerivedI > & I,
-    Eigen::MatrixBase<DerivedminD > & minD,
-    Eigen::MatrixBase<DerivedVI > & VI);
+    Eigen::PlainObjectBase<DerivedI > & I,
+    Eigen::PlainObjectBase<DerivedminD > & minD,
+    Eigen::PlainObjectBase<DerivedVI > & VI);
   template <
     typename DerivedC, 
     typename DerivedV, 
@@ -44,8 +44,8 @@ namespace igl
   IGL_INLINE void snap_points(
     const Eigen::MatrixBase<DerivedC > & C,
     const Eigen::MatrixBase<DerivedV > & V,
-    Eigen::MatrixBase<DerivedI > & I,
-    Eigen::MatrixBase<DerivedminD > & minD);
+    Eigen::PlainObjectBase<DerivedI > & I,
+    Eigen::PlainObjectBase<DerivedminD > & minD);
   template <
     typename DerivedC, 
     typename DerivedV, 
@@ -53,7 +53,7 @@ namespace igl
   IGL_INLINE void snap_points(
     const Eigen::MatrixBase<DerivedC > & C,
     const Eigen::MatrixBase<DerivedV > & V,
-    Eigen::MatrixBase<DerivedI > & I);
+    Eigen::PlainObjectBase<DerivedI > & I);
 }
 
 #ifndef IGL_STATIC_LIBRARY

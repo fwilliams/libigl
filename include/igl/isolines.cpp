@@ -26,8 +26,8 @@ IGL_INLINE void igl::isolines(
                               const Eigen::MatrixBase<DerivedF>& F,
                               const Eigen::MatrixBase<DerivedZ>& z,
                               const int n,
-                              Eigen::MatrixBase<DerivedIsoV>& isoV,
-                              Eigen::MatrixBase<DerivedIsoE>& isoE)
+                              Eigen::PlainObjectBase<DerivedIsoV>& isoV,
+                              Eigen::PlainObjectBase<DerivedIsoE>& isoE)
 {
     //Constants
     const int dim = V.cols();
@@ -111,6 +111,6 @@ IGL_INLINE void igl::isolines(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::isolines<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, int const, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > &, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > &);
+template void igl::isolines<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, int const, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > &, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > &);
 #endif
 

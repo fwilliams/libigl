@@ -42,8 +42,8 @@ namespace igl
         const Eigen::MatrixBase<DerivedVB > & VB,
         const Eigen::MatrixBase<DerivedFB > & FB,
         const MeshBooleanType & type,
-        Eigen::MatrixBase<DerivedVC > & VC,
-        Eigen::MatrixBase<DerivedFC > & FC);
+        Eigen::PlainObjectBase<DerivedVC > & VC,
+        Eigen::PlainObjectBase<DerivedFC > & FC);
     }
   }
 }

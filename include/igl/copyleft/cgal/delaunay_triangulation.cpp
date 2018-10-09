@@ -17,7 +17,7 @@ template<
   typename DerivedF>
 IGL_INLINE void igl::copyleft::cgal::delaunay_triangulation(
     const Eigen::MatrixBase<DerivedV>& V,
-    Eigen::MatrixBase<DerivedF>& F)
+    Eigen::PlainObjectBase<DerivedF>& F)
 {
   typedef typename DerivedV::Scalar Scalar;
   igl::delaunay_triangulation(V, orient2D<Scalar>, incircle<Scalar>, F);

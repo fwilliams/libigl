@@ -13,7 +13,7 @@
 #include <Eigen/Sparse>
 
 // History:
-//  changed templates from generic matrices to MatrixBase Alec May 7, 2011
+//  changed templates from generic matrices to PlainObjectBase Alec May 7, 2011
 namespace igl
 {
   // Subdivide without moving vertices: Given the triangle mesh [V, F],
@@ -34,7 +34,7 @@ namespace igl
     const int n_verts,
     const Eigen::MatrixBase<DerivedF>& F,
     Eigen::SparseMatrix<SType>& S,
-    Eigen::MatrixBase<DerivedNF>& NF);
+    Eigen::PlainObjectBase<DerivedNF>& NF);
   // Subdivide a mesh without moving vertices: loop subdivision but odd
   // vertices stay put and even vertices are just edge midpoints
   // 
@@ -61,8 +61,8 @@ namespace igl
   IGL_INLINE void upsample(
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedF>& F,
-    Eigen::MatrixBase<DerivedNV>& NV,
-    Eigen::MatrixBase<DerivedNF>& NF,
+    Eigen::PlainObjectBase<DerivedNV>& NV,
+    Eigen::PlainObjectBase<DerivedNF>& NF,
     const int number_of_subdivs = 1);
 
   // Virtually in place wrapper

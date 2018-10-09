@@ -50,7 +50,7 @@ IGL_INLINE void slice_cached_precompute(
   const Eigen::SparseMatrix<TX>& X,
   const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
   const Eigen::Matrix<int,Eigen::Dynamic,1> & C,
-  Eigen::MatrixBase<DerivedI>& data,
+  Eigen::PlainObjectBase<DerivedI>& data,
   Eigen::SparseMatrix<TY>& Y
   );
 

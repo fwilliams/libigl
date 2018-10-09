@@ -26,7 +26,7 @@ namespace igl
   template <typename DerivedF, typename DerivedE>
   IGL_INLINE void edges(
     const Eigen::MatrixBase<DerivedF> & F, 
-    Eigen::MatrixBase<DerivedE> & E);
+    Eigen::PlainObjectBase<DerivedE> & E);
 }
 
 #ifndef IGL_STATIC_LIBRARY

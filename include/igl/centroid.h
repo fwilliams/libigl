@@ -22,22 +22,19 @@ namespace igl
   //
   template <
     typename DerivedV, 
-    typename DerivedF, 
-    typename Derivedc, 
-    typename Derivedvol>
+    typename DerivedF>
   IGL_INLINE void centroid(
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedF>& F,
-    Eigen::MatrixBase<Derivedc>& c,
-    Derivedvol & vol);
+    Eigen::PlainObjectBase<DerivedV>& c,
+    DerivedV & vol);
   template <
     typename DerivedV, 
-    typename DerivedF, 
-    typename Derivedc>
+    typename DerivedF>
   IGL_INLINE void centroid(
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedF>& F,
-    Eigen::MatrixBase<Derivedc>& c);
+    Eigen::PlainObjectBase<DerivedV>& c);
 
 }
 

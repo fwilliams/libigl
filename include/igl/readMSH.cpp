@@ -19,8 +19,8 @@ template <
   typename DerivedT>
 IGL_INLINE bool igl::readMSH(
   const std::string & filename,
-  Eigen::MatrixBase<DerivedV> & V,
-  Eigen::MatrixBase<DerivedT> & T)
+  Eigen::PlainObjectBase<DerivedV> & V,
+  Eigen::PlainObjectBase<DerivedT> & T)
 {
   // https://github.com/Yixin-Hu/TetWild/blob/master/pymesh/MshSaver.cpp
   // Original copyright: /* This file is part of PyMesh. Copyright (c) 2015 by Qingnan Zhou */

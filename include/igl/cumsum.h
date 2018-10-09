@@ -28,11 +28,11 @@ namespace igl
   IGL_INLINE void cumsum(
     const Eigen::MatrixBase<DerivedX > & X,
     const int dim,
-    Eigen::MatrixBase<DerivedY > & Y);
+    Eigen::PlainObjectBase<DerivedY > & Y);
   //template <typename DerivedX, typename DerivedY>
   //IGL_INLINE void cumsum(
   //  const Eigen::MatrixBase<DerivedX > & X,
-  //  Eigen::MatrixBase<DerivedY > & Y);
+  //  Eigen::PlainObjectBase<DerivedY > & Y);
 }
 
 #ifndef IGL_STATIC_LIBRARY

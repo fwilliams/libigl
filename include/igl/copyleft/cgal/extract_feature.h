@@ -48,7 +48,7 @@ namespace igl
             const Eigen::MatrixBase<DerivedV>& V,
             const Eigen::MatrixBase<DerivedF>& F,
             const double tol,
-            Eigen::MatrixBase<DerivedE>& feature_edges);
+            Eigen::PlainObjectBase<DerivedE>& feature_edges);
 
       // Inputs:
       //   V    #V by 3 array of vertices.
@@ -79,7 +79,7 @@ namespace igl
             const Eigen::MatrixBase<DerivedE>& E,
             const Eigen::MatrixBase<DerivedE>& uE,
             const std::vector<std::vector<typename DerivedE::Scalar> >& uE2E,
-            Eigen::MatrixBase<DerivedE>& feature_edges);
+            Eigen::PlainObjectBase<DerivedE>& feature_edges);
     }
   }
 }

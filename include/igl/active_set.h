@@ -74,7 +74,7 @@ namespace igl
     const Eigen::MatrixBase<Derivedlx> & lx,
     const Eigen::MatrixBase<Derivedux> & ux,
     const igl::active_set_params & params,
-    Eigen::MatrixBase<DerivedZ> & Z
+    Eigen::PlainObjectBase<DerivedZ> & Z
     );
 };
 

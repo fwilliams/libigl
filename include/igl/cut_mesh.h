@@ -62,16 +62,16 @@ namespace igl
     const Eigen::MatrixBase<DerivedTT>& TTi,
     const std::vector<bool> &V_border,
     const Eigen::MatrixBase<DerivedC> &cuts,
-    Eigen::MatrixBase<DerivedV> &Vcut,
-    Eigen::MatrixBase<DerivedF> &Fcut);
+    Eigen::PlainObjectBase<DerivedV> &Vcut,
+    Eigen::PlainObjectBase<DerivedF> &Fcut);
   //Wrapper of the above with only vertices and faces as mesh input
   template <typename DerivedV, typename DerivedF, typename DerivedC>
   IGL_INLINE void cut_mesh(
     const Eigen::MatrixBase<DerivedV> &V,
     const Eigen::MatrixBase<DerivedF> &F,
     const Eigen::MatrixBase<DerivedC> &cuts,
-    Eigen::MatrixBase<DerivedV> &Vcut,
-    Eigen::MatrixBase<DerivedF> &Fcut);
+    Eigen::PlainObjectBase<DerivedV> &Vcut,
+    Eigen::PlainObjectBase<DerivedF> &Fcut);
 };
 
 

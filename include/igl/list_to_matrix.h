@@ -27,7 +27,7 @@ namespace igl
   template <typename T, typename Derived>
   IGL_INLINE bool list_to_matrix(
     const std::vector<std::vector<T > > & V,
-    Eigen::MatrixBase<Derived>& M);
+    Eigen::PlainObjectBase<Derived>& M);
   // Convert a list of row vectors of `n` or less to a matrix and pad on
   // the right with `padding`:
   //
@@ -42,10 +42,10 @@ namespace igl
     const std::vector<std::vector<T > > & V,
     const int n,
     const T & padding,
-    Eigen::MatrixBase<Derived>& M);
+    Eigen::PlainObjectBase<Derived>& M);
   // Vector wrapper
   template <typename T, typename Derived>
-  IGL_INLINE bool list_to_matrix(const std::vector<T > & V,Eigen::MatrixBase<Derived>& M);
+  IGL_INLINE bool list_to_matrix(const std::vector<T > & V,Eigen::PlainObjectBase<Derived>& M);
 }
 
 #ifndef IGL_STATIC_LIBRARY

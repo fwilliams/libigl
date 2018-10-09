@@ -29,7 +29,7 @@ namespace igl
   template <typename DerivedF,typename DerivedB>
   IGL_INLINE bool is_vertex_manifold(
     const Eigen::MatrixBase<DerivedF>& F,
-    Eigen::MatrixBase<DerivedB>& B);
+    Eigen::PlainObjectBase<DerivedB>& B);
 }
 
 #ifndef IGL_STATIC_LIBRARY

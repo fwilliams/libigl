@@ -56,7 +56,7 @@ namespace igl {
     const ColorMapType cm,
     const Eigen::MatrixBase<DerivedZ> & Z,
     const bool normalize,
-    Eigen::MatrixBase<DerivedC> & C);
+    Eigen::PlainObjectBase<DerivedC> & C);
   // Inputs:
   //   min_z  value at "0"
   //   max_z  value at "1"
@@ -66,7 +66,7 @@ namespace igl {
     const Eigen::MatrixBase<DerivedZ> & Z,
     const double min_Z,
     const double max_Z,
-    Eigen::MatrixBase<DerivedC> & C);
+    Eigen::PlainObjectBase<DerivedC> & C);
 };
 
 #ifndef IGL_STATIC_LIBRARY

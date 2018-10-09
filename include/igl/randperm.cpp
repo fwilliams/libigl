@@ -12,7 +12,7 @@
 template <typename DerivedI>
 IGL_INLINE void igl::randperm(
   const int n,
-  Eigen::MatrixBase<DerivedI> & I)
+  Eigen::PlainObjectBase<DerivedI> & I)
 {
   Eigen::VectorXi II;
   igl::colon(0,1,n-1,II);
@@ -22,6 +22,6 @@ IGL_INLINE void igl::randperm(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::randperm<Eigen::Matrix<int, -1, 1, 0, -1, 1> >(int, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
-template void igl::randperm<Eigen::Matrix<int, -1, -1, 0, -1, -1> >(int, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
+template void igl::randperm<Eigen::Matrix<int, -1, 1, 0, -1, 1> >(int, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::randperm<Eigen::Matrix<int, -1, -1, 0, -1, -1> >(int, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
 #endif

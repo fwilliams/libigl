@@ -32,7 +32,7 @@ namespace igl
     const Eigen::MatrixBase<DerivedU> & V,
     const Eigen::MatrixBase<DerivedV> & U,
     const bool squared,
-    Eigen::MatrixBase<DerivedOut> & D);
+    Eigen::PlainObjectBase<DerivedOut> & D);
 }
 
 #ifndef IGL_STATIC_LIBRARY

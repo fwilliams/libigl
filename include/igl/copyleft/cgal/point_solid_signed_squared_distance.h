@@ -36,7 +36,7 @@ namespace igl
         const Eigen::MatrixBase<DerivedQ> & Q,
         const Eigen::MatrixBase<DerivedVB> & VB,
         const Eigen::MatrixBase<DerivedFB> & FB,
-        Eigen::MatrixBase<DerivedD> & D);
+        Eigen::PlainObjectBase<DerivedD> & D);
     }
   }
 }

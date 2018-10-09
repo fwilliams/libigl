@@ -31,7 +31,7 @@ namespace igl
     const Eigen::MatrixBase<Derivedmodel>& model,
     const Eigen::MatrixBase<Derivedproj>& proj,
     const Eigen::MatrixBase<Derivedviewport>&  viewport,
-    Eigen::MatrixBase<Derivedscene> & scene);
+    Eigen::PlainObjectBase<Derivedscene> & scene);
   template <typename Scalar>
   IGL_INLINE Eigen::Matrix<Scalar,3,1> unproject(
     const Eigen::Matrix<Scalar,3,1>&  win,

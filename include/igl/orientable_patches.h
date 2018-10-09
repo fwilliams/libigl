@@ -32,8 +32,8 @@ namespace igl
     SparseT & A);
   template <typename DerivedF, typename DerivedC>
   IGL_INLINE void orientable_patches(
-    const Eigen::PlainObjectBase<DerivedF> & F,
-    Eigen::MatrixBase<DerivedC> & C);
+    const Eigen::MatrixBase<DerivedF> & F,
+    Eigen::PlainObjectBase<DerivedC> & C);
 };
 #ifndef IGL_STATIC_LIBRARY
 #  include "orientable_patches.cpp"

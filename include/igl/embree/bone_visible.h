@@ -45,7 +45,7 @@ namespace igl
       const Eigen::MatrixBase<DerivedF> & F,
       const Eigen::MatrixBase<DerivedSD> & s,
       const Eigen::MatrixBase<DerivedSD> & d,
-      Eigen::MatrixBase<Derivedflag>  & flag);
+      Eigen::PlainObjectBase<Derivedflag>  & flag);
     // Inputs:
     //  ei  EmbreeIntersector for mesh (V,F) should be double sided
     template <
@@ -59,7 +59,7 @@ namespace igl
       const EmbreeIntersector & ei,
       const Eigen::MatrixBase<DerivedSD> & s,
       const Eigen::MatrixBase<DerivedSD> & d,
-      Eigen::MatrixBase<Derivedflag>  & flag);
+      Eigen::PlainObjectBase<Derivedflag>  & flag);
   }
 }
 #ifndef IGL_STATIC_LIBRARY

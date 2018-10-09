@@ -175,7 +175,7 @@ namespace igl
   typename DerivedSC,
   typename DerivedS>
   IGL_INLINE bool shapeup_solve(const Eigen::MatrixBase<DerivedP>& bc,
-                                const std::function<bool(const Eigen::MatrixBase<DerivedP>&, const Eigen::MatrixBase<DerivedSC>&, const Eigen::MatrixBase<DerivedS>&,  Eigen::MatrixBase<DerivedP>&)>& local_projection,
+                                const std::function<bool(const Eigen::MatrixBase<DerivedP>&, const Eigen::MatrixBase<DerivedSC>&, const Eigen::MatrixBase<DerivedS>&,  Eigen::PlainObjectBase<DerivedP>&)>& local_projection,
                                 const Eigen::MatrixBase<DerivedP>& P0,
                                 const ShapeupData & sudata,
                                 const bool quietIterations,
@@ -207,7 +207,7 @@ namespace igl
         for (int j=0;j<sudata.SC(i);j++)
           rhs.row(currRow++)=projP.block(i, 3*j, 1,3);
       
-      Eigen::MatrixBase<DerivedP> lsrhs=-sudata.At*sudata.W*rhs;
+      Eigen::PlainObjectBase<DerivedP> lsrhs=-sudata.At*sudata.W*rhs;
       MatrixXd Y(0,3), Beq(0,3);  //We do not use the min_quad_solver fixed variables mechanism; they are treated with the closeness energy of ShapeUp.
       min_quad_with_fixed_solve(sudata.solver_data, lsrhs,Y,Beq,currP);
       
@@ -232,7 +232,7 @@ namespace igl
 
 
 #ifdef IGL_STATIC_LIBRARY
-template bool igl::shapeup_precomputation< typename Eigen::Matrix<double, -1, -1, 0, -1, -1>, typename Eigen::Matrix<int, -1, 1, 0, -1, 1>, typename Eigen::Matrix<int, -1, -1, 0, -1, -1>, typename Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&,   Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, igl::ShapeupData&);
+template bool igl::shapeup_precomputation< typename Eigen::Matrix<double, -1, -1, 0, -1, -1>, typename Eigen::Matrix<int, -1, 1, 0, -1, 1>, typename Eigen::Matrix<int, -1, -1, 0, -1, -1>, typename Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&,   Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, igl::ShapeupData&);
 
-template bool igl::shapeup_solve<typename Eigen::Matrix<double, -1, -1, 0, -1, -1>, typename Eigen::Matrix<int, -1, 1, 0, -1, 1>, typename Eigen::Matrix<int, -1, -1, 0, -1, -1> >(const Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >& bc, const std::function<bool(const Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, const Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, const Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&,  Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >& ) >& local_projection, const Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >& P0, const igl::ShapeupData & sudata, const bool quietIterations, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >& P);
+template bool igl::shapeup_solve<typename Eigen::Matrix<double, -1, -1, 0, -1, -1>, typename Eigen::Matrix<int, -1, 1, 0, -1, 1>, typename Eigen::Matrix<int, -1, -1, 0, -1, -1> >(const Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >& bc, const std::function<bool(const Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, const Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, const Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&,  Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >& ) >& local_projection, const Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >& P0, const igl::ShapeupData & sudata, const bool quietIterations, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >& P);
 #endif

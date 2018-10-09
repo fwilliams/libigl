@@ -38,7 +38,7 @@ namespace igl
   template <typename T,typename DerivedV>
   IGL_INLINE void diag(
     const Eigen::SparseMatrix<T>& X, 
-    Eigen::MatrixBase<DerivedV>& V);
+    Eigen::PlainObjectBase<DerivedV>& V);
   // Templates:
   //   T  should be a eigen sparse matrix primitive type like int or double
   // Inputs:

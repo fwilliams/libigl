@@ -35,7 +35,7 @@ namespace igl
     const Eigen::DenseBase<DerivedX> & X,
     const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
     const Eigen::Matrix<int,Eigen::Dynamic,1> & C,
-    Eigen::MatrixBase<DerivedY> & Y);
+    Eigen::PlainObjectBase<DerivedY> & Y);
   // Wrapper to only slice in one direction
   //
   // Inputs:
@@ -53,7 +53,7 @@ namespace igl
   IGL_INLINE void slice_into(
     const Eigen::DenseBase<DerivedX> & X,
     const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
-    Eigen::MatrixBase<DerivedY> & Y);
+    Eigen::PlainObjectBase<DerivedY> & Y);
 }
 
 #ifndef IGL_STATIC_LIBRARY

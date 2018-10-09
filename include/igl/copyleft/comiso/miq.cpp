@@ -319,8 +319,8 @@ namespace comiso {
                          const Eigen::Matrix<int, Eigen::Dynamic, 3> &Handle_MMatch,
                          const Eigen::Matrix<int, Eigen::Dynamic, 1> &Handle_Singular,
                          const Eigen::Matrix<int, Eigen::Dynamic, 3> &Handle_Seams,
-                         Eigen::MatrixBase<DerivedU> &UV,
-                         Eigen::MatrixBase<DerivedF> &FUV,
+                         Eigen::PlainObjectBase<DerivedU> &UV,
+                         Eigen::PlainObjectBase<DerivedF> &FUV,
                          double GradientSize = 30.0,
                          double Stiffness = 5.0,
                          bool DirectRound = false,
@@ -332,8 +332,8 @@ namespace comiso {
                          std::vector<std::vector<int> > hardFeatures = std::vector<std::vector<int> >());
 
 
-    IGL_INLINE void extractUV(Eigen::MatrixBase<DerivedU> &UV_out,
-                              Eigen::MatrixBase<DerivedF> &FUV_out);
+    IGL_INLINE void extractUV(Eigen::PlainObjectBase<DerivedU> &UV_out,
+                              Eigen::PlainObjectBase<DerivedF> &FUV_out);
 
   private:
     IGL_INLINE int NumFlips(const Eigen::MatrixXd& WUV);
@@ -1177,8 +1177,8 @@ IGL_INLINE igl::copyleft::comiso::MIQ_class<DerivedV, DerivedF, DerivedU>::MIQ_c
                                                                    const Eigen::Matrix<int, Eigen::Dynamic, 3> &Handle_MMatch,
                                                                    const Eigen::Matrix<int, Eigen::Dynamic, 1> &Handle_Singular,
                                                                    const Eigen::Matrix<int, Eigen::Dynamic, 3> &Handle_Seams,
-                                                                   Eigen::MatrixBase<DerivedU> &UV,
-                                                                   Eigen::MatrixBase<DerivedF> &FUV,
+                                                                   Eigen::PlainObjectBase<DerivedU> &UV,
+                                                                   Eigen::PlainObjectBase<DerivedF> &FUV,
                                                                    double GradientSize,
                                                                    double Stiffness,
                                                                    bool DirectRound,
@@ -1240,8 +1240,8 @@ F(F_)
 }
 
 template <typename DerivedV, typename DerivedF, typename DerivedU>
-IGL_INLINE void igl::copyleft::comiso::MIQ_class<DerivedV, DerivedF, DerivedU>::extractUV(Eigen::MatrixBase<DerivedU> &UV_out,
-                                                                        Eigen::MatrixBase<DerivedF> &FUV_out)
+IGL_INLINE void igl::copyleft::comiso::MIQ_class<DerivedV, DerivedF, DerivedU>::extractUV(Eigen::PlainObjectBase<DerivedU> &UV_out,
+                                                                        Eigen::PlainObjectBase<DerivedF> &FUV_out)
 {
   UV_out = this->UV_out;
   FUV_out = this->FUV_out;
@@ -1432,8 +1432,8 @@ IGL_INLINE void igl::copyleft::comiso::miq(
   const Eigen::Matrix<int, Eigen::Dynamic, 3> &Handle_MMatch,
   const Eigen::Matrix<int, Eigen::Dynamic, 1> &Handle_Singular,
   const Eigen::Matrix<int, Eigen::Dynamic, 3> &Handle_Seams,
-  Eigen::MatrixBase<DerivedU> &UV,
-  Eigen::MatrixBase<DerivedF> &FUV,
+  Eigen::PlainObjectBase<DerivedU> &UV,
+  Eigen::PlainObjectBase<DerivedF> &FUV,
   double GradientSize,
   double Stiffness,
   bool DirectRound,
@@ -1474,8 +1474,8 @@ IGL_INLINE void igl::copyleft::comiso::miq(
     const Eigen::MatrixBase<DerivedF> &F,
     const Eigen::MatrixBase<DerivedV> &PD1,
     const Eigen::MatrixBase<DerivedV> &PD2,
-    Eigen::MatrixBase<DerivedU> &UV,
-    Eigen::MatrixBase<DerivedF> &FUV,
+    Eigen::PlainObjectBase<DerivedU> &UV,
+    Eigen::PlainObjectBase<DerivedF> &FUV,
     double GradientSize,
     double Stiffness,
     bool DirectRound,
@@ -1528,7 +1528,7 @@ IGL_INLINE void igl::copyleft::comiso::miq(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::copyleft::comiso::miq<Eigen::Matrix<double, -1, 3, 0, -1, 3>, Eigen::Matrix<int, -1, 3, 0, -1, 3>, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, 3, 0, -1, 3> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 3, 0, -1, 3> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 3, 0, -1, 3> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 3, 0, -1, 3> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 3, 0, -1, 3> >&, double, double, bool, int, int, bool, bool, std::vector<int, std::allocator<int> >, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >);
-template void igl::copyleft::comiso::miq<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::Matrix<int, -1, 3, 0, -1, 3> const&, Eigen::Matrix<int, -1, 1, 0, -1, 1> const&, Eigen::Matrix<int, -1, 3, 0, -1, 3> const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, double, double, bool, int, int, bool, bool, std::vector<int, std::allocator<int> >, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >);
-template void igl::copyleft::comiso::miq<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, double, double, bool, int, int, bool, bool, std::vector<int, std::allocator<int> >, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >);
+template void igl::copyleft::comiso::miq<Eigen::Matrix<double, -1, 3, 0, -1, 3>, Eigen::Matrix<int, -1, 3, 0, -1, 3>, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 3, 0, -1, 3> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 3, 0, -1, 3> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 3, 0, -1, 3> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 3, 0, -1, 3> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 3, 0, -1, 3> >&, double, double, bool, int, int, bool, bool, std::vector<int, std::allocator<int> >, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >);
+template void igl::copyleft::comiso::miq<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::Matrix<int, -1, 3, 0, -1, 3> const&, Eigen::Matrix<int, -1, 1, 0, -1, 1> const&, Eigen::Matrix<int, -1, 3, 0, -1, 3> const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, double, double, bool, int, int, bool, bool, std::vector<int, std::allocator<int> >, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >);
+template void igl::copyleft::comiso::miq<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, double, double, bool, int, int, bool, bool, std::vector<int, std::allocator<int> >, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >);
 #endif

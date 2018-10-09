@@ -26,7 +26,7 @@ namespace igl
   IGL_INLINE void inradius(
     const Eigen::MatrixBase<DerivedV> & V, 
     const Eigen::MatrixBase<DerivedF> & F,
-    Eigen::MatrixBase<DerivedR> & R);
+    Eigen::PlainObjectBase<DerivedR> & R);
 }
 #ifndef IGL_STATIC_LIBRARY
 #  include "inradius.cpp"

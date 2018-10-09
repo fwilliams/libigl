@@ -49,7 +49,7 @@ namespace igl
       const Eigen::MatrixBase<Derivedbc> & bc,
       igl::BBWData & data,
       igl::mosek::MosekData & mosek_data,
-      Eigen::MatrixBase<DerivedW> & W);
+      Eigen::PlainObjectBase<DerivedW> & W);
   }
 }
 

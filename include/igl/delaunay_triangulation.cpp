@@ -23,7 +23,7 @@ IGL_INLINE void igl::delaunay_triangulation(
     const Eigen::MatrixBase<DerivedV>& V,
     Orient2D orient2D,
     InCircle incircle,
-    Eigen::MatrixBase<DerivedF>& F)
+    Eigen::PlainObjectBase<DerivedF>& F)
 {
   assert(V.cols() == 2);
   typedef typename DerivedF::Scalar Index;
@@ -82,5 +82,5 @@ IGL_INLINE void igl::delaunay_triangulation(
 }
 
 #ifdef IGL_STATIC_LIBRARY
-template void igl::delaunay_triangulation<Eigen::Matrix<double, -1, -1, 0, -1, -1>, short (*)(double const*, double const*, double const*), short (*)(double const*, double const*, double const*, double const*), Eigen::Matrix<int, -1, -1, 0, -1, -1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, short (*)(double const*, double const*, double const*), short (*)(double const*, double const*, double const*, double const*), Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
+template void igl::delaunay_triangulation<Eigen::Matrix<double, -1, -1, 0, -1, -1>, short (*)(double const*, double const*, double const*), short (*)(double const*, double const*, double const*, double const*), Eigen::Matrix<int, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, short (*)(double const*, double const*, double const*), short (*)(double const*, double const*, double const*, double const*), Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&);
 #endif

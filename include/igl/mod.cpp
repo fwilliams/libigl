@@ -11,7 +11,7 @@ template <typename DerivedA, typename DerivedB>
 IGL_INLINE void igl::mod(
   const Eigen::MatrixBase<DerivedA> & A,
   const int base,
-  Eigen::MatrixBase<DerivedB> & B)
+  Eigen::PlainObjectBase<DerivedB> & B)
 {
   B.resizeLike(A);
   for(int i = 0;i<A.rows();i++)

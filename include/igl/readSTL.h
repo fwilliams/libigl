@@ -39,9 +39,9 @@ namespace igl
   template <typename DerivedV, typename DerivedF, typename DerivedN>
   IGL_INLINE bool readSTL(
     const std::string & filename,
-    Eigen::MatrixBase<DerivedV> & V,
-    Eigen::MatrixBase<DerivedF> & F,
-    Eigen::MatrixBase<DerivedN> & N);
+    Eigen::PlainObjectBase<DerivedV> & V,
+    Eigen::PlainObjectBase<DerivedF> & F,
+    Eigen::PlainObjectBase<DerivedN> & N);
   // Inputs:
   //   stl_file  pointer to already opened .stl file 
   // Outputs:

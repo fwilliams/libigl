@@ -38,9 +38,9 @@ namespace igl
         const double th,
         const int poly_size,
         const bool solid,
-        Eigen::MatrixBase<DerivedV> & V,
-        Eigen::MatrixBase<DerivedF> & F,
-        Eigen::MatrixBase<DerivedJ> & J);
+        Eigen::PlainObjectBase<DerivedV> & V,
+        Eigen::PlainObjectBase<DerivedF> & F,
+        Eigen::PlainObjectBase<DerivedJ> & J);
       // Default with solid=true
       template <
         typename DerivedWV,
@@ -53,9 +53,9 @@ namespace igl
         const Eigen::MatrixBase<DerivedWE> & WE,
         const double th,
         const int poly_size,
-        Eigen::MatrixBase<DerivedV> & V,
-        Eigen::MatrixBase<DerivedF> & F,
-        Eigen::MatrixBase<DerivedJ> & J);
+        Eigen::PlainObjectBase<DerivedV> & V,
+        Eigen::PlainObjectBase<DerivedF> & F,
+        Eigen::PlainObjectBase<DerivedJ> & J);
 
     }
   }

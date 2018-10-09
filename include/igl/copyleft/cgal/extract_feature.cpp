@@ -20,7 +20,7 @@ IGL_INLINE void igl::copyleft::cgal::extract_feature(
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedF>& F,
     const double tol,
-    Eigen::MatrixBase<DerivedE>& feature_edges) {
+    Eigen::PlainObjectBase<DerivedE>& feature_edges) {
 
   using IndexType = typename DerivedE::Scalar;
   DerivedE E, uE;
@@ -42,7 +42,7 @@ IGL_INLINE void igl::copyleft::cgal::extract_feature(
     const Eigen::MatrixBase<DerivedE>& E,
     const Eigen::MatrixBase<DerivedE>& uE,
     const std::vector<std::vector<typename DerivedE::Scalar> >& uE2E,
-    Eigen::MatrixBase<DerivedE>& feature_edges) {
+    Eigen::PlainObjectBase<DerivedE>& feature_edges) {
 
   assert(V.cols() == 3);
   assert(F.cols() == 3);

@@ -30,7 +30,7 @@ namespace igl
     template <typename Derivedwin, typename Derivedobj>
     IGL_INLINE void unproject(
       const Eigen::MatrixBase<Derivedwin> & win,
-      Eigen::MatrixBase<Derivedobj> & obj);
+      Eigen::PlainObjectBase<Derivedobj> & obj);
     template <typename Derivedwin>
     IGL_INLINE Derivedwin unproject(
       const Eigen::MatrixBase<Derivedwin> & win);

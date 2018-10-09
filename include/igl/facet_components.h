@@ -21,7 +21,7 @@ namespace igl
   template <typename DerivedF, typename DerivedC>
   IGL_INLINE void facet_components(
     const Eigen::MatrixBase<DerivedF> & F,
-    Eigen::MatrixBase<DerivedC> & C);
+    Eigen::PlainObjectBase<DerivedC> & C);
   // Inputs:
   //   TT  #TT by 3 list of list of adjacency triangles (see
   //   triangle_triangle_adjacency.h)
@@ -34,8 +34,8 @@ namespace igl
     typename Derivedcounts>
   IGL_INLINE void facet_components(
     const std::vector<std::vector<std::vector<TTIndex > > > & TT,
-    Eigen::MatrixBase<DerivedC> & C,
-    Eigen::MatrixBase<Derivedcounts> & counts);
+    Eigen::PlainObjectBase<DerivedC> & C,
+    Eigen::PlainObjectBase<Derivedcounts> & counts);
 }
 #ifndef IGL_STATIC_LIBRARY
 #  include "facet_components.cpp"

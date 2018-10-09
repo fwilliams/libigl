@@ -36,7 +36,7 @@ namespace igl
     const Eigen::MatrixBase<Derivedb> & b,
     const Eigen::MatrixBase<Derivedbc> & bc,
     const int k,
-    Eigen::MatrixBase<DerivedW> & W);
+    Eigen::PlainObjectBase<DerivedW> & W);
   // Compute harmonic map using uniform laplacian operator
   //
   // Inputs:
@@ -57,7 +57,7 @@ namespace igl
     const Eigen::MatrixBase<Derivedb> & b,
     const Eigen::MatrixBase<Derivedbc> & bc,
     const int k,
-    Eigen::MatrixBase<DerivedW> & W);
+    Eigen::PlainObjectBase<DerivedW> & W);
   // Compute a harmonic map using a given Laplacian and mass matrix
   //
   // Inputs:
@@ -80,7 +80,7 @@ namespace igl
     const Eigen::MatrixBase<Derivedb> & b,
     const Eigen::MatrixBase<Derivedbc> & bc,
     const int k,
-    Eigen::MatrixBase<DerivedW> & W);
+    Eigen::PlainObjectBase<DerivedW> & W);
   // Build the discrete k-harmonic operator (computing integrated quantities).
   // That is, if the k-harmonic PDE is Q x = 0, then this minimizes x' Q x
   //

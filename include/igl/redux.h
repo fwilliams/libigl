@@ -29,7 +29,7 @@ namespace igl
     const Eigen::SparseMatrix<AType> & A,
     const int dim,
     const Func & func,
-    Eigen::MatrixBase<DerivedB> & B);
+    Eigen::PlainObjectBase<DerivedB> & B);
 }
 
 // Implementation
@@ -42,7 +42,7 @@ inline void igl::redux(
   const Eigen::SparseMatrix<AType> & A,
   const int dim,
   const Func & func,
-  Eigen::MatrixBase<DerivedB> & B)
+  Eigen::PlainObjectBase<DerivedB> & B)
 {
   assert((dim == 1 || dim == 2) && "dim must be 2 or 1");
   // Get size of input

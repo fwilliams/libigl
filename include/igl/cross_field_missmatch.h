@@ -34,7 +34,7 @@ namespace igl
                                         const Eigen::MatrixBase<DerivedV> &PD1,
                                         const Eigen::MatrixBase<DerivedV> &PD2,
                                         const bool isCombed,
-                                        Eigen::MatrixBase<DerivedM> &missmatch);
+                                        Eigen::PlainObjectBase<DerivedM> &missmatch);
 }
 #ifndef IGL_STATIC_LIBRARY
 #include "cross_field_missmatch.cpp"

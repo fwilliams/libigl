@@ -66,7 +66,7 @@ namespace igl
     const Eigen::MatrixBase<Derivedb> & b,
     const Eigen::MatrixBase<Derivedbc> & bc,
     BBWData & data,
-    Eigen::MatrixBase<DerivedW> & W);
+    Eigen::PlainObjectBase<DerivedW> & W);
 }
 
 #ifndef IGL_STATIC_LIBRARY

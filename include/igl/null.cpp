@@ -11,7 +11,7 @@
 template <typename DerivedA, typename DerivedN>
 IGL_INLINE void igl::null(
   const Eigen::MatrixBase<DerivedA> & A,
-  Eigen::MatrixBase<DerivedN> & N)
+  Eigen::PlainObjectBase<DerivedN> & N)
 {
   using namespace Eigen;
   typedef typename DerivedA::Scalar Scalar;

@@ -31,11 +31,11 @@ Eigen::Matrix<Scalar,3,1> igl::project(
 
 template <typename DerivedV, typename DerivedM, typename DerivedN, typename DerivedO, typename DerivedP>
 IGL_INLINE void igl::project(
-  const    Eigen::MatrixBase<DerivedV>&  V,
-  const    Eigen::MatrixBase<DerivedM>& model,
-  const    Eigen::MatrixBase<DerivedN>& proj,
-  const    Eigen::MatrixBase<DerivedO>&  viewport,
-  Eigen::MatrixBase<DerivedP> & P)
+  const    Eigen::PlainObjectBase<DerivedV>&  V,
+  const    Eigen::PlainObjectBase<DerivedM>& model,
+  const    Eigen::PlainObjectBase<DerivedN>& proj,
+  const    Eigen::PlainObjectBase<DerivedO>&  viewport,
+  Eigen::PlainObjectBase<DerivedP> & P)
 {
   typedef typename DerivedP::Scalar PScalar;
   Eigen::Matrix<PScalar,DerivedV::RowsAtCompileTime,4> HV(V.rows(),4);
@@ -54,6 +54,6 @@ IGL_INLINE void igl::project(
 // Explicit template instantiation
 template Eigen::Matrix<double, 3, 1, 0, 3, 1> igl::project<double>(Eigen::Matrix<double, 3, 1, 0, 3, 1> const&, Eigen::Matrix<double, 4, 4, 0, 4, 4> const&, Eigen::Matrix<double, 4, 4, 0, 4, 4> const&, Eigen::Matrix<double, 4, 1, 0, 4, 1> const&);
 template Eigen::Matrix<float, 3, 1, 0, 3, 1> igl::project<float>(Eigen::Matrix<float, 3, 1, 0, 3, 1> const&, Eigen::Matrix<float, 4, 4, 0, 4, 4> const&, Eigen::Matrix<float, 4, 4, 0, 4, 4> const&, Eigen::Matrix<float, 4, 1, 0, 4, 1> const&);
-template void igl::project<Eigen::Matrix<float, -1, -1, 0, -1, -1>, Eigen::Matrix<float, 4, 4, 0, 4, 4>, Eigen::Matrix<float, 4, 4, 0, 4, 4>, Eigen::Matrix<float, 4, 1, 0, 4, 1>, Eigen::Matrix<float, -1, -1, 0, -1, -1>>(const Eigen::MatrixBase<Eigen::Matrix<float, -1, -1, 0, -1, -1>>&, const Eigen::MatrixBase<Eigen::Matrix<float, 4, 4, 0, 4, 4>>&, const Eigen::MatrixBase<Eigen::Matrix<float, 4, 4, 0, 4, 4>>&, const Eigen::MatrixBase<Eigen::Matrix<float, 4, 1, 0, 4, 1>>&, Eigen::MatrixBase<Eigen::Matrix<float, -1, -1, 0, -1, -1>>&);
-template void igl::project<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<double, 4, 1, 0, 4, 1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>>(const Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1>>&, const Eigen::MatrixBase<Eigen::Matrix<double, 4, 4, 0, 4, 4>>&, const Eigen::MatrixBase<Eigen::Matrix<double, 4, 4, 0, 4, 4>>&, const Eigen::MatrixBase<Eigen::Matrix<double, 4, 1, 0, 4, 1>>&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1>>&);
+template void igl::project<Eigen::Matrix<float, -1, -1, 0, -1, -1>, Eigen::Matrix<float, 4, 4, 0, 4, 4>, Eigen::Matrix<float, 4, 4, 0, 4, 4>, Eigen::Matrix<float, 4, 1, 0, 4, 1>, Eigen::Matrix<float, -1, -1, 0, -1, -1>>(const Eigen::MatrixBase<Eigen::Matrix<float, -1, -1, 0, -1, -1>>&, const Eigen::MatrixBase<Eigen::Matrix<float, 4, 4, 0, 4, 4>>&, const Eigen::MatrixBase<Eigen::Matrix<float, 4, 4, 0, 4, 4>>&, const Eigen::MatrixBase<Eigen::Matrix<float, 4, 1, 0, 4, 1>>&, Eigen::PlainObjectBase<Eigen::Matrix<float, -1, -1, 0, -1, -1>>&);
+template void igl::project<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<double, 4, 4, 0, 4, 4>, Eigen::Matrix<double, 4, 1, 0, 4, 1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>>(const Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1>>&, const Eigen::MatrixBase<Eigen::Matrix<double, 4, 4, 0, 4, 4>>&, const Eigen::MatrixBase<Eigen::Matrix<double, 4, 4, 0, 4, 4>>&, const Eigen::MatrixBase<Eigen::Matrix<double, 4, 1, 0, 4, 1>>&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1>>&);
 #endif

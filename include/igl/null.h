@@ -26,7 +26,7 @@ namespace igl
   template <typename DerivedA, typename DerivedN>
   IGL_INLINE void null(
     const Eigen::MatrixBase<DerivedA> & A,
-    Eigen::MatrixBase<DerivedN> & N);
+    Eigen::PlainObjectBase<DerivedN> & N);
 }
 
 #ifndef IGL_STATIC_LIBRARY

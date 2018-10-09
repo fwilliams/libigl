@@ -53,11 +53,11 @@ namespace igl
         const Eigen::MatrixBase<DerivedVB> & VB,
         const Eigen::MatrixBase<DerivedFB> & FB,
         const RemeshSelfIntersectionsParam & params,
-        Eigen::MatrixBase<DerivedIF> & IF,
-        Eigen::MatrixBase<DerivedVVAB> & VVAB,
-        Eigen::MatrixBase<DerivedFFAB> & FFAB,
-        Eigen::MatrixBase<DerivedJAB>  & JAB,
-        Eigen::MatrixBase<DerivedIMAB> & IMAB);
+        Eigen::PlainObjectBase<DerivedIF> & IF,
+        Eigen::PlainObjectBase<DerivedVVAB> & VVAB,
+        Eigen::PlainObjectBase<DerivedFFAB> & FFAB,
+        Eigen::PlainObjectBase<DerivedJAB>  & JAB,
+        Eigen::PlainObjectBase<DerivedIMAB> & IMAB);
       // Legacy wrapper for detect only using common types.
       //
       // Inputs:

@@ -25,7 +25,7 @@ IGL_INLINE bool igl::biharmonic_coordinates(
   const Eigen::MatrixBase<DerivedV> & V,
   const Eigen::MatrixBase<DerivedT> & T,
   const std::vector<std::vector<SType> > & S,
-  Eigen::MatrixBase<DerivedW> & W)
+  Eigen::PlainObjectBase<DerivedW> & W)
 {
   return biharmonic_coordinates(V,T,S,2,W);
 }
@@ -40,7 +40,7 @@ IGL_INLINE bool igl::biharmonic_coordinates(
   const Eigen::MatrixBase<DerivedT> & T,
   const std::vector<std::vector<SType> > & S,
   const int k,
-  Eigen::MatrixBase<DerivedW> & W)
+  Eigen::PlainObjectBase<DerivedW> & W)
 {
   using namespace Eigen;
   using namespace std;
@@ -199,5 +199,5 @@ IGL_INLINE bool igl::biharmonic_coordinates(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template bool igl::biharmonic_coordinates<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, int, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&);
+template bool igl::biharmonic_coordinates<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, int, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&);
 #endif

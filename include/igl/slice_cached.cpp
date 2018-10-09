@@ -17,7 +17,7 @@ IGL_INLINE void igl::slice_cached_precompute(
   const Eigen::SparseMatrix<TX>& X,
   const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
   const Eigen::Matrix<int,Eigen::Dynamic,1> & C,
-  Eigen::MatrixBase<DerivedI>& data,
+  Eigen::PlainObjectBase<DerivedI>& data,
   Eigen::SparseMatrix<TY>& Y
   )
 {
@@ -52,6 +52,6 @@ IGL_INLINE void igl::slice_cached(
 }
 
 #ifdef IGL_STATIC_LIBRARY
-template void igl::slice_cached<double, double, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::SparseMatrix<double, 0, int> const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> > const&, Eigen::SparseMatrix<double, 0, int>&);
-template void igl::slice_cached_precompute<double, double, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::SparseMatrix<double, 0, int> const&, Eigen::Matrix<int, -1, 1, 0, -1, 1> const&, Eigen::Matrix<int, -1, 1, 0, -1, 1> const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, Eigen::SparseMatrix<double, 0, int>&);
+template void igl::slice_cached<double, double, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::SparseMatrix<double, 0, int> const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> > const&, Eigen::SparseMatrix<double, 0, int>&);
+template void igl::slice_cached_precompute<double, double, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::SparseMatrix<double, 0, int> const&, Eigen::Matrix<int, -1, 1, 0, -1, 1> const&, Eigen::Matrix<int, -1, 1, 0, -1, 1> const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, Eigen::SparseMatrix<double, 0, int>&);
 #endif

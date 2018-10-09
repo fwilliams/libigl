@@ -23,8 +23,8 @@ IGL_INLINE bool igl::eigs(
   const Eigen::SparseMatrix<Btype> & iB,
   const size_t k,
   const EigsType type,
-  Eigen::MatrixBase<DerivedU> & sU,
-  Eigen::MatrixBase<DerivedS> & sS)
+  Eigen::PlainObjectBase<DerivedU> & sU,
+  Eigen::PlainObjectBase<DerivedS> & sS)
 {
   using namespace Eigen;
   using namespace std;
@@ -169,8 +169,8 @@ IGL_INLINE bool igl::eigs(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template bool igl::eigs<double, double, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::SparseMatrix<double, 0, int> const&, Eigen::SparseMatrix<double, 0, int> const&, const size_t, igl::EigsType, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >&);
+template bool igl::eigs<double, double, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::SparseMatrix<double, 0, int> const&, Eigen::SparseMatrix<double, 0, int> const&, const size_t, igl::EigsType, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >&);
 #ifdef WIN32
-template bool igl::eigs<double, double, Eigen::Matrix<double,-1,-1,0,-1,-1>, Eigen::Matrix<double,-1,1,0,-1,1> >(Eigen::SparseMatrix<double,0,int> const &,Eigen::SparseMatrix<double,0,int> const &, const size_t, igl::EigsType, Eigen::MatrixBase< Eigen::Matrix<double,-1,-1,0,-1,-1> > &, Eigen::MatrixBase<Eigen::Matrix<double,-1,1,0,-1,1> > &);
+template bool igl::eigs<double, double, Eigen::Matrix<double,-1,-1,0,-1,-1>, Eigen::Matrix<double,-1,1,0,-1,1> >(Eigen::SparseMatrix<double,0,int> const &,Eigen::SparseMatrix<double,0,int> const &, const size_t, igl::EigsType, Eigen::PlainObjectBase< Eigen::Matrix<double,-1,-1,0,-1,-1> > &, Eigen::PlainObjectBase<Eigen::Matrix<double,-1,1,0,-1,1> > &);
 #endif
 #endif

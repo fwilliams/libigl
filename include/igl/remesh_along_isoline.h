@@ -46,12 +46,12 @@ namespace igl
       const Eigen::MatrixBase<DerivedF> & F,
       const Eigen::MatrixBase<DerivedS> & S,
       const typename DerivedS::Scalar val,
-      Eigen::MatrixBase<DerivedU> & U,
-      Eigen::MatrixBase<DerivedG> & G,
-      Eigen::MatrixBase<DerivedSU> & SU,
-      Eigen::MatrixBase<DerivedJ> & J,
+      Eigen::PlainObjectBase<DerivedU> & U,
+      Eigen::PlainObjectBase<DerivedG> & G,
+      Eigen::PlainObjectBase<DerivedSU> & SU,
+      Eigen::PlainObjectBase<DerivedJ> & J,
       Eigen::SparseMatrix<BCtype> & BC,
-      Eigen::MatrixBase<DerivedL> & L);
+      Eigen::PlainObjectBase<DerivedL> & L);
   // Input:
   //   n  number of vertices (#V)
   template <
@@ -67,11 +67,11 @@ namespace igl
       const Eigen::MatrixBase<DerivedF> & F,
       const Eigen::MatrixBase<DerivedS> & S,
       const typename DerivedS::Scalar val,
-      Eigen::MatrixBase<DerivedG> & G,
-      Eigen::MatrixBase<DerivedSU> & SU,
-      Eigen::MatrixBase<DerivedJ> & J,
+      Eigen::PlainObjectBase<DerivedG> & G,
+      Eigen::PlainObjectBase<DerivedSU> & SU,
+      Eigen::PlainObjectBase<DerivedJ> & J,
       Eigen::SparseMatrix<BCtype> & BC,
-      Eigen::MatrixBase<DerivedL> & L);
+      Eigen::PlainObjectBase<DerivedL> & L);
 }
 
 #ifndef IGL_STATIC_LIBRARY

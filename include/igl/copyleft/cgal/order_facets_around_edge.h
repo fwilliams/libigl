@@ -47,7 +47,7 @@ namespace igl
           size_t s, 
           size_t d, 
           const std::vector<int>& adj_faces,
-          Eigen::MatrixBase<DerivedI>& order,
+          Eigen::PlainObjectBase<DerivedI>& order,
           bool debug=false);
 
       // This function is a wrapper around the one above.  Since the ordering
@@ -66,7 +66,7 @@ namespace igl
         size_t d, 
         const std::vector<int>& adj_faces,
         const Eigen::MatrixBase<DerivedV>& pivot_point,
-        Eigen::MatrixBase<DerivedI>& order);
+        Eigen::PlainObjectBase<DerivedI>& order);
     }
   }
 }

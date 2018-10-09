@@ -181,10 +181,10 @@ template <
   typename DerivedUV>
 IGL_INLINE bool igl::readPLY(
   const std::string filename,
-  Eigen::MatrixBase<DerivedV> & V,
-  Eigen::MatrixBase<DerivedF> & F,
-  Eigen::MatrixBase<DerivedN> & N,
-  Eigen::MatrixBase<DerivedUV> & UV)
+  Eigen::PlainObjectBase<DerivedV> & V,
+  Eigen::PlainObjectBase<DerivedF> & F,
+  Eigen::PlainObjectBase<DerivedN> & N,
+  Eigen::PlainObjectBase<DerivedUV> & UV)
 {
   std::vector<std::vector<typename DerivedV::Scalar> > vV;
   std::vector<std::vector<typename DerivedF::Scalar> > vF;
@@ -206,8 +206,8 @@ template <
   typename DerivedF>
 IGL_INLINE bool igl::readPLY(
   const std::string filename,
-  Eigen::MatrixBase<DerivedV> & V,
-  Eigen::MatrixBase<DerivedF> & F)
+  Eigen::PlainObjectBase<DerivedV> & V,
+  Eigen::PlainObjectBase<DerivedF> & F)
 {
   Eigen::MatrixXd N,UV;
   return readPLY(filename,V,F,N,UV);
@@ -217,8 +217,8 @@ IGL_INLINE bool igl::readPLY(
 // Explicit template instantiation
 template bool igl::readPLY<double, int, double, double>(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&);
 
-template bool igl::readPLY<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic>, Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic>, Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic>, Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const, Eigen::MatrixBase<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> > &, Eigen::MatrixBase<Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic> > &, Eigen::MatrixBase<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> > &, Eigen::MatrixBase<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> > &);
+template bool igl::readPLY<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic>, Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic>, Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic>, Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const, Eigen::PlainObjectBase<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> > &, Eigen::PlainObjectBase<Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic> > &, Eigen::PlainObjectBase<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> > &, Eigen::PlainObjectBase<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> > &);
 
-template bool igl::readPLY<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic>, Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const, Eigen::MatrixBase<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> > &, Eigen::MatrixBase<Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic> > &);
-template bool igl::readPLY<Eigen::Matrix<float, -1, 3, 1, -1, 3>, Eigen::Matrix<int, -1, 3, 1, -1, 3> >(std::string, Eigen::MatrixBase<Eigen::Matrix<float, -1, 3, 1, -1, 3> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 3, 1, -1, 3> >&);
+template bool igl::readPLY<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic>, Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const, Eigen::PlainObjectBase<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> > &, Eigen::PlainObjectBase<Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic> > &);
+template bool igl::readPLY<Eigen::Matrix<float, -1, 3, 1, -1, 3>, Eigen::Matrix<int, -1, 3, 1, -1, 3> >(std::string, Eigen::PlainObjectBase<Eigen::Matrix<float, -1, 3, 1, -1, 3> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 3, 1, -1, 3> >&);
 #endif

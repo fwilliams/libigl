@@ -28,7 +28,7 @@ namespace igl
       {
         public:
           typedef CGAL::Epeck::FT ExactScalar;
-          //typedef Eigen::MatrixBase<DerivedF> POBF;
+          //typedef Eigen::PlainObjectBase<DerivedF> POBF;
           typedef Eigen::MatrixXi POBF;
           typedef POBF::Index FIndex;
           typedef Eigen::Matrix<ExactScalar,Eigen::Dynamic,3> MatrixX3E;

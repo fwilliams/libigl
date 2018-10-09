@@ -53,8 +53,8 @@ namespace igl
         const Eigen::MatrixBase<DerivedP>& P,
         const std::vector<std::vector<uE2EType> >& uE2E,
         const Eigen::MatrixBase<DerivedEMAP>& EMAP,
-              Eigen::MatrixBase<DerivedR>& R,
-              Eigen::MatrixBase<DerivedS>& S);
+              Eigen::PlainObjectBase<DerivedR>& R,
+              Eigen::PlainObjectBase<DerivedS>& S);
       template<
         typename DerivedV,
         typename DerivedF,
@@ -69,8 +69,8 @@ namespace igl
         const Eigen::MatrixBase<DerivedP>& P,
         const std::vector<std::vector<uE2EType> >& uE2E,
         const Eigen::MatrixBase<DerivedEMAP>& EMAP,
-        Eigen::MatrixBase<DerivedR>& R,
-        Eigen::MatrixBase<DerivedS>& S);
+        Eigen::PlainObjectBase<DerivedR>& R,
+        Eigen::PlainObjectBase<DerivedS>& S);
       template<
         typename DerivedV,
         typename DerivedF,
@@ -98,8 +98,8 @@ namespace igl
                   typename Kernel::Triangle_3 >::iterator > > > & tree,
           const std::vector<typename Kernel::Triangle_3 > & triangles,
           const std::vector<bool> & in_I,
-          Eigen::MatrixBase<DerivedR>& R,
-          Eigen::MatrixBase<DerivedS>& S);
+          Eigen::PlainObjectBase<DerivedR>& R,
+          Eigen::PlainObjectBase<DerivedS>& S);
     }
   }
 }

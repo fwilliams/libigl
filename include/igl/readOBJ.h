@@ -80,17 +80,17 @@ namespace igl
     typename DerivedFN>
   IGL_INLINE bool readOBJ(
     const std::string str,
-    Eigen::MatrixBase<DerivedV>& V,
-    Eigen::MatrixBase<DerivedTC>& TC,
-    Eigen::MatrixBase<DerivedCN>& CN,
-    Eigen::MatrixBase<DerivedF>& F,
-    Eigen::MatrixBase<DerivedFTC>& FTC,
-    Eigen::MatrixBase<DerivedFN>& FN);
+    Eigen::PlainObjectBase<DerivedV>& V,
+    Eigen::PlainObjectBase<DerivedTC>& TC,
+    Eigen::PlainObjectBase<DerivedCN>& CN,
+    Eigen::PlainObjectBase<DerivedF>& F,
+    Eigen::PlainObjectBase<DerivedFTC>& FTC,
+    Eigen::PlainObjectBase<DerivedFN>& FN);
   template <typename DerivedV, typename DerivedF>
   IGL_INLINE bool readOBJ(
     const std::string str,
-    Eigen::MatrixBase<DerivedV>& V,
-    Eigen::MatrixBase<DerivedF>& F);
+    Eigen::PlainObjectBase<DerivedV>& V,
+    Eigen::PlainObjectBase<DerivedF>& F);
 
 }
 

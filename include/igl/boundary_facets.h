@@ -38,7 +38,7 @@ namespace igl
   template <typename DerivedT, typename DerivedF>
   IGL_INLINE void boundary_facets(
     const Eigen::MatrixBase<DerivedT>& T,
-    Eigen::MatrixBase<DerivedF>& F);
+    Eigen::PlainObjectBase<DerivedF>& F);
   // Same as above but returns F
   template <typename DerivedT, typename Ret>
   Ret boundary_facets(

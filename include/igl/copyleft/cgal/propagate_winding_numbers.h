@@ -55,7 +55,7 @@ namespace igl
         const Eigen::MatrixBase<DerivedV>& V,
         const Eigen::MatrixBase<DerivedF>& F,
         const Eigen::MatrixBase<DerivedL>& labels,
-        Eigen::MatrixBase<DerivedW>& W);
+        Eigen::PlainObjectBase<DerivedW>& W);
 
       // Inputs:
       //   V  #V by 3 list of vertex positions.
@@ -92,7 +92,7 @@ namespace igl
         const size_t num_cells,
         const Eigen::MatrixBase<DerivedC>& C,
         const Eigen::MatrixBase<DerivedL>& labels,
-        Eigen::MatrixBase<DerivedW>& W);
+        Eigen::PlainObjectBase<DerivedW>& W);
     }
   }
 }

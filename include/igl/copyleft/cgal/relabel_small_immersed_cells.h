@@ -48,7 +48,7 @@ namespace igl
           const size_t num_cells,
           const Eigen::MatrixBase<DerivedC>& C,
           const FT vol_threashold,
-          Eigen::MatrixBase<DerivedW>& W);
+          Eigen::PlainObjectBase<DerivedW>& W);
     }
   }
 }

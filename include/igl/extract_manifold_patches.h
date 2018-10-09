@@ -36,13 +36,13 @@ namespace igl {
       const Eigen::MatrixBase<DerivedF>& F,
       const Eigen::MatrixBase<DerivedEMAP>& EMAP,
       const std::vector<std::vector<uE2EType> >& uE2E,
-      Eigen::MatrixBase<DerivedP>& P);
+      Eigen::PlainObjectBase<DerivedP>& P);
     template <
       typename DerivedF,
       typename DerivedP>
     IGL_INLINE size_t extract_manifold_patches(
       const Eigen::MatrixBase<DerivedF>& F,
-      Eigen::MatrixBase<DerivedP>& P);
+      Eigen::PlainObjectBase<DerivedP>& P);
 }
 #ifndef IGL_STATIC_LIBRARY
 #  include "extract_manifold_patches.cpp"

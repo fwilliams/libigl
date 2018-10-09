@@ -28,10 +28,10 @@ IGL_INLINE void igl::copyleft::cgal::subdivide_segments(
   const Eigen::MatrixBase<DerivedV> & V,
   const Eigen::MatrixBase<DerivedE> & E,
   const std::vector<std::vector<CGAL::Point_2<Kernel> > > & _steiner,
-  Eigen::MatrixBase<DerivedVI> & VI,
-  Eigen::MatrixBase<DerivedEI> & EI,
-  Eigen::MatrixBase<DerivedJ> & J,
-  Eigen::MatrixBase<DerivedIM> & IM)
+  Eigen::PlainObjectBase<DerivedVI> & VI,
+  Eigen::PlainObjectBase<DerivedEI> & EI,
+  Eigen::PlainObjectBase<DerivedJ> & J,
+  Eigen::PlainObjectBase<DerivedIM> & IM)
 {
   using namespace Eigen;
   using namespace igl;

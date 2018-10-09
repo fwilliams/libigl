@@ -30,7 +30,7 @@ namespace igl
   IGL_INLINE void comb_line_field(const Eigen::MatrixBase<DerivedV> &V,
                                   const Eigen::MatrixBase<DerivedF> &F,
                                   const Eigen::MatrixBase<DerivedV> &PD1in,
-                                  Eigen::MatrixBase<DerivedV> &PD1out);
+                                  Eigen::PlainObjectBase<DerivedV> &PD1out);
 }
 #ifndef IGL_STATIC_LIBRARY
 #include "comb_line_field.cpp"

@@ -29,7 +29,7 @@ IGL_INLINE void igl::copyleft::cgal::relabel_small_immersed_cells(
     const size_t num_cells,
     const Eigen::MatrixBase<DerivedC>& C,
     const FT vol_threashold,
-    Eigen::MatrixBase<DerivedW>& W)
+    Eigen::PlainObjectBase<DerivedW>& W)
 {
   const size_t num_vertices = V.rows();
   const size_t num_faces = F.rows();

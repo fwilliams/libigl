@@ -13,7 +13,7 @@ namespace igl {
         IGL_INLINE size_t peel_winding_number_layers(
                 const Eigen::MatrixBase<DerivedV > & V,
                 const Eigen::MatrixBase<DerivedF > & F,
-                Eigen::MatrixBase<DerivedW>& W);
+                Eigen::PlainObjectBase<DerivedW>& W);
     }
   }
 }

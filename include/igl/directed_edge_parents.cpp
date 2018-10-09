@@ -15,7 +15,7 @@
 template <typename DerivedE, typename DerivedP>
 IGL_INLINE void igl::directed_edge_parents(
   const Eigen::MatrixBase<DerivedE> & E,
-  Eigen::MatrixBase<DerivedP> & P)
+  Eigen::PlainObjectBase<DerivedP> & P)
 {
   using namespace Eigen;
   using namespace std;
@@ -30,5 +30,5 @@ IGL_INLINE void igl::directed_edge_parents(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::directed_edge_parents<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::directed_edge_parents<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
 #endif

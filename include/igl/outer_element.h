@@ -37,7 +37,7 @@ namespace igl
           const Eigen::MatrixBase<DerivedF> & F,
           const Eigen::MatrixBase<DerivedI> & I,
           IndexType & v_index,
-          Eigen::MatrixBase<DerivedA> & A);
+          Eigen::PlainObjectBase<DerivedA> & A);
 
 
   // Find an edge that is reachable from infinity without crossing any faces.
@@ -69,7 +69,7 @@ namespace igl
           const Eigen::MatrixBase<DerivedI> & I,
           IndexType & v1,
           IndexType & v2,
-          Eigen::MatrixBase<DerivedA> & A);
+          Eigen::PlainObjectBase<DerivedA> & A);
 
 
   // Find a facet that is reachable from infinity without crossing any faces.

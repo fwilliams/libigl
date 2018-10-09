@@ -23,12 +23,12 @@ template <
     const Eigen::MatrixBase<DerivedF> & F,
     const Eigen::MatrixBase<DerivedS> & S,
     const typename DerivedS::Scalar val,
-    Eigen::MatrixBase<DerivedU> & U,
-    Eigen::MatrixBase<DerivedG> & G,
-    Eigen::MatrixBase<DerivedSU> & SU,
-    Eigen::MatrixBase<DerivedJ> & J,
+    Eigen::PlainObjectBase<DerivedU> & U,
+    Eigen::PlainObjectBase<DerivedG> & G,
+    Eigen::PlainObjectBase<DerivedSU> & SU,
+    Eigen::PlainObjectBase<DerivedJ> & J,
     Eigen::SparseMatrix<BCtype> & BC,
-    Eigen::MatrixBase<DerivedL> & L)
+    Eigen::PlainObjectBase<DerivedL> & L)
 {
   igl::remesh_along_isoline(V.rows(),F,S,val,G,SU,J,BC,L);
   U = BC * V;
@@ -47,11 +47,11 @@ template <
     const Eigen::MatrixBase<DerivedF> & F,
     const Eigen::MatrixBase<DerivedS> & S,
     const typename DerivedS::Scalar val,
-    Eigen::MatrixBase<DerivedG> & G,
-    Eigen::MatrixBase<DerivedSU> & SU,
-    Eigen::MatrixBase<DerivedJ> & J,
+    Eigen::PlainObjectBase<DerivedG> & G,
+    Eigen::PlainObjectBase<DerivedSU> & SU,
+    Eigen::PlainObjectBase<DerivedJ> & J,
     Eigen::SparseMatrix<BCtype> & BC,
-    Eigen::MatrixBase<DerivedL> & L)
+    Eigen::PlainObjectBase<DerivedL> & L)
 {
   // Lazy implementation using vectors
 
@@ -156,5 +156,5 @@ template <
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::remesh_along_isoline<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, double, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, Eigen::Matrix<double, -1, 1, 0, -1, 1>::Scalar, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, Eigen::SparseMatrix<double, 0, int>&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >&);
+template void igl::remesh_along_isoline<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1>, double, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, Eigen::Matrix<double, -1, 1, 0, -1, 1>::Scalar, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> >&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, Eigen::SparseMatrix<double, 0, int>&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >&);
 #endif

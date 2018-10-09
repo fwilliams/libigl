@@ -12,7 +12,7 @@
 template <typename DerivedF, typename DerivedC>
 IGL_INLINE void igl::facet_components(
   const Eigen::MatrixBase<DerivedF> & F,
-  Eigen::MatrixBase<DerivedC> & C)
+  Eigen::PlainObjectBase<DerivedC> & C)
 {
   using namespace std;
   typedef typename DerivedF::Index Index;
@@ -29,8 +29,8 @@ template <
   typename Derivedcounts>
 IGL_INLINE void igl::facet_components(
   const std::vector<std::vector<std::vector<TTIndex > > > & TT,
-  Eigen::MatrixBase<DerivedC> & C,
-  Eigen::MatrixBase<Derivedcounts> & counts)
+  Eigen::PlainObjectBase<DerivedC> & C,
+  Eigen::PlainObjectBase<Derivedcounts> & counts)
 {
   using namespace std;
   typedef TTIndex Index;
@@ -86,7 +86,7 @@ IGL_INLINE void igl::facet_components(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::facet_components<long, Eigen::Matrix<long, -1, 1, 0, -1, 1>, Eigen::Matrix<long, -1, 1, 0, -1, 1> >(std::vector<std::vector<std::vector<long, std::allocator<long> >, std::allocator<std::vector<long, std::allocator<long> > > >, std::allocator<std::vector<std::vector<long, std::allocator<long> >, std::allocator<std::vector<long, std::allocator<long> > > > > > const&, Eigen::MatrixBase<Eigen::Matrix<long, -1, 1, 0, -1, 1> >&, Eigen::MatrixBase<Eigen::Matrix<long, -1, 1, 0, -1, 1> >&);
-template void igl::facet_components<int, Eigen::Matrix<int, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(std::vector<std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >, std::allocator<std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > > > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
-template void igl::facet_components<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::MatrixBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::facet_components<long, Eigen::Matrix<long, -1, 1, 0, -1, 1>, Eigen::Matrix<long, -1, 1, 0, -1, 1> >(std::vector<std::vector<std::vector<long, std::allocator<long> >, std::allocator<std::vector<long, std::allocator<long> > > >, std::allocator<std::vector<std::vector<long, std::allocator<long> >, std::allocator<std::vector<long, std::allocator<long> > > > > > const&, Eigen::PlainObjectBase<Eigen::Matrix<long, -1, 1, 0, -1, 1> >&, Eigen::PlainObjectBase<Eigen::Matrix<long, -1, 1, 0, -1, 1> >&);
+template void igl::facet_components<int, Eigen::Matrix<int, -1, 1, 0, -1, 1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(std::vector<std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >, std::allocator<std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > > > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
+template void igl::facet_components<Eigen::Matrix<int, -1, -1, 0, -1, -1>, Eigen::Matrix<int, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<int, -1, -1, 0, -1, -1> > const&, Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1, 0, -1, 1> >&);
 #endif

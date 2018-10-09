@@ -43,9 +43,9 @@ namespace igl
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedT>& T,
     const Eigen::MatrixBase<DerivedS> & S,
-    Eigen::MatrixBase<DerivedSV>& SV,
-    Eigen::MatrixBase<DerivedSF>& SF,
-    Eigen::MatrixBase<DerivedJ>& J,
+    Eigen::PlainObjectBase<DerivedSV>& SV,
+    Eigen::PlainObjectBase<DerivedSF>& SF,
+    Eigen::PlainObjectBase<DerivedJ>& J,
     Eigen::SparseMatrix<BCType> & BC);
   template <
     typename DerivedV, 
@@ -58,9 +58,9 @@ namespace igl
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedT>& T,
     const Eigen::MatrixBase<DerivedS> & S,
-    Eigen::MatrixBase<DerivedSV>& SV,
-    Eigen::MatrixBase<DerivedSF>& SF,
-    Eigen::MatrixBase<DerivedJ>& J);
+    Eigen::PlainObjectBase<DerivedSV>& SV,
+    Eigen::PlainObjectBase<DerivedSF>& SF,
+    Eigen::PlainObjectBase<DerivedJ>& J);
   // Outputs:
   //   sE  #SV by 2 list of sorted edge indices into V
   //   lambda  #SV by 1 list of parameters along each edge in sE so that:
@@ -79,11 +79,11 @@ namespace igl
     const Eigen::MatrixBase<DerivedV>& V,
     const Eigen::MatrixBase<DerivedT>& T,
     const Eigen::MatrixBase<DerivedS> & S,
-    Eigen::MatrixBase<DerivedSV>& SV,
-    Eigen::MatrixBase<DerivedSF>& SF,
-    Eigen::MatrixBase<DerivedJ>& J,
-    Eigen::MatrixBase<DerivedsE>& sE,
-    Eigen::MatrixBase<Derivedlambda>& lambda);
+    Eigen::PlainObjectBase<DerivedSV>& SV,
+    Eigen::PlainObjectBase<DerivedSF>& SF,
+    Eigen::PlainObjectBase<DerivedJ>& J,
+    Eigen::PlainObjectBase<DerivedsE>& sE,
+    Eigen::PlainObjectBase<Derivedlambda>& lambda);
 
 }
 

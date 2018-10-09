@@ -28,8 +28,8 @@ namespace igl
   IGL_INLINE void find_cross_field_singularities(const Eigen::MatrixBase<DerivedV> &V,
                                                  const Eigen::MatrixBase<DerivedF> &F,
                                                  const Eigen::MatrixBase<DerivedM> &Handle_MMatch,
-                                                 Eigen::MatrixBase<DerivedO> &isSingularity,
-                                                 Eigen::MatrixBase<DerivedO> &singularityIndex);
+                                                 Eigen::PlainObjectBase<DerivedO> &isSingularity,
+                                                 Eigen::PlainObjectBase<DerivedO> &singularityIndex);
 
   // Wrapper that calculates the missmatch if it is not provided.
   // Note that the field in PD1 and PD2 MUST BE combed (see igl::comb_cross_field).
@@ -47,8 +47,8 @@ namespace igl
                                                  const Eigen::MatrixBase<DerivedF> &F,
                                                  const Eigen::MatrixBase<DerivedV> &PD1,
                                                  const Eigen::MatrixBase<DerivedV> &PD2,
-                                                 Eigen::MatrixBase<DerivedO> &isSingularity,
-                                                 Eigen::MatrixBase<DerivedO> &singularityIndex,
+                                                 Eigen::PlainObjectBase<DerivedO> &isSingularity,
+                                                 Eigen::PlainObjectBase<DerivedO> &singularityIndex,
                                                  bool isCombed = false);
 }
 #ifndef IGL_STATIC_LIBRARY

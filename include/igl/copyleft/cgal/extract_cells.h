@@ -37,7 +37,7 @@ namespace igl {
       IGL_INLINE size_t extract_cells(
         const Eigen::MatrixBase<DerivedV>& V,
         const Eigen::MatrixBase<DerivedF>& F,
-        Eigen::MatrixBase<DerivedC>& cells);
+        Eigen::PlainObjectBase<DerivedC>& cells);
 
       // Extract connected 3D space partitioned by mesh (V, F).
       //
@@ -72,7 +72,7 @@ namespace igl {
         const Eigen::MatrixBase<DeriveduE>& uE,
         const std::vector<std::vector<uE2EType> >& uE2E,
         const Eigen::MatrixBase<DerivedEMAP>& EMAP,
-        Eigen::MatrixBase<DerivedC>& cells);
+        Eigen::PlainObjectBase<DerivedC>& cells);
 
       // Extract connected 3D space partitioned by mesh (V,F) composed of
       // **possibly multiple components** (the name of this function is
@@ -105,7 +105,7 @@ namespace igl {
         const Eigen::MatrixBase<DeriveduE>& uE,
         const std::vector<std::vector<uE2EType> >& uE2E,
         const Eigen::MatrixBase<DerivedEMAP>& EMAP,
-        Eigen::MatrixBase<DerivedC>& cells);
+        Eigen::PlainObjectBase<DerivedC>& cells);
     }
   }
 }

@@ -58,17 +58,17 @@ namespace igl
     typename DerivedUV>
   IGL_INLINE bool readPLY(
     const std::string filename,
-    Eigen::MatrixBase<DerivedV> & V,
-    Eigen::MatrixBase<DerivedF> & F,
-    Eigen::MatrixBase<DerivedN> & N,
-    Eigen::MatrixBase<DerivedUV> & UV);
+    Eigen::PlainObjectBase<DerivedV> & V,
+    Eigen::PlainObjectBase<DerivedF> & F,
+    Eigen::PlainObjectBase<DerivedN> & N,
+    Eigen::PlainObjectBase<DerivedUV> & UV);
   template <
     typename DerivedV,
     typename DerivedF>
   IGL_INLINE bool readPLY(
     const std::string filename,
-    Eigen::MatrixBase<DerivedV> & V,
-    Eigen::MatrixBase<DerivedF> & F);
+    Eigen::PlainObjectBase<DerivedV> & V,
+    Eigen::PlainObjectBase<DerivedF> & F);
 }
 #ifndef IGL_STATIC_LIBRARY
 #  include "readPLY.cpp"

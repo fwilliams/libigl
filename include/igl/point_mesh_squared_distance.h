@@ -40,9 +40,9 @@ namespace igl
     const Eigen::MatrixBase<DerivedP> & P,
     const Eigen::MatrixBase<DerivedV> & V,
     const Eigen::MatrixXi & Ele, 
-    Eigen::MatrixBase<DerivedsqrD> & sqrD,
-    Eigen::MatrixBase<DerivedI> & I,
-    Eigen::MatrixBase<DerivedC> & C);
+    Eigen::PlainObjectBase<DerivedsqrD> & sqrD,
+    Eigen::PlainObjectBase<DerivedI> & I,
+    Eigen::PlainObjectBase<DerivedC> & C);
 }
 
 #ifndef IGL_STATIC_LIBRARY

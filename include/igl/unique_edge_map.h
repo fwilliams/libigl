@@ -31,9 +31,9 @@ namespace igl
     typename uE2EType>
   IGL_INLINE void unique_edge_map(
     const Eigen::MatrixBase<DerivedF> & F,
-    Eigen::MatrixBase<DerivedE> & E,
-    Eigen::MatrixBase<DeriveduE> & uE,
-    Eigen::MatrixBase<DerivedEMAP> & EMAP,
+    Eigen::PlainObjectBase<DerivedE> & E,
+    Eigen::PlainObjectBase<DeriveduE> & uE,
+    Eigen::PlainObjectBase<DerivedEMAP> & EMAP,
     std::vector<std::vector<uE2EType> > & uE2E);
 
 }

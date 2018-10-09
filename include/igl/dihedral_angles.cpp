@@ -14,10 +14,10 @@ template <
   typename Derivedtheta,
   typename Derivedcos_theta>
 IGL_INLINE void igl::dihedral_angles(
-  Eigen::MatrixBase<DerivedV>& V,
-  Eigen::MatrixBase<DerivedT>& T,
-  Eigen::MatrixBase<Derivedtheta>& theta,
-  Eigen::MatrixBase<Derivedcos_theta>& cos_theta)
+  const Eigen::MatrixBase<DerivedV>& V,
+  const Eigen::MatrixBase<DerivedT>& T,
+  Eigen::PlainObjectBase<Derivedtheta>& theta,
+  Eigen::PlainObjectBase<Derivedcos_theta>& cos_theta)
 {
   using namespace Eigen;
   assert(T.cols() == 4);
@@ -25,7 +25,7 @@ IGL_INLINE void igl::dihedral_angles(
   edge_lengths(V,T,l);
   Matrix<typename Derivedtheta::Scalar,Dynamic,4> s;
   face_areas(l,s);
-  return dihedral_angles_intrinsic(l,s,theta,cos_theta);
+  dihedral_angles_intrinsic(l,s,theta,cos_theta);
 }
 
 template <
@@ -34,10 +34,10 @@ template <
   typename Derivedtheta,
   typename Derivedcos_theta>
 IGL_INLINE void igl::dihedral_angles_intrinsic(
-  Eigen::MatrixBase<DerivedL>& L,
-  Eigen::MatrixBase<DerivedA>& A,
-  Eigen::MatrixBase<Derivedtheta>& theta,
-  Eigen::MatrixBase<Derivedcos_theta>& cos_theta)
+  const Eigen::MatrixBase<DerivedL>& L,
+  const Eigen::MatrixBase<DerivedA>& A,
+  Eigen::PlainObjectBase<Derivedtheta>& theta,
+  Eigen::PlainObjectBase<Derivedcos_theta>& cos_theta)
 {
   using namespace Eigen;
   const int m = L.rows();
@@ -90,5 +90,5 @@ IGL_INLINE void igl::dihedral_angles_intrinsic(
 }
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::dihedral_angles_intrinsic<Eigen::Matrix<double, -1, 6, 0, -1, 6>, Eigen::Matrix<double, -1, 4, 0, -1, 4>, Eigen::Matrix<double, -1, 6, 0, -1, 6>, Eigen::Matrix<double, -1, 6, 0, -1, 6> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, 6, 0, -1, 6> >&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 4, 0, -1, 4> >&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 6, 0, -1, 6> >&, Eigen::MatrixBase<Eigen::Matrix<double, -1, 6, 0, -1, 6> >&);
+template void igl::dihedral_angles_intrinsic<Eigen::Matrix<double, -1, 6, 0, -1, 6>, Eigen::Matrix<double, -1, 4, 0, -1, 4>, Eigen::Matrix<double, -1, 6, 0, -1, 6>, Eigen::Matrix<double, -1, 6, 0, -1, 6> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 6, 0, -1, 6> >&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 4, 0, -1, 4> >&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 6, 0, -1, 6> >&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 6, 0, -1, 6> >&);
 #endif

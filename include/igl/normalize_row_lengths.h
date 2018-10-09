@@ -27,7 +27,7 @@ namespace igl
   template <typename DerivedV>
   IGL_INLINE void normalize_row_lengths(
    const Eigen::MatrixBase<DerivedV>& A,
-   Eigen::MatrixBase<DerivedV> & B);
+   Eigen::PlainObjectBase<DerivedV> & B);
 }
 
 #ifndef IGL_STATIC_LIBRARY

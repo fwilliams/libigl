@@ -25,9 +25,9 @@ template <
 IGL_INLINE void igl::copyleft::cgal::snap_rounding(
   const Eigen::MatrixBase<DerivedV> & V,
   const Eigen::MatrixBase<DerivedE> & E,
-  Eigen::MatrixBase<DerivedVI> & VI,
-  Eigen::MatrixBase<DerivedEI> & EI,
-  Eigen::MatrixBase<DerivedJ> & J)
+  Eigen::PlainObjectBase<DerivedVI> & VI,
+  Eigen::PlainObjectBase<DerivedEI> & EI,
+  Eigen::PlainObjectBase<DerivedJ> & J)
 {
   using namespace Eigen;
   using namespace igl;

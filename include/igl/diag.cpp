@@ -43,7 +43,7 @@ IGL_INLINE void igl::diag(
 template <typename T,typename DerivedV>
 IGL_INLINE void igl::diag(
   const Eigen::SparseMatrix<T>& X,
-  Eigen::MatrixBase<DerivedV> & V)
+  Eigen::PlainObjectBase<DerivedV> & V)
 {
   assert(false && "Just call X.diagonal() directly");
   V = X.diagonal();
@@ -101,8 +101,8 @@ IGL_INLINE void igl::diag(
 
 #ifdef IGL_STATIC_LIBRARY
 // Explicit template instantiation
-template void igl::diag<double, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::SparseMatrix<double, 0, int> const&, Eigen::MatrixBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&);
+template void igl::diag<double, Eigen::Matrix<double, -1, -1, 0, -1, -1> >(Eigen::SparseMatrix<double, 0, int> const&, Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >&);
 template void igl::diag<double>(Eigen::SparseMatrix<double, 0, int> const&, Eigen::SparseVector<double, 0, int>&);
-template void igl::diag<double, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::MatrixBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, Eigen::SparseMatrix<double, 0, int>&);
+template void igl::diag<double, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> > const&, Eigen::SparseMatrix<double, 0, int>&);
 template void igl::diag<double>(Eigen::SparseVector<double, 0, int> const&, Eigen::SparseMatrix<double, 0, int>&);
 #endif
