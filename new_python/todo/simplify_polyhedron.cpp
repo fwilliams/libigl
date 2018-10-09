@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/simplify_polyhedron.h>
 
 const char* ds_simplify_polyhedron = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_simplify_polyhedron = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -56,30 +49,15 @@ npe_doc(ds_simplify_polyhedron)
 
 npe_arg(ov, Eigen::MatrixXd &)
 npe_arg(of, Eigen::MatrixXi &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & v;
-    Eigen::MatrixXi & f;
-    Eigen::VectorXi & j;
-    igl::simplify_polyhedron(ov, of, v, f, j);
-    return std::make_tuple(    npe::move(v),
-    npe::move(f),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & v;
-    Eigen::MatrixXi & f;
-    Eigen::VectorXi & j;
-    igl::simplify_polyhedron(ov, of, v, f, j);
-    return std::make_tuple(    npe::move(v),     npe::move(f),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & v;
+  Eigen::MatrixXi & f;
+  Eigen::VectorXi & j;
+  igl::simplify_polyhedron(ov, of, v, f, j);
+  return std::make_tuple(npe::move(v), npe::move(f), npe::move(j));
 
 npe_end_code()
 

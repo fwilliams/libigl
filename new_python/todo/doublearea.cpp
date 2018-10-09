@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/doublearea.h>
@@ -11,8 +7,6 @@ const char* ds_doublearea = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -51,26 +45,15 @@ Examples
 npe_function(doublearea)
 npe_doc(ds_doublearea)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 dbl_a;
-    igl::doublearea(v, f, dbl_a);
-    return npe::move(dbl_a);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 dbl_a;
-    igl::doublearea(v, f, dbl_a);
-    return npe::move(dbl_a);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> dbl_a;
+  igl::doublearea(v, f, dbl_a);
+  return npe::move(dbl_a);
 
 npe_end_code()
 #include <igl/doublearea.h>
@@ -80,8 +63,6 @@ const char* ds_doublearea = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -104,27 +85,16 @@ Examples
 npe_function(doublearea)
 npe_doc(ds_doublearea)
 
-npe_arg(a, dense_f64)
-npe_arg(b, dense_f64)
-npe_arg(c, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(a, dense_f32, dense_f64)
+npe_arg(b, dense_f32, dense_f64)
+npe_arg(c, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 d;
-    igl::doublearea(a, b, c, d);
-    return npe::move(d);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 d;
-    igl::doublearea(a, b, c, d);
-    return npe::move(d);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> d;
+  igl::doublearea(a, b, c, d);
+  return npe::move(d);
 
 npe_end_code()
 #include <igl/doublearea_single.h>
@@ -134,8 +104,6 @@ const char* ds_doublearea_single = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -160,20 +128,15 @@ Examples
 npe_function(doublearea_single)
 npe_doc(ds_doublearea_single)
 
-npe_arg(a, dense_f64)
-npe_arg(b, dense_f64)
-npe_arg(c, dense_f64)
-
+npe_arg(a, dense_f32, dense_f64)
+npe_arg(b, dense_f32, dense_f64)
+npe_arg(c, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-
-igl::doublearea_single(a, b, c);
-
-return
+  igl::doublearea_single(a, b, c);
+  return ;
 
 npe_end_code()
 #include <igl/doublearea.h>
@@ -183,8 +146,6 @@ const char* ds_doublearea = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -207,25 +168,14 @@ Examples
 npe_function(doublearea)
 npe_doc(ds_doublearea)
 
-npe_arg(l, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(l, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 dbl_a;
-    igl::doublearea(l, dbl_a);
-    return npe::move(dbl_a);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 dbl_a;
-    igl::doublearea(l, dbl_a);
-    return npe::move(dbl_a);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> dbl_a;
+  igl::doublearea(l, dbl_a);
+  return npe::move(dbl_a);
 
 npe_end_code()
 #include <igl/doublearea_quad.h>
@@ -235,8 +185,6 @@ const char* ds_doublearea_quad = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -266,26 +214,15 @@ Examples
 npe_function(doublearea_quad)
 npe_doc(ds_doublearea_quad)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 dbl_a;
-    igl::doublearea_quad(v, f, dbl_a);
-    return npe::move(dbl_a);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 dbl_a;
-    igl::doublearea_quad(v, f, dbl_a);
-    return npe::move(dbl_a);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> dbl_a;
+  igl::doublearea_quad(v, f, dbl_a);
+  return npe::move(dbl_a);
 
 npe_end_code()
 
@@ -294,7 +231,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/doublearea.h>
 
 const char* ds_doublearea = R"igl_Qu8mg5v7(
@@ -302,8 +238,6 @@ const char* ds_doublearea = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -341,26 +275,15 @@ Examples
 npe_function(doublearea)
 npe_doc(ds_doublearea)
 
-npe_arg(l, dense_f64)
+npe_arg(l, dense_f32, dense_f64)
 npe_arg(nan_replacement, typename Derivedl::Scalar)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 dbl_a;
-    igl::doublearea(l, nan_replacement, dbl_a);
-    return npe::move(dbl_a);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 dbl_a;
-    igl::doublearea(l, nan_replacement, dbl_a);
-    return npe::move(dbl_a);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> dbl_a;
+  igl::doublearea(l, nan_replacement, dbl_a);
+  return npe::move(dbl_a);
 
 npe_end_code()
 

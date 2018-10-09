@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/boundary_conditions.h>
 
 const char* ds_boundary_conditions = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_boundary_conditions = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -71,27 +64,14 @@ npe_arg(c, Eigen::MatrixXd &)
 npe_arg(p, Eigen::VectorXi &)
 npe_arg(be, Eigen::MatrixXi &)
 npe_arg(ce, Eigen::MatrixXi &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::VectorXi & b;
-    Eigen::MatrixXd & bc;
-    igl::boundary_conditions(v, ele, c, p, be, ce, b, bc);
-    return std::make_tuple(    npe::move(b),
-    npe::move(bc));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::VectorXi & b;
-    Eigen::MatrixXd & bc;
-    igl::boundary_conditions(v, ele, c, p, be, ce, b, bc);
-    return std::make_tuple(    npe::move(b),     npe::move(bc));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::VectorXi & b;
+  Eigen::MatrixXd & bc;
+  igl::boundary_conditions(v, ele, c, p, be, ce, b, bc);
+  return std::make_tuple(npe::move(b), npe::move(bc));
 
 npe_end_code()
 

@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/swept_volume_signed_distance.h>
 
 const char* ds_swept_volume_signed_distance = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_swept_volume_signed_distance = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -71,24 +64,13 @@ npe_arg(res, Eigen::RowVector3i &)
 npe_arg(h, double)
 npe_arg(isolevel, double)
 npe_arg(s0, Eigen::VectorXd &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::VectorXd & s;
-    igl::swept_volume_signed_distance(v, f, transform, steps, gv, res, h, isolevel, s0, s);
-    return npe::move(s);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::VectorXd & s;
-    igl::swept_volume_signed_distance(v, f, transform, steps, gv, res, h, isolevel, s0, s);
-    return npe::move(s);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::VectorXd & s;
+  igl::swept_volume_signed_distance(v, f, transform, steps, gv, res, h, isolevel, s0, s);
+  return npe::move(s);
 
 npe_end_code()
 #include <igl/swept_volume_signed_distance.h>
@@ -108,24 +90,13 @@ npe_arg(gv, Eigen::MatrixXd &)
 npe_arg(res, Eigen::RowVector3i &)
 npe_arg(h, double)
 npe_arg(isolevel, double)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::VectorXd & s;
-    igl::swept_volume_signed_distance(v, f, transform, steps, gv, res, h, isolevel, s);
-    return npe::move(s);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::VectorXd & s;
-    igl::swept_volume_signed_distance(v, f, transform, steps, gv, res, h, isolevel, s);
-    return npe::move(s);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::VectorXd & s;
+  igl::swept_volume_signed_distance(v, f, transform, steps, gv, res, h, isolevel, s);
+  return npe::move(s);
 
 npe_end_code()
 

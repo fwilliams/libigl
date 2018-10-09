@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/draw_rectangular_marquee.h>
@@ -10,8 +7,6 @@ const char* ds_draw_rectangular_marquee = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -47,15 +42,10 @@ npe_arg(to_x, int)
 npe_arg(to_y, int)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_rectangular_marquee(from_x, from_y, to_x, to_y);
-
-return
+  igl::  opengl2::draw_rectangular_marquee(from_x, from_y, to_x, to_y);
+  return ;
 
 npe_end_code()
 

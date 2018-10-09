@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/two_axis_valuator_fixed_up.h>
 
 const char* ds_two_axis_valuator_fixed_up = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_two_axis_valuator_fixed_up = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -65,24 +58,13 @@ npe_arg(down_x, int)
 npe_arg(down_y, int)
 npe_arg(mouse_x, int)
 npe_arg(mouse_y, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::Quaternion<Scalarquat> & quat;
-    igl::two_axis_valuator_fixed_up(w, h, speed, down_quat, down_x, down_y, mouse_x, mouse_y, quat);
-    return npe::move(quat);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::Quaternion<Scalarquat> & quat;
-    igl::two_axis_valuator_fixed_up(w, h, speed, down_quat, down_x, down_y, mouse_x, mouse_y, quat);
-    return npe::move(quat);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::Quaternion<Scalarquat> & quat;
+  igl::two_axis_valuator_fixed_up(w, h, speed, down_quat, down_x, down_y, mouse_x, mouse_y, quat);
+  return npe::move(quat);
 
 npe_end_code()
 

@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/draw_mesh.h>
 
 const char* ds_draw_mesh = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_draw_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -52,15 +45,10 @@ npe_arg(f, Eigen::MatrixXi &)
 npe_arg(n, Eigen::MatrixXd &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_mesh(v, f, n);
-
-return
+  igl::  opengl2::draw_mesh(v, f, n);
+  return ;
 
 npe_end_code()
 #include <igl/draw_mesh.h>
@@ -70,8 +58,6 @@ const char* ds_draw_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -107,15 +93,10 @@ npe_arg(n, Eigen::MatrixXd &)
 npe_arg(c, Eigen::MatrixXd &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_mesh(v, f, n, c);
-
-return
+  igl::  opengl2::draw_mesh(v, f, n, c);
+  return ;
 
 npe_end_code()
 #include <igl/draw_mesh.h>
@@ -125,8 +106,6 @@ const char* ds_draw_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -161,15 +140,10 @@ npe_arg(c, Eigen::MatrixXd &)
 npe_arg(tc, Eigen::MatrixXd &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_mesh(v, f, n, c, tc);
-
-return
+  igl::  opengl2::draw_mesh(v, f, n, c, tc);
+  return ;
 
 npe_end_code()
 #include <igl/draw_mesh.h>
@@ -179,8 +153,6 @@ const char* ds_draw_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -228,15 +200,10 @@ npe_arg(wi, Eigen::MatrixXi &)
 npe_arg(wi_index, GLuint)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_mesh(v, f, n, c, tc, w, w_index, wi, wi_index);
-
-return
+  igl::  opengl2::draw_mesh(v, f, n, c, tc, w, w_index, wi, wi_index);
+  return ;
 
 npe_end_code()
 #include <igl/draw_mesh.h>
@@ -246,8 +213,6 @@ const char* ds_draw_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -301,15 +266,10 @@ npe_arg(wi, Eigen::MatrixXi &)
 npe_arg(wi_index, GLuint)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_mesh(v, f, n, nf, c, tc, tf, w, w_index, wi, wi_index);
-
-return
+  igl::  opengl2::draw_mesh(v, f, n, nf, c, tc, tf, w, w_index, wi, wi_index);
+  return ;
 
 npe_end_code()
 

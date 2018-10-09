@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/piecewise_constant_winding_number.h>
@@ -10,8 +7,6 @@ const char* ds_piecewise_constant_winding_number = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -42,19 +37,14 @@ Examples
 npe_function(piecewise_constant_winding_number)
 npe_doc(ds_piecewise_constant_winding_number)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-
-igl::copyleft::cgal::piecewise_constant_winding_number(v, f);
-
-return
+  igl::  copyleft::  cgal::piecewise_constant_winding_number(v, f);
+  return ;
 
 npe_end_code()
 

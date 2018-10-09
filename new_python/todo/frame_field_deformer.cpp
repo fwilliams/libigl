@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/frame_field_deformer.h>
 
 const char* ds_frame_field_deformer = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_frame_field_deformer = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -63,30 +56,15 @@ npe_arg(ff2, Eigen::MatrixXd &)
 npe_arg(iterations, int)
 npe_arg(lambda, double)
 npe_arg(perturb_initial_guess, bool)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & v_d;
-    Eigen::MatrixXd & ff1_d;
-    Eigen::MatrixXd & ff2_d;
-    igl::frame_field_deformer(v, f, ff1, ff2, iterations, lambda, perturb_initial_guess, v_d, ff1_d, ff2_d);
-    return std::make_tuple(    npe::move(v_d),
-    npe::move(ff1_d),
-    npe::move(ff2_d));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & v_d;
-    Eigen::MatrixXd & ff1_d;
-    Eigen::MatrixXd & ff2_d;
-    igl::frame_field_deformer(v, f, ff1, ff2, iterations, lambda, perturb_initial_guess, v_d, ff1_d, ff2_d);
-    return std::make_tuple(    npe::move(v_d),     npe::move(ff1_d),     npe::move(ff2_d));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & v_d;
+  Eigen::MatrixXd & ff1_d;
+  Eigen::MatrixXd & ff2_d;
+  igl::frame_field_deformer(v, f, ff1, ff2, iterations, lambda, perturb_initial_guess, v_d, ff1_d, ff2_d);
+  return std::make_tuple(npe::move(v_d), npe::move(ff1_d), npe::move(ff2_d));
 
 npe_end_code()
 

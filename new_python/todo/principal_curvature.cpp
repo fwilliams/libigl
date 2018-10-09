@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/principal_curvature.h>
 
 const char* ds_principal_curvature = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_principal_curvature = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -62,41 +55,20 @@ Examples
 npe_function(principal_curvature)
 npe_doc(ds_principal_curvature)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 pd1;
-    dense_f32 pd2;
-    dense_f32 pv1;
-    dense_f32 pv2;
-    unsigned int radius;
-    bool use_kring;
-    igl::principal_curvature(v, f, pd1, pd2, pv1, pv2, radius, use_kring);
-    return std::make_tuple(    npe::move(pd1),
-    npe::move(pd2),
-    npe::move(pv1),
-    npe::move(pv2),
-    npe::move(radius),
-    npe::move(use_kring));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 pd1;
-    dense_f64 pd2;
-    dense_f64 pv1;
-    dense_f64 pv2;
-    unsigned int radius;
-    bool use_kring;
-    igl::principal_curvature(v, f, pd1, pd2, pv1, pv2, radius, use_kring);
-    return std::make_tuple(    npe::move(pd1),     npe::move(pd2),     npe::move(pv1),     npe::move(pv2),     npe::move(radius),     npe::move(use_kring));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> pd1;
+  EigenDense<npe_Scalar_> pd2;
+  EigenDense<npe_Scalar_> pv1;
+  EigenDense<npe_Scalar_> pv2;
+  unsigned int radius;
+  bool use_kring;
+  igl::principal_curvature(v, f, pd1, pd2, pv1, pv2, radius, use_kring);
+  return std::make_tuple(npe::move(pd1), npe::move(pd2), npe::move(pv1), npe::move(pv2), npe::move(radius), npe::move(use_kring));
 
 npe_end_code()
 

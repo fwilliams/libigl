@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/partition.h>
 
 const char* ds_partition = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_partition = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -56,30 +49,15 @@ npe_doc(ds_partition)
 
 npe_arg(w, Eigen::MatrixXd &)
 npe_arg(k, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::Matrix<int, Eigen::Dynamic, 1> & g;
-    Eigen::Matrix<int, Eigen::Dynamic, 1> & s;
-    Eigen::Matrix<double, Eigen::Dynamic, 1> & d;
-    igl::partition(w, k, g, s, d);
-    return std::make_tuple(    npe::move(g),
-    npe::move(s),
-    npe::move(d));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::Matrix<int, Eigen::Dynamic, 1> & g;
-    Eigen::Matrix<int, Eigen::Dynamic, 1> & s;
-    Eigen::Matrix<double, Eigen::Dynamic, 1> & d;
-    igl::partition(w, k, g, s, d);
-    return std::make_tuple(    npe::move(g),     npe::move(s),     npe::move(d));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::Matrix<int, Eigen::Dynamic, 1> & g;
+  Eigen::Matrix<int, Eigen::Dynamic, 1> & s;
+  Eigen::Matrix<double, Eigen::Dynamic, 1> & d;
+  igl::partition(w, k, g, s, d);
+  return std::make_tuple(npe::move(g), npe::move(s), npe::move(d));
 
 npe_end_code()
 

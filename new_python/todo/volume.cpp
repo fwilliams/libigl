@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/volume.h>
@@ -11,8 +7,6 @@ const char* ds_volume = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -45,26 +39,15 @@ Examples
 npe_function(volume)
 npe_doc(ds_volume)
 
-npe_arg(v, dense_f64)
-npe_arg(t, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(t, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vol;
-    igl::volume(v, t, vol);
-    return npe::move(vol);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vol;
-    igl::volume(v, t, vol);
-    return npe::move(vol);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vol;
+  igl::volume(v, t, vol);
+  return npe::move(vol);
 
 npe_end_code()
 #include <igl/volume.h>
@@ -76,28 +59,17 @@ See volume for the documentation.
 npe_function(volume)
 npe_doc(ds_volume)
 
-npe_arg(a, dense_f64)
-npe_arg(b, dense_f64)
-npe_arg(c, dense_f64)
-npe_arg(d, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(a, dense_f32, dense_f64)
+npe_arg(b, dense_f32, dense_f64)
+npe_arg(c, dense_f32, dense_f64)
+npe_arg(d, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vol;
-    igl::volume(a, b, c, d, vol);
-    return npe::move(vol);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vol;
-    igl::volume(a, b, c, d, vol);
-    return npe::move(vol);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vol;
+  igl::volume(a, b, c, d, vol);
+  return npe::move(vol);
 
 npe_end_code()
 #include <igl/volume.h>
@@ -107,8 +79,6 @@ const char* ds_volume = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -134,25 +104,14 @@ Examples
 npe_function(volume)
 npe_doc(ds_volume)
 
-npe_arg(l, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(l, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vol;
-    igl::volume(l, vol);
-    return npe::move(vol);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vol;
-    igl::volume(l, vol);
-    return npe::move(vol);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vol;
+  igl::volume(l, vol);
+  return npe::move(vol);
 
 npe_end_code()
 
@@ -161,7 +120,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/volume_single.h>
 
 const char* ds_volume_single = R"igl_Qu8mg5v7(
@@ -169,8 +127,6 @@ const char* ds_volume_single = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -199,15 +155,10 @@ npe_arg(c, VecC &)
 npe_arg(d, VecD &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::volume_single(a, b, c, d);
-
-return
+  igl::volume_single(a, b, c, d);
+  return ;
 
 npe_end_code()
 

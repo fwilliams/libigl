@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/knn.h>
 
 const char* ds_knn = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_knn = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -61,30 +54,19 @@ Examples
 npe_function(knn)
 npe_doc(ds_knn)
 
-npe_arg(p, dense_f64)
+npe_arg(p, dense_f32, dense_f64)
 npe_arg(k, KType &)
 npe_arg(point_indices, std::vector<std::vector<IndexType> > &)
-npe_arg(ch, dense_f64)
-npe_arg(cn, dense_f64)
-npe_arg(w, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(ch, dense_f32, dense_f64)
+npe_arg(cn, dense_f32, dense_f64)
+npe_arg(w, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 i;
-    igl::knn(p, k, point_indices, ch, cn, w, i);
-    return npe::move(i);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 i;
-    igl::knn(p, k, point_indices, ch, cn, w, i);
-    return npe::move(i);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> i;
+  igl::knn(p, k, point_indices, ch, cn, w, i);
+  return npe::move(i);
 
 npe_end_code()
 

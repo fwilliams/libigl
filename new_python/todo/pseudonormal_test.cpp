@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/pseudonormal_test.h>
 
 const char* ds_pseudonormal_test = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_pseudonormal_test = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -59,38 +52,23 @@ Examples
 npe_function(pseudonormal_test)
 npe_doc(ds_pseudonormal_test)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(fn, dense_f64)
-npe_arg(vn, dense_f64)
-npe_arg(en, dense_f64)
-npe_arg(emap, dense_f64)
-npe_arg(q, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(fn, dense_f32, dense_f64)
+npe_arg(vn, dense_f32, dense_f64)
+npe_arg(en, dense_f32, dense_f64)
+npe_arg(emap, dense_f32, dense_f64)
+npe_arg(q, dense_f32, dense_f64)
 npe_arg(f, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 c;
-    Scalar & s;
-    dense_f32 n;
-    igl::pseudonormal_test(v, f, fn, vn, en, emap, q, f, c, s, n);
-    return std::make_tuple(    npe::move(c),
-    npe::move(s),
-    npe::move(n));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 c;
-    Scalar & s;
-    dense_f64 n;
-    igl::pseudonormal_test(v, f, fn, vn, en, emap, q, f, c, s, n);
-    return std::make_tuple(    npe::move(c),     npe::move(s),     npe::move(n));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> c;
+  Scalar & s;
+  EigenDense<npe_Scalar_> n;
+  igl::pseudonormal_test(v, f, fn, vn, en, emap, q, f, c, s, n);
+  return std::make_tuple(npe::move(c), npe::move(s), npe::move(n));
 
 npe_end_code()
 #include <igl/pseudonormal_test.h>
@@ -102,36 +80,21 @@ See pseudonormal_test for the documentation.
 npe_function(pseudonormal_test)
 npe_doc(ds_pseudonormal_test)
 
-npe_arg(v, dense_f64)
-npe_arg(e, dense_f64)
-npe_arg(en, dense_f64)
-npe_arg(vn, dense_f64)
-npe_arg(q, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(e, dense_f32, dense_f64)
+npe_arg(en, dense_f32, dense_f64)
+npe_arg(vn, dense_f32, dense_f64)
+npe_arg(q, dense_f32, dense_f64)
 npe_arg(e, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 c;
-    Scalar & s;
-    dense_f32 n;
-    igl::pseudonormal_test(v, e, en, vn, q, e, c, s, n);
-    return std::make_tuple(    npe::move(c),
-    npe::move(s),
-    npe::move(n));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 c;
-    Scalar & s;
-    dense_f64 n;
-    igl::pseudonormal_test(v, e, en, vn, q, e, c, s, n);
-    return std::make_tuple(    npe::move(c),     npe::move(s),     npe::move(n));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> c;
+  Scalar & s;
+  EigenDense<npe_Scalar_> n;
+  igl::pseudonormal_test(v, e, en, vn, q, e, c, s, n);
+  return std::make_tuple(npe::move(c), npe::move(s), npe::move(n));
 
 npe_end_code()
 

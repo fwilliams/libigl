@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/rotation_matrix_from_directions.h>
 
 const char* ds_rotation_matrix_from_directions = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_rotation_matrix_from_directions = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -54,15 +47,10 @@ npe_arg(v0, Eigen::Matrix<Scalar, 3, 1>)
 npe_arg(v1, Eigen::Matrix<Scalar, 3, 1>)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::rotation_matrix_from_directions(v0, v1);
-
-return
+  igl::rotation_matrix_from_directions(v0, v1);
+  return ;
 
 npe_end_code()
 

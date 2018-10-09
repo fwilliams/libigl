@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/requires_arg.h>
 
 const char* ds_requires_arg = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_requires_arg = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -52,15 +45,10 @@ npe_arg(nrhs, int)
 npe_arg(name, char *)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::matlab::requires_arg(i, nrhs, name);
-
-return
+  igl::  matlab::requires_arg(i, nrhs, name);
+  return ;
 
 npe_end_code()
 

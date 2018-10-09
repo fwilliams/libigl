@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/rotate_vectors.h>
 
 const char* ds_rotate_vectors = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_rotate_vectors = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -60,15 +53,10 @@ npe_arg(b1, Eigen::MatrixXd &)
 npe_arg(b2, Eigen::MatrixXd &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::rotate_vectors(v, a, b1, b2);
-
-return
+  igl::rotate_vectors(v, a, b1, b2);
+  return ;
 
 npe_end_code()
 

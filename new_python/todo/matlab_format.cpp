@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/matlab_format.h>
 
 const char* ds_matlab_format = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_matlab_format = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -69,15 +62,10 @@ npe_arg(m, Eigen::DenseBase<DerivedM> &)
 npe_arg(name, std::string)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::matlab_format(m, name);
-
-return
+  igl::matlab_format(m, name);
+  return ;
 
 npe_end_code()
 #include <igl/matlab_format.h>
@@ -87,8 +75,6 @@ const char* ds_matlab_format = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -128,15 +114,10 @@ npe_arg(s, Eigen::SparseMatrix<DerivedS> &)
 npe_arg(name, std::string)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::matlab_format(s, name);
-
-return
+  igl::matlab_format(s, name);
+  return ;
 
 npe_end_code()
 #include <igl/matlab_format.h>
@@ -152,15 +133,10 @@ npe_arg(v, double)
 npe_arg(name, std::string)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::matlab_format(v, name);
-
-return
+  igl::matlab_format(v, name);
+  return ;
 
 npe_end_code()
 #include <igl/matlab_format.h>
@@ -176,15 +152,10 @@ npe_arg(v, float)
 npe_arg(name, std::string)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::matlab_format(v, name);
-
-return
+  igl::matlab_format(v, name);
+  return ;
 
 npe_end_code()
 

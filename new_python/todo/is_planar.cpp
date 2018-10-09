@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/is_planar.h>
 
 const char* ds_is_planar = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_is_planar = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -52,15 +45,10 @@ npe_doc(ds_is_planar)
 npe_arg(v, Eigen::MatrixXd &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::is_planar(v);
-
-return
+  igl::is_planar(v);
+  return ;
 
 npe_end_code()
 

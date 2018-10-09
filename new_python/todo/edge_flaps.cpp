@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/edge_flaps.h>
 
 const char* ds_edge_flaps = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_edge_flaps = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -65,27 +58,14 @@ npe_doc(ds_edge_flaps)
 npe_arg(f, Eigen::MatrixXi &)
 npe_arg(e, Eigen::MatrixXi &)
 npe_arg(emap, Eigen::VectorXi &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXi & ef;
-    Eigen::MatrixXi & ei;
-    igl::edge_flaps(f, e, emap, ef, ei);
-    return std::make_tuple(    npe::move(ef),
-    npe::move(ei));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXi & ef;
-    Eigen::MatrixXi & ei;
-    igl::edge_flaps(f, e, emap, ef, ei);
-    return std::make_tuple(    npe::move(ef),     npe::move(ei));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXi & ef;
+  Eigen::MatrixXi & ei;
+  igl::edge_flaps(f, e, emap, ef, ei);
+  return std::make_tuple(npe::move(ef), npe::move(ei));
 
 npe_end_code()
 #include <igl/edge_flaps.h>
@@ -95,8 +75,6 @@ const char* ds_edge_flaps = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -120,33 +98,16 @@ npe_function(edge_flaps)
 npe_doc(ds_edge_flaps)
 
 npe_arg(f, Eigen::MatrixXi &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXi & e;
-    Eigen::VectorXi & emap;
-    Eigen::MatrixXi & ef;
-    Eigen::MatrixXi & ei;
-    igl::edge_flaps(f, e, emap, ef, ei);
-    return std::make_tuple(    npe::move(e),
-    npe::move(emap),
-    npe::move(ef),
-    npe::move(ei));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXi & e;
-    Eigen::VectorXi & emap;
-    Eigen::MatrixXi & ef;
-    Eigen::MatrixXi & ei;
-    igl::edge_flaps(f, e, emap, ef, ei);
-    return std::make_tuple(    npe::move(e),     npe::move(emap),     npe::move(ef),     npe::move(ei));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXi & e;
+  Eigen::VectorXi & emap;
+  Eigen::MatrixXi & ef;
+  Eigen::MatrixXi & ei;
+  igl::edge_flaps(f, e, emap, ef, ei);
+  return std::make_tuple(npe::move(e), npe::move(emap), npe::move(ef), npe::move(ei));
 
 npe_end_code()
 

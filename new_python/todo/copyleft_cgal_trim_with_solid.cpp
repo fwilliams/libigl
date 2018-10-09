@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/trim_with_solid.h>
@@ -10,8 +7,6 @@ const char* ds_trim_with_solid = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -51,37 +46,20 @@ Examples
 npe_function(trim_with_solid)
 npe_doc(ds_trim_with_solid)
 
-npe_arg(va, dense_f64)
-npe_arg(fa, dense_f64)
-npe_arg(vb, dense_f64)
-npe_arg(fb, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(va, dense_f32, dense_f64)
+npe_arg(fa, dense_f32, dense_f64)
+npe_arg(vb, dense_f32, dense_f64)
+npe_arg(fb, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vd;
-    dense_i32 f;
-    dense_f32 d;
-    dense_f32 j;
-    igl::    copyleft::    cgal::trim_with_solid(va, fa, vb, fb, vd, f, d, j);
-    return std::make_tuple(    npe::move(vd),
-    npe::move(f),
-    npe::move(d),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vd;
-    dense_i32 f;
-    dense_f64 d;
-    dense_f64 j;
-    igl::    copyleft::    cgal::trim_with_solid(va, fa, vb, fb, vd, f, d, j);
-    return std::make_tuple(    npe::move(vd),     npe::move(f),     npe::move(d),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vd;
+  EigenDense<npe_Scalar_> f;
+  EigenDense<npe_Scalar_> d;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::trim_with_solid(va, fa, vb, fb, vd, f, d, j);
+  return std::make_tuple(npe::move(vd), npe::move(f), npe::move(d), npe::move(j));
 
 npe_end_code()
 

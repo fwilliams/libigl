@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/up_axis.h>
 
 const char* ds_up_axis = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_up_axis = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -52,30 +45,15 @@ Examples
 npe_function(up_axis)
 npe_doc(ds_up_axis)
 
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    double * x;
-    double * y;
-    double * z;
-    igl::    opengl2::up_axis(x, y, z);
-    return std::make_tuple(    npe::move(x),
-    npe::move(y),
-    npe::move(z));
-} else if (dtype.type() == npe::type_f64) {
-    double * x;
-    double * y;
-    double * z;
-    igl::    opengl2::up_axis(x, y, z);
-    return std::make_tuple(    npe::move(x),     npe::move(y),     npe::move(z));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  double * x;
+  double * y;
+  double * z;
+  igl::  opengl2::up_axis(x, y, z);
+  return std::make_tuple(npe::move(x), npe::move(y), npe::move(z));
 
 npe_end_code()
 #include <igl/up_axis.h>
@@ -88,30 +66,15 @@ npe_function(up_axis)
 npe_doc(ds_up_axis)
 
 npe_arg(mv, double *)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    double * x;
-    double * y;
-    double * z;
-    igl::    opengl2::up_axis(mv, x, y, z);
-    return std::make_tuple(    npe::move(x),
-    npe::move(y),
-    npe::move(z));
-} else if (dtype.type() == npe::type_f64) {
-    double * x;
-    double * y;
-    double * z;
-    igl::    opengl2::up_axis(mv, x, y, z);
-    return std::make_tuple(    npe::move(x),     npe::move(y),     npe::move(z));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  double * x;
+  double * y;
+  double * z;
+  igl::  opengl2::up_axis(mv, x, y, z);
+  return std::make_tuple(npe::move(x), npe::move(y), npe::move(z));
 
 npe_end_code()
 

@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/colormap.h>
@@ -11,8 +7,6 @@ const char* ds_colormap = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -41,26 +35,15 @@ npe_function(colormap)
 npe_doc(ds_colormap)
 
 npe_arg(cm, igl::ColorMapType)
-npe_arg(z, dense_f64)
+npe_arg(z, dense_f32, dense_f64)
 npe_arg(normalize, bool)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 c;
-    igl::colormap(cm, z, normalize, c);
-    return npe::move(c);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 c;
-    igl::colormap(cm, z, normalize, c);
-    return npe::move(c);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> c;
+  igl::colormap(cm, z, normalize, c);
+  return npe::move(c);
 
 npe_end_code()
 
@@ -69,7 +52,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/colormap.h>
 
 const char* ds_colormap = R"igl_Qu8mg5v7(
@@ -77,8 +59,6 @@ const char* ds_colormap = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -110,24 +90,13 @@ npe_doc(ds_colormap)
 
 npe_arg(cm, igl::ColorMapType)
 npe_arg(f, T)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    T * rgb;
-    igl::colormap(cm, f, rgb);
-    return npe::move(rgb);
-} else if (dtype.type() == npe::type_f64) {
-    T * rgb;
-    igl::colormap(cm, f, rgb);
-    return npe::move(rgb);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  T * rgb;
+  igl::colormap(cm, f, rgb);
+  return npe::move(rgb);
 
 npe_end_code()
 #include <igl/colormap.h>
@@ -137,8 +106,6 @@ const char* ds_colormap = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -166,30 +133,15 @@ npe_doc(ds_colormap)
 
 npe_arg(cm, igl::ColorMapType)
 npe_arg(f, T)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    T & r;
-    T & g;
-    T & b;
-    igl::colormap(cm, f, r, g, b);
-    return std::make_tuple(    npe::move(r),
-    npe::move(g),
-    npe::move(b));
-} else if (dtype.type() == npe::type_f64) {
-    T & r;
-    T & g;
-    T & b;
-    igl::colormap(cm, f, r, g, b);
-    return std::make_tuple(    npe::move(r),     npe::move(g),     npe::move(b));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  T & r;
+  T & g;
+  T & b;
+  igl::colormap(cm, f, r, g, b);
+  return std::make_tuple(npe::move(r), npe::move(g), npe::move(b));
 
 npe_end_code()
 #include <igl/colormap.h>
@@ -199,8 +151,6 @@ const char* ds_colormap = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -226,30 +176,15 @@ npe_doc(ds_colormap)
 
 npe_arg(palette, double [256][3])
 npe_arg(x_in, T)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    T & r;
-    T & g;
-    T & b;
-    igl::colormap(palette, x_in, r, g, b);
-    return std::make_tuple(    npe::move(r),
-    npe::move(g),
-    npe::move(b));
-} else if (dtype.type() == npe::type_f64) {
-    T & r;
-    T & g;
-    T & b;
-    igl::colormap(palette, x_in, r, g, b);
-    return std::make_tuple(    npe::move(r),     npe::move(g),     npe::move(b));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  T & r;
+  T & g;
+  T & b;
+  igl::colormap(palette, x_in, r, g, b);
+  return std::make_tuple(npe::move(r), npe::move(g), npe::move(b));
 
 npe_end_code()
 #include <igl/colormap.h>
@@ -259,8 +194,6 @@ const char* ds_colormap = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -286,27 +219,16 @@ npe_function(colormap)
 npe_doc(ds_colormap)
 
 npe_arg(cm, igl::ColorMapType)
-npe_arg(z, dense_f64)
+npe_arg(z, dense_f32, dense_f64)
 npe_arg(min_z, double)
 npe_arg(max_z, double)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 c;
-    igl::colormap(cm, z, min_z, max_z, c);
-    return npe::move(c);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 c;
-    igl::colormap(cm, z, min_z, max_z, c);
-    return npe::move(c);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> c;
+  igl::colormap(cm, z, min_z, max_z, c);
+  return npe::move(c);
 
 npe_end_code()
 

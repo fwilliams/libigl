@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/line_segment_in_rectangle.h>
 
 const char* ds_line_segment_in_rectangle = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_line_segment_in_rectangle = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -55,15 +48,10 @@ npe_arg(a, Eigen::Vector2d &)
 npe_arg(b, Eigen::Vector2d &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::line_segment_in_rectangle(s, d, a, b);
-
-return
+  igl::line_segment_in_rectangle(s, d, a, b);
+  return ;
 
 npe_end_code()
 

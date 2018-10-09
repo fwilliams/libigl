@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/mesh_boolean.h>
 
 const char* ds_mesh_boolean = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_mesh_boolean = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -59,35 +52,20 @@ Examples
 npe_function(mesh_boolean)
 npe_doc(ds_mesh_boolean)
 
-npe_arg(va, dense_f64)
-npe_arg(fa, dense_f64)
-npe_arg(vb, dense_f64)
-npe_arg(fb, dense_f64)
+npe_arg(va, dense_f32, dense_f64)
+npe_arg(fa, dense_f32, dense_f64)
+npe_arg(vb, dense_f32, dense_f64)
+npe_arg(fb, dense_f32, dense_f64)
 npe_arg(type, igl::MeshBooleanType &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vc;
-    dense_f32 fc;
-    dense_f32 j;
-    igl::    copyleft::    cgal::mesh_boolean(va, fa, vb, fb, type, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),
-    npe::move(fc),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vc;
-    dense_f64 fc;
-    dense_f64 j;
-    igl::    copyleft::    cgal::mesh_boolean(va, fa, vb, fb, type, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),     npe::move(fc),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vc;
+  EigenDense<npe_Scalar_> fc;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::mesh_boolean(va, fa, vb, fb, type, vc, fc, j);
+  return std::make_tuple(npe::move(vc), npe::move(fc), npe::move(j));
 
 npe_end_code()
 #include <igl/mesh_boolean.h>
@@ -99,35 +77,20 @@ See mesh_boolean for the documentation.
 npe_function(mesh_boolean)
 npe_doc(ds_mesh_boolean)
 
-npe_arg(va, dense_f64)
-npe_arg(fa, dense_f64)
-npe_arg(vb, dense_f64)
-npe_arg(fb, dense_f64)
+npe_arg(va, dense_f32, dense_f64)
+npe_arg(fa, dense_f32, dense_f64)
+npe_arg(vb, dense_f32, dense_f64)
+npe_arg(fb, dense_f32, dense_f64)
 npe_arg(type_str, std::string &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vc;
-    dense_f32 fc;
-    dense_f32 j;
-    igl::    copyleft::    cgal::mesh_boolean(va, fa, vb, fb, type_str, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),
-    npe::move(fc),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vc;
-    dense_f64 fc;
-    dense_f64 j;
-    igl::    copyleft::    cgal::mesh_boolean(va, fa, vb, fb, type_str, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),     npe::move(fc),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vc;
+  EigenDense<npe_Scalar_> fc;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::mesh_boolean(va, fa, vb, fb, type_str, vc, fc, j);
+  return std::make_tuple(npe::move(vc), npe::move(fc), npe::move(j));
 
 npe_end_code()
 #include <igl/mesh_boolean.h>
@@ -137,8 +100,6 @@ const char* ds_mesh_boolean = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -179,36 +140,21 @@ Examples
 npe_function(mesh_boolean)
 npe_doc(ds_mesh_boolean)
 
-npe_arg(va, dense_f64)
-npe_arg(fa, dense_f64)
-npe_arg(vb, dense_f64)
-npe_arg(fb, dense_f64)
+npe_arg(va, dense_f32, dense_f64)
+npe_arg(fa, dense_f32, dense_f64)
+npe_arg(vb, dense_f32, dense_f64)
+npe_arg(fb, dense_f32, dense_f64)
 npe_arg(wind_num_op, std::function<int (const Eigen::Matrix<int, 1, Eigen::Dynamic>)> &)
 npe_arg(keep, std::function<int (const int, const int)> &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vc;
-    dense_f32 fc;
-    dense_f32 j;
-    igl::    copyleft::    cgal::mesh_boolean(va, fa, vb, fb, wind_num_op, keep, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),
-    npe::move(fc),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vc;
-    dense_f64 fc;
-    dense_f64 j;
-    igl::    copyleft::    cgal::mesh_boolean(va, fa, vb, fb, wind_num_op, keep, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),     npe::move(fc),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vc;
+  EigenDense<npe_Scalar_> fc;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::mesh_boolean(va, fa, vb, fb, wind_num_op, keep, vc, fc, j);
+  return std::make_tuple(npe::move(vc), npe::move(fc), npe::move(j));
 
 npe_end_code()
 #include <igl/mesh_boolean.h>
@@ -218,8 +164,6 @@ const char* ds_mesh_boolean = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -265,30 +209,15 @@ npe_arg(vlist, std::vector<DerivedV> &)
 npe_arg(flist, std::vector<DerivedF> &)
 npe_arg(wind_num_op, std::function<int (const Eigen::Matrix<int, 1, Eigen::Dynamic>)> &)
 npe_arg(keep, std::function<int (const int, const int)> &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vc;
-    dense_f32 fc;
-    dense_f32 j;
-    igl::    copyleft::    cgal::mesh_boolean(vlist, flist, wind_num_op, keep, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),
-    npe::move(fc),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vc;
-    dense_f64 fc;
-    dense_f64 j;
-    igl::    copyleft::    cgal::mesh_boolean(vlist, flist, wind_num_op, keep, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),     npe::move(fc),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vc;
+  EigenDense<npe_Scalar_> fc;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::mesh_boolean(vlist, flist, wind_num_op, keep, vc, fc, j);
+  return std::make_tuple(npe::move(vc), npe::move(fc), npe::move(j));
 
 npe_end_code()
 #include <igl/mesh_boolean.h>
@@ -303,30 +232,15 @@ npe_doc(ds_mesh_boolean)
 npe_arg(vlist, std::vector<DerivedV> &)
 npe_arg(flist, std::vector<DerivedF> &)
 npe_arg(type, igl::MeshBooleanType &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vc;
-    dense_f32 fc;
-    dense_f32 j;
-    igl::    copyleft::    cgal::mesh_boolean(vlist, flist, type, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),
-    npe::move(fc),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vc;
-    dense_f64 fc;
-    dense_f64 j;
-    igl::    copyleft::    cgal::mesh_boolean(vlist, flist, type, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),     npe::move(fc),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vc;
+  EigenDense<npe_Scalar_> fc;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::mesh_boolean(vlist, flist, type, vc, fc, j);
+  return std::make_tuple(npe::move(vc), npe::move(fc), npe::move(j));
 
 npe_end_code()
 #include <igl/mesh_boolean.h>
@@ -336,8 +250,6 @@ const char* ds_mesh_boolean = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -377,35 +289,20 @@ Examples
 npe_function(mesh_boolean)
 npe_doc(ds_mesh_boolean)
 
-npe_arg(vv, dense_f64)
-npe_arg(ff, dense_f64)
-npe_arg(sizes, dense_f64)
+npe_arg(vv, dense_f32, dense_f64)
+npe_arg(ff, dense_f32, dense_f64)
+npe_arg(sizes, dense_f32, dense_f64)
 npe_arg(wind_num_op, std::function<int (const Eigen::Matrix<int, 1, Eigen::Dynamic>)> &)
 npe_arg(keep, std::function<int (const int, const int)> &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vc;
-    dense_f32 fc;
-    dense_f32 j;
-    igl::    copyleft::    cgal::mesh_boolean(vv, ff, sizes, wind_num_op, keep, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),
-    npe::move(fc),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vc;
-    dense_f64 fc;
-    dense_f64 j;
-    igl::    copyleft::    cgal::mesh_boolean(vv, ff, sizes, wind_num_op, keep, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),     npe::move(fc),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vc;
+  EigenDense<npe_Scalar_> fc;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::mesh_boolean(vv, ff, sizes, wind_num_op, keep, vc, fc, j);
+  return std::make_tuple(npe::move(vc), npe::move(fc), npe::move(j));
 
 npe_end_code()
 #include <igl/mesh_boolean.h>
@@ -415,8 +312,6 @@ const char* ds_mesh_boolean = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -449,32 +344,19 @@ Examples
 npe_function(mesh_boolean)
 npe_doc(ds_mesh_boolean)
 
-npe_arg(va, dense_f64)
-npe_arg(fa, dense_f64)
-npe_arg(vb, dense_f64)
-npe_arg(fb, dense_f64)
+npe_arg(va, dense_f32, dense_f64)
+npe_arg(fa, dense_f32, dense_f64)
+npe_arg(vb, dense_f32, dense_f64)
+npe_arg(fb, dense_f32, dense_f64)
 npe_arg(type, igl::MeshBooleanType &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vc;
-    dense_f32 fc;
-    igl::    copyleft::    cgal::mesh_boolean(va, fa, vb, fb, type, vc, fc);
-    return std::make_tuple(    npe::move(vc),
-    npe::move(fc));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vc;
-    dense_f64 fc;
-    igl::    copyleft::    cgal::mesh_boolean(va, fa, vb, fb, type, vc, fc);
-    return std::make_tuple(    npe::move(vc),     npe::move(fc));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vc;
+  EigenDense<npe_Scalar_> fc;
+  igl::  copyleft::  cgal::mesh_boolean(va, fa, vb, fb, type, vc, fc);
+  return std::make_tuple(npe::move(vc), npe::move(fc));
 
 npe_end_code()
 

@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/writePLY.h>
 
 const char* ds_write_ply = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_write_ply = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -51,22 +44,17 @@ npe_function(write_ply)
 npe_doc(ds_write_ply)
 
 npe_arg(filename, std::string &)
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(n, dense_f64)
-npe_arg(uv, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(n, dense_f32, dense_f64)
+npe_arg(uv, dense_f32, dense_f64)
 npe_arg(ascii, bool)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::writePLY(filename, v, f, n, uv, ascii);
-
-return
+  igl::writePLY(filename, v, f, n, uv, ascii);
+  return ;
 
 npe_end_code()
 #include <igl/writePLY.h>
@@ -79,20 +67,15 @@ npe_function(write_ply)
 npe_doc(ds_write_ply)
 
 npe_arg(filename, std::string &)
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(ascii, bool)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::writePLY(filename, v, f, ascii);
-
-return
+  igl::writePLY(filename, v, f, ascii);
+  return ;
 
 npe_end_code()
 

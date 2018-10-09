@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/edge_collapse_is_valid.h>
 
 const char* ds_edge_collapse_is_valid = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_edge_collapse_is_valid = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -68,15 +61,10 @@ npe_arg(ef, Eigen::MatrixXi &)
 npe_arg(ei, Eigen::MatrixXi &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::edge_collapse_is_valid(e, f, e, emap, ef, ei);
-
-return
+  igl::edge_collapse_is_valid(e, f, e, emap, ef, ei);
+  return ;
 
 npe_end_code()
 

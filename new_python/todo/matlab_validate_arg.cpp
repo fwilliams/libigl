@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/validate_arg_scalar.h>
 
 const char* ds_validate_arg_scalar = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_validate_arg_scalar = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -54,15 +47,10 @@ npe_arg(prhs, int *[])
 npe_arg(name, char *)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::matlab::validate_arg_scalar(i, nrhs, prhs, name);
-
-return
+  igl::  matlab::validate_arg_scalar(i, nrhs, prhs, name);
+  return ;
 
 npe_end_code()
 #include <igl/validate_arg_logical.h>
@@ -80,15 +68,10 @@ npe_arg(prhs, int *[])
 npe_arg(name, char *)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::matlab::validate_arg_logical(i, nrhs, prhs, name);
-
-return
+  igl::  matlab::validate_arg_logical(i, nrhs, prhs, name);
+  return ;
 
 npe_end_code()
 #include <igl/validate_arg_char.h>
@@ -106,15 +89,10 @@ npe_arg(prhs, int *[])
 npe_arg(name, char *)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::matlab::validate_arg_char(i, nrhs, prhs, name);
-
-return
+  igl::  matlab::validate_arg_char(i, nrhs, prhs, name);
+  return ;
 
 npe_end_code()
 #include <igl/validate_arg_double.h>
@@ -132,15 +110,10 @@ npe_arg(prhs, int *[])
 npe_arg(name, char *)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::matlab::validate_arg_double(i, nrhs, prhs, name);
-
-return
+  igl::  matlab::validate_arg_double(i, nrhs, prhs, name);
+  return ;
 
 npe_end_code()
 #include <igl/validate_arg_function_handle.h>
@@ -158,15 +131,10 @@ npe_arg(prhs, int *[])
 npe_arg(name, char *)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::matlab::validate_arg_function_handle(i, nrhs, prhs, name);
-
-return
+  igl::  matlab::validate_arg_function_handle(i, nrhs, prhs, name);
+  return ;
 
 npe_end_code()
 

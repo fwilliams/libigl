@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/mosek_linprog.h>
 
 const char* ds_mosek_linprog = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_mosek_linprog = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -63,24 +56,13 @@ npe_arg(lc, Eigen::VectorXd &)
 npe_arg(uc, Eigen::VectorXd &)
 npe_arg(lx, Eigen::VectorXd &)
 npe_arg(ux, Eigen::VectorXd &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::VectorXd & x;
-    igl::    mosek::mosek_linprog(c, a, lc, uc, lx, ux, x);
-    return npe::move(x);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::VectorXd & x;
-    igl::    mosek::mosek_linprog(c, a, lc, uc, lx, ux, x);
-    return npe::move(x);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::VectorXd & x;
+  igl::  mosek::mosek_linprog(c, a, lc, uc, lx, ux, x);
+  return npe::move(x);
 
 npe_end_code()
 #include <igl/mosek_linprog.h>
@@ -90,8 +72,6 @@ const char* ds_mosek_linprog = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -122,24 +102,13 @@ npe_arg(uc, Eigen::VectorXd &)
 npe_arg(lx, Eigen::VectorXd &)
 npe_arg(ux, Eigen::VectorXd &)
 npe_arg(env, int &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::VectorXd & x;
-    igl::    mosek::mosek_linprog(c, a, lc, uc, lx, ux, env, x);
-    return npe::move(x);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::VectorXd & x;
-    igl::    mosek::mosek_linprog(c, a, lc, uc, lx, ux, env, x);
-    return npe::move(x);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::VectorXd & x;
+  igl::  mosek::mosek_linprog(c, a, lc, uc, lx, ux, env, x);
+  return npe::move(x);
 
 npe_end_code()
 

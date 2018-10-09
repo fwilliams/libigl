@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/point_areas.h>
@@ -10,8 +7,6 @@ const char* ds_point_areas = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -55,27 +50,16 @@ Examples
 npe_function(point_areas)
 npe_doc(ds_point_areas)
 
-npe_arg(p, dense_f64)
-npe_arg(i, dense_f64)
-npe_arg(n, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(p, dense_f32, dense_f64)
+npe_arg(i, dense_f32, dense_f64)
+npe_arg(n, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 a;
-    igl::    copyleft::    cgal::point_areas(p, i, n, a);
-    return npe::move(a);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 a;
-    igl::    copyleft::    cgal::point_areas(p, i, n, a);
-    return npe::move(a);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> a;
+  igl::  copyleft::  cgal::point_areas(p, i, n, a);
+  return npe::move(a);
 
 npe_end_code()
 #include <igl/point_areas.h>
@@ -85,8 +69,6 @@ const char* ds_point_areas = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -119,30 +101,17 @@ Examples
 npe_function(point_areas)
 npe_doc(ds_point_areas)
 
-npe_arg(p, dense_f64)
-npe_arg(i, dense_f64)
-npe_arg(n, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(p, dense_f32, dense_f64)
+npe_arg(i, dense_f32, dense_f64)
+npe_arg(n, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 a;
-    dense_f32 t;
-    igl::    copyleft::    cgal::point_areas(p, i, n, a, t);
-    return std::make_tuple(    npe::move(a),
-    npe::move(t));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 a;
-    dense_f64 t;
-    igl::    copyleft::    cgal::point_areas(p, i, n, a, t);
-    return std::make_tuple(    npe::move(a),     npe::move(t));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> a;
+  EigenDense<npe_Scalar_> t;
+  igl::  copyleft::  cgal::point_areas(p, i, n, a, t);
+  return std::make_tuple(npe::move(a), npe::move(t));
 
 npe_end_code()
 

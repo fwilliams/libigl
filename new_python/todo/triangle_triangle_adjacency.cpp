@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/triangle_triangle_adjacency.h>
@@ -11,8 +7,6 @@ const char* ds_triangle_triangle_adjacency = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -47,28 +41,15 @@ Examples
 npe_function(triangle_triangle_adjacency)
 npe_doc(ds_triangle_triangle_adjacency)
 
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 tt;
-    dense_f32 t_ti;
-    igl::triangle_triangle_adjacency(f, tt, t_ti);
-    return std::make_tuple(    npe::move(tt),
-    npe::move(t_ti));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 tt;
-    dense_f64 t_ti;
-    igl::triangle_triangle_adjacency(f, tt, t_ti);
-    return std::make_tuple(    npe::move(tt),     npe::move(t_ti));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> tt;
+  EigenDense<npe_Scalar_> t_ti;
+  igl::triangle_triangle_adjacency(f, tt, t_ti);
+  return std::make_tuple(npe::move(tt), npe::move(t_ti));
 
 npe_end_code()
 #include <igl/triangle_triangle_adjacency.h>
@@ -80,25 +61,14 @@ See triangle_triangle_adjacency for the documentation.
 npe_function(triangle_triangle_adjacency)
 npe_doc(ds_triangle_triangle_adjacency)
 
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 tt;
-    igl::triangle_triangle_adjacency(f, tt);
-    return npe::move(tt);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 tt;
-    igl::triangle_triangle_adjacency(f, tt);
-    return npe::move(tt);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> tt;
+  igl::triangle_triangle_adjacency(f, tt);
+  return npe::move(tt);
 
 npe_end_code()
 
@@ -107,7 +77,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/triangle_triangle_adjacency_preprocess.h>
 
 const char* ds_triangle_triangle_adjacency_preprocess = R"igl_Qu8mg5v7(
@@ -115,8 +84,6 @@ const char* ds_triangle_triangle_adjacency_preprocess = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -139,25 +106,14 @@ Examples
 npe_function(triangle_triangle_adjacency_preprocess)
 npe_doc(ds_triangle_triangle_adjacency_preprocess)
 
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<std::vector<TTT_type> > & ttt;
-    igl::triangle_triangle_adjacency_preprocess(f, ttt);
-    return npe::move(ttt);
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<std::vector<TTT_type> > & ttt;
-    igl::triangle_triangle_adjacency_preprocess(f, ttt);
-    return npe::move(ttt);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<std::vector<TTT_type> > & ttt;
+  igl::triangle_triangle_adjacency_preprocess(f, ttt);
+  return npe::move(ttt);
 
 npe_end_code()
 #include <igl/triangle_triangle_adjacency_extractTT.h>
@@ -167,8 +123,6 @@ const char* ds_triangle_triangle_adjacency_extract_tt = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -191,28 +145,15 @@ Examples
 npe_function(triangle_triangle_adjacency_extract_tt)
 npe_doc(ds_triangle_triangle_adjacency_extract_tt)
 
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<std::vector<TTT_type> > & ttt;
-    dense_f32 tt;
-    igl::triangle_triangle_adjacency_extractTT(f, ttt, tt);
-    return std::make_tuple(    npe::move(ttt),
-    npe::move(tt));
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<std::vector<TTT_type> > & ttt;
-    dense_f64 tt;
-    igl::triangle_triangle_adjacency_extractTT(f, ttt, tt);
-    return std::make_tuple(    npe::move(ttt),     npe::move(tt));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<std::vector<TTT_type> > & ttt;
+  EigenDense<npe_Scalar_> tt;
+  igl::triangle_triangle_adjacency_extractTT(f, ttt, tt);
+  return std::make_tuple(npe::move(ttt), npe::move(tt));
 
 npe_end_code()
 #include <igl/triangle_triangle_adjacency_extractTTi.h>
@@ -222,8 +163,6 @@ const char* ds_triangle_triangle_adjacency_extract_t_ti = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -246,28 +185,15 @@ Examples
 npe_function(triangle_triangle_adjacency_extract_t_ti)
 npe_doc(ds_triangle_triangle_adjacency_extract_t_ti)
 
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<std::vector<TTT_type> > & ttt;
-    dense_f32 t_ti;
-    igl::triangle_triangle_adjacency_extractTTi(f, ttt, t_ti);
-    return std::make_tuple(    npe::move(ttt),
-    npe::move(t_ti));
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<std::vector<TTT_type> > & ttt;
-    dense_f64 t_ti;
-    igl::triangle_triangle_adjacency_extractTTi(f, ttt, t_ti);
-    return std::make_tuple(    npe::move(ttt),     npe::move(t_ti));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<std::vector<TTT_type> > & ttt;
+  EigenDense<npe_Scalar_> t_ti;
+  igl::triangle_triangle_adjacency_extractTTi(f, ttt, t_ti);
+  return std::make_tuple(npe::move(ttt), npe::move(t_ti));
 
 npe_end_code()
 #include <igl/triangle_triangle_adjacency.h>
@@ -277,8 +203,6 @@ const char* ds_triangle_triangle_adjacency = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -311,28 +235,15 @@ Examples
 npe_function(triangle_triangle_adjacency)
 npe_doc(ds_triangle_triangle_adjacency)
 
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<std::vector<std::vector<TTIndex> > > & tt;
-    std::vector<std::vector<std::vector<TTiIndex> > > & t_ti;
-    igl::triangle_triangle_adjacency(f, tt, t_ti);
-    return std::make_tuple(    npe::move(tt),
-    npe::move(t_ti));
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<std::vector<std::vector<TTIndex> > > & tt;
-    std::vector<std::vector<std::vector<TTiIndex> > > & t_ti;
-    igl::triangle_triangle_adjacency(f, tt, t_ti);
-    return std::make_tuple(    npe::move(tt),     npe::move(t_ti));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<std::vector<std::vector<TTIndex> > > & tt;
+  std::vector<std::vector<std::vector<TTiIndex> > > & t_ti;
+  igl::triangle_triangle_adjacency(f, tt, t_ti);
+  return std::make_tuple(npe::move(tt), npe::move(t_ti));
 
 npe_end_code()
 #include <igl/triangle_triangle_adjacency.h>
@@ -344,25 +255,14 @@ See triangle_triangle_adjacency for the documentation.
 npe_function(triangle_triangle_adjacency)
 npe_doc(ds_triangle_triangle_adjacency)
 
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<std::vector<std::vector<TTIndex> > > & tt;
-    igl::triangle_triangle_adjacency(f, tt);
-    return npe::move(tt);
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<std::vector<std::vector<TTIndex> > > & tt;
-    igl::triangle_triangle_adjacency(f, tt);
-    return npe::move(tt);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<std::vector<std::vector<TTIndex> > > & tt;
+  igl::triangle_triangle_adjacency(f, tt);
+  return npe::move(tt);
 
 npe_end_code()
 #include <igl/triangle_triangle_adjacency.h>
@@ -372,8 +272,6 @@ const char* ds_triangle_triangle_adjacency = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -397,29 +295,16 @@ Examples
 npe_function(triangle_triangle_adjacency)
 npe_doc(ds_triangle_triangle_adjacency)
 
-npe_arg(f, dense_i32)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(construct_t_ti, bool)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<std::vector<std::vector<TTIndex> > > & tt;
-    std::vector<std::vector<std::vector<TTiIndex> > > & t_ti;
-    igl::triangle_triangle_adjacency(f, construct_t_ti, tt, t_ti);
-    return std::make_tuple(    npe::move(tt),
-    npe::move(t_ti));
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<std::vector<std::vector<TTIndex> > > & tt;
-    std::vector<std::vector<std::vector<TTiIndex> > > & t_ti;
-    igl::triangle_triangle_adjacency(f, construct_t_ti, tt, t_ti);
-    return std::make_tuple(    npe::move(tt),     npe::move(t_ti));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<std::vector<std::vector<TTIndex> > > & tt;
+  std::vector<std::vector<std::vector<TTiIndex> > > & t_ti;
+  igl::triangle_triangle_adjacency(f, construct_t_ti, tt, t_ti);
+  return std::make_tuple(npe::move(tt), npe::move(t_ti));
 
 npe_end_code()
 #include <igl/triangle_triangle_adjacency.h>
@@ -429,8 +314,6 @@ const char* ds_triangle_triangle_adjacency = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -459,31 +342,18 @@ Examples
 npe_function(triangle_triangle_adjacency)
 npe_doc(ds_triangle_triangle_adjacency)
 
-npe_arg(e, dense_f64)
-npe_arg(emap, dense_f64)
+npe_arg(e, dense_f32, dense_f64)
+npe_arg(emap, dense_f32, dense_f64)
 npe_arg(u_e2_e, std::vector<std::vector<uE2EType> > &)
 npe_arg(construct_t_ti, bool)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<std::vector<std::vector<TTIndex> > > & tt;
-    std::vector<std::vector<std::vector<TTiIndex> > > & t_ti;
-    igl::triangle_triangle_adjacency(e, emap, u_e2_e, construct_t_ti, tt, t_ti);
-    return std::make_tuple(    npe::move(tt),
-    npe::move(t_ti));
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<std::vector<std::vector<TTIndex> > > & tt;
-    std::vector<std::vector<std::vector<TTiIndex> > > & t_ti;
-    igl::triangle_triangle_adjacency(e, emap, u_e2_e, construct_t_ti, tt, t_ti);
-    return std::make_tuple(    npe::move(tt),     npe::move(t_ti));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<std::vector<std::vector<TTIndex> > > & tt;
+  std::vector<std::vector<std::vector<TTiIndex> > > & t_ti;
+  igl::triangle_triangle_adjacency(e, emap, u_e2_e, construct_t_ti, tt, t_ti);
+  return std::make_tuple(npe::move(tt), npe::move(t_ti));
 
 npe_end_code()
 

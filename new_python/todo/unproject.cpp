@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/unproject.h>
@@ -11,8 +7,6 @@ const char* ds_unproject = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -43,28 +37,17 @@ Examples
 npe_function(unproject)
 npe_doc(ds_unproject)
 
-npe_arg(win, dense_f64)
-npe_arg(model, dense_f64)
-npe_arg(proj, dense_f64)
-npe_arg(viewport, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(win, dense_f32, dense_f64)
+npe_arg(model, dense_f32, dense_f64)
+npe_arg(proj, dense_f32, dense_f64)
+npe_arg(viewport, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 scene;
-    igl::unproject(win, model, proj, viewport, scene);
-    return npe::move(scene);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 scene;
-    igl::unproject(win, model, proj, viewport, scene);
-    return npe::move(scene);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> scene;
+  igl::unproject(win, model, proj, viewport, scene);
+  return npe::move(scene);
 
 npe_end_code()
 
@@ -73,7 +56,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/unproject.h>
 
 const char* ds_unproject = R"igl_Qu8mg5v7(
@@ -89,15 +71,10 @@ npe_arg(proj, Eigen::Matrix<Scalar, 4, 4> &)
 npe_arg(viewport, Eigen::Matrix<Scalar, 4, 1> &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::unproject(win, model, proj, viewport);
-
-return
+  igl::unproject(win, model, proj, viewport);
+  return ;
 
 npe_end_code()
 

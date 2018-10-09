@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/piecewise_constant_winding_number.h>
@@ -13,18 +9,13 @@ See piecewise_constant_winding_number for the documentation.
 npe_function(piecewise_constant_winding_number)
 npe_doc(ds_piecewise_constant_winding_number)
 
-npe_arg(f, dense_i32)
-
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-
-igl::piecewise_constant_winding_number(f);
-
-return
+  igl::piecewise_constant_winding_number(f);
+  return ;
 
 npe_end_code()
 
@@ -33,7 +24,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/piecewise_constant_winding_number.h>
 
 const char* ds_piecewise_constant_winding_number = R"igl_Qu8mg5v7(
@@ -41,8 +31,6 @@ const char* ds_piecewise_constant_winding_number = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -83,20 +71,15 @@ Examples
 npe_function(piecewise_constant_winding_number)
 npe_doc(ds_piecewise_constant_winding_number)
 
-npe_arg(f, dense_i32)
-npe_arg(u_e, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(u_e, dense_f32, dense_f64)
 npe_arg(u_e2_e, std::vector<std::vector<uE2EType> > &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::piecewise_constant_winding_number(f, u_e, u_e2_e);
-
-return
+  igl::piecewise_constant_winding_number(f, u_e, u_e2_e);
+  return ;
 
 npe_end_code()
 

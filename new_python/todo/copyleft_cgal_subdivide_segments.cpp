@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/subdivide_segments.h>
 
 const char* ds_subdivide_segments = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_subdivide_segments = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -54,36 +47,19 @@ Examples
 npe_function(subdivide_segments)
 npe_doc(ds_subdivide_segments)
 
-npe_arg(v, dense_f64)
-npe_arg(e, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(e, dense_f32, dense_f64)
 npe_arg(steiner, std::vector<std::vector<CGAL::Point_2<Kernel> > > &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vi;
-    dense_f32 ei;
-    dense_f32 j;
-    dense_f32 im;
-    igl::    copyleft::    cgal::subdivide_segments(v, e, steiner, vi, ei, j, im);
-    return std::make_tuple(    npe::move(vi),
-    npe::move(ei),
-    npe::move(j),
-    npe::move(im));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vi;
-    dense_f64 ei;
-    dense_f64 j;
-    dense_f64 im;
-    igl::    copyleft::    cgal::subdivide_segments(v, e, steiner, vi, ei, j, im);
-    return std::make_tuple(    npe::move(vi),     npe::move(ei),     npe::move(j),     npe::move(im));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vi;
+  EigenDense<npe_Scalar_> ei;
+  EigenDense<npe_Scalar_> j;
+  EigenDense<npe_Scalar_> im;
+  igl::  copyleft::  cgal::subdivide_segments(v, e, steiner, vi, ei, j, im);
+  return std::make_tuple(npe::move(vi), npe::move(ei), npe::move(j), npe::move(im));
 
 npe_end_code()
 

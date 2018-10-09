@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/histc.h>
@@ -11,8 +7,6 @@ const char* ds_histc = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -47,29 +41,16 @@ Examples
 npe_function(histc)
 npe_doc(ds_histc)
 
-npe_arg(x, dense_f64)
-npe_arg(e, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(x, dense_f32, dense_f64)
+npe_arg(e, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 n;
-    dense_f32 b;
-    igl::histc(x, e, n, b);
-    return std::make_tuple(    npe::move(n),
-    npe::move(b));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 n;
-    dense_f64 b;
-    igl::histc(x, e, n, b);
-    return std::make_tuple(    npe::move(n),     npe::move(b));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> n;
+  EigenDense<npe_Scalar_> b;
+  igl::histc(x, e, n, b);
+  return std::make_tuple(npe::move(n), npe::move(b));
 
 npe_end_code()
 #include <igl/histc.h>
@@ -79,8 +60,6 @@ const char* ds_histc = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -103,26 +82,15 @@ Examples
 npe_function(histc)
 npe_doc(ds_histc)
 
-npe_arg(x, dense_f64)
-npe_arg(e, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(x, dense_f32, dense_f64)
+npe_arg(e, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 b;
-    igl::histc(x, e, b);
-    return npe::move(b);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 b;
-    igl::histc(x, e, b);
-    return npe::move(b);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> b;
+  igl::histc(x, e, b);
+  return npe::move(b);
 
 npe_end_code()
 
@@ -131,7 +99,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/histc.h>
 
 const char* ds_histc = R"igl_Qu8mg5v7(
@@ -139,8 +106,6 @@ const char* ds_histc = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -164,25 +129,14 @@ npe_function(histc)
 npe_doc(ds_histc)
 
 npe_arg(x, typename DerivedE::Scalar &)
-npe_arg(e, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(e, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    typename DerivedE::Index & b;
-    igl::histc(x, e, b);
-    return npe::move(b);
-} else if (dtype.type() == npe::type_f64) {
-    typename DerivedE::Index & b;
-    igl::histc(x, e, b);
-    return npe::move(b);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  typename DerivedE::Index & b;
+  igl::histc(x, e, b);
+  return npe::move(b);
 
 npe_end_code()
 

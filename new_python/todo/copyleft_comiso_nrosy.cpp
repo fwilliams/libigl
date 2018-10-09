@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/nrosy.h>
 
 const char* ds_nrosy = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_nrosy = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -67,27 +60,14 @@ npe_arg(w_soft, Eigen::VectorXd &)
 npe_arg(bc_soft, Eigen::MatrixXd &)
 npe_arg(n, int)
 npe_arg(soft, double)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & r;
-    Eigen::VectorXd & s;
-    igl::    copyleft::    comiso::nrosy(v, f, b, bc, b_soft, w_soft, bc_soft, n, soft, r, s);
-    return std::make_tuple(    npe::move(r),
-    npe::move(s));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & r;
-    Eigen::VectorXd & s;
-    igl::    copyleft::    comiso::nrosy(v, f, b, bc, b_soft, w_soft, bc_soft, n, soft, r, s);
-    return std::make_tuple(    npe::move(r),     npe::move(s));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & r;
+  Eigen::VectorXd & s;
+  igl::  copyleft::  comiso::nrosy(v, f, b, bc, b_soft, w_soft, bc_soft, n, soft, r, s);
+  return std::make_tuple(npe::move(r), npe::move(s));
 
 npe_end_code()
 #include <igl/nrosy.h>
@@ -97,8 +77,6 @@ const char* ds_nrosy = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -126,27 +104,14 @@ npe_arg(f, Eigen::MatrixXi &)
 npe_arg(b, Eigen::VectorXi &)
 npe_arg(bc, Eigen::MatrixXd &)
 npe_arg(n, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & r;
-    Eigen::VectorXd & s;
-    igl::    copyleft::    comiso::nrosy(v, f, b, bc, n, r, s);
-    return std::make_tuple(    npe::move(r),
-    npe::move(s));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & r;
-    Eigen::VectorXd & s;
-    igl::    copyleft::    comiso::nrosy(v, f, b, bc, n, r, s);
-    return std::make_tuple(    npe::move(r),     npe::move(s));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & r;
+  Eigen::VectorXd & s;
+  igl::  copyleft::  comiso::nrosy(v, f, b, bc, n, r, s);
+  return std::make_tuple(npe::move(r), npe::move(s));
 
 npe_end_code()
 

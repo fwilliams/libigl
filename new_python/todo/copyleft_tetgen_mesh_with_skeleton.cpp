@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/mesh_with_skeleton.h>
 
 const char* ds_mesh_with_skeleton = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_mesh_with_skeleton = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -68,30 +61,15 @@ npe_arg(be, Eigen::MatrixXi &)
 npe_arg(ce, Eigen::MatrixXi &)
 npe_arg(samples_per_bone, int)
 npe_arg(tetgen_flags, std::string &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & vv;
-    Eigen::MatrixXi & tt;
-    Eigen::MatrixXi & ff;
-    igl::    copyleft::    tetgen::mesh_with_skeleton(v, f, c, , be, ce, samples_per_bone, tetgen_flags, vv, tt, ff);
-    return std::make_tuple(    npe::move(vv),
-    npe::move(tt),
-    npe::move(ff));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & vv;
-    Eigen::MatrixXi & tt;
-    Eigen::MatrixXi & ff;
-    igl::    copyleft::    tetgen::mesh_with_skeleton(v, f, c, , be, ce, samples_per_bone, tetgen_flags, vv, tt, ff);
-    return std::make_tuple(    npe::move(vv),     npe::move(tt),     npe::move(ff));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & vv;
+  Eigen::MatrixXi & tt;
+  Eigen::MatrixXi & ff;
+  igl::  copyleft::  tetgen::mesh_with_skeleton(v, f, c, , be, ce, samples_per_bone, tetgen_flags, vv, tt, ff);
+  return std::make_tuple(npe::move(vv), npe::move(tt), npe::move(ff));
 
 npe_end_code()
 #include <igl/mesh_with_skeleton.h>
@@ -101,8 +79,6 @@ const char* ds_mesh_with_skeleton = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -132,30 +108,15 @@ npe_arg(, Eigen::VectorXi &)
 npe_arg(be, Eigen::MatrixXi &)
 npe_arg(ce, Eigen::MatrixXi &)
 npe_arg(samples_per_bone, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & vv;
-    Eigen::MatrixXi & tt;
-    Eigen::MatrixXi & ff;
-    igl::    copyleft::    tetgen::mesh_with_skeleton(v, f, c, , be, ce, samples_per_bone, vv, tt, ff);
-    return std::make_tuple(    npe::move(vv),
-    npe::move(tt),
-    npe::move(ff));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & vv;
-    Eigen::MatrixXi & tt;
-    Eigen::MatrixXi & ff;
-    igl::    copyleft::    tetgen::mesh_with_skeleton(v, f, c, , be, ce, samples_per_bone, vv, tt, ff);
-    return std::make_tuple(    npe::move(vv),     npe::move(tt),     npe::move(ff));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & vv;
+  Eigen::MatrixXi & tt;
+  Eigen::MatrixXi & ff;
+  igl::  copyleft::  tetgen::mesh_with_skeleton(v, f, c, , be, ce, samples_per_bone, vv, tt, ff);
+  return std::make_tuple(npe::move(vv), npe::move(tt), npe::move(ff));
 
 npe_end_code()
 

@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/outer_hull.h>
@@ -10,8 +7,6 @@ const char* ds_outer_hull = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -45,35 +40,18 @@ Examples
 npe_function(outer_hull)
 npe_doc(ds_outer_hull)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 hv;
-    dense_f32 hf;
-    dense_f32 j;
-    dense_f32 flip;
-    igl::    copyleft::    cgal::outer_hull(v, f, hv, hf, j, flip);
-    return std::make_tuple(    npe::move(hv),
-    npe::move(hf),
-    npe::move(j),
-    npe::move(flip));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 hv;
-    dense_f64 hf;
-    dense_f64 j;
-    dense_f64 flip;
-    igl::    copyleft::    cgal::outer_hull(v, f, hv, hf, j, flip);
-    return std::make_tuple(    npe::move(hv),     npe::move(hf),     npe::move(j),     npe::move(flip));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> hv;
+  EigenDense<npe_Scalar_> hf;
+  EigenDense<npe_Scalar_> j;
+  EigenDense<npe_Scalar_> flip;
+  igl::  copyleft::  cgal::outer_hull(v, f, hv, hf, j, flip);
+  return std::make_tuple(npe::move(hv), npe::move(hf), npe::move(j), npe::move(flip));
 
 npe_end_code()
 #include <igl/outer_hull_legacy.h>
@@ -83,8 +61,6 @@ const char* ds_outer_hull_legacy = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -127,32 +103,17 @@ Examples
 npe_function(outer_hull_legacy)
 npe_doc(ds_outer_hull_legacy)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 g;
-    dense_f32 j;
-    dense_f32 flip;
-    igl::    copyleft::    cgal::outer_hull_legacy(v, f, g, j, flip);
-    return std::make_tuple(    npe::move(g),
-    npe::move(j),
-    npe::move(flip));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 g;
-    dense_f64 j;
-    dense_f64 flip;
-    igl::    copyleft::    cgal::outer_hull_legacy(v, f, g, j, flip);
-    return std::make_tuple(    npe::move(g),     npe::move(j),     npe::move(flip));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> g;
+  EigenDense<npe_Scalar_> j;
+  EigenDense<npe_Scalar_> flip;
+  igl::  copyleft::  cgal::outer_hull_legacy(v, f, g, j, flip);
+  return std::make_tuple(npe::move(g), npe::move(j), npe::move(flip));
 
 npe_end_code()
 

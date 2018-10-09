@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/project_to_line.h>
@@ -11,8 +7,6 @@ const char* ds_project_to_line = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -50,30 +44,17 @@ Examples
 npe_function(project_to_line)
 npe_doc(ds_project_to_line)
 
-npe_arg(p, dense_f64)
-npe_arg(s, dense_f64)
-npe_arg(d, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(p, dense_f32, dense_f64)
+npe_arg(s, dense_f32, dense_f64)
+npe_arg(d, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 t;
-    dense_f32 sqr_d;
-    igl::project_to_line(p, s, d, t, sqr_d);
-    return std::make_tuple(    npe::move(t),
-    npe::move(sqr_d));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 t;
-    dense_f64 sqr_d;
-    igl::project_to_line(p, s, d, t, sqr_d);
-    return std::make_tuple(    npe::move(t),     npe::move(sqr_d));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> t;
+  EigenDense<npe_Scalar_> sqr_d;
+  igl::project_to_line(p, s, d, t, sqr_d);
+  return std::make_tuple(npe::move(t), npe::move(sqr_d));
 
 npe_end_code()
 
@@ -82,7 +63,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/project_to_line.h>
 
 const char* ds_project_to_line = R"igl_Qu8mg5v7(
@@ -90,8 +70,6 @@ const char* ds_project_to_line = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -123,36 +101,17 @@ npe_arg(sz, Scalar)
 npe_arg(dx, Scalar)
 npe_arg(dy, Scalar)
 npe_arg(dz, Scalar)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Scalar & projpx;
-    Scalar & projpy;
-    Scalar & projpz;
-    Scalar & t;
-    Scalar & sqrd;
-    igl::project_to_line(px, py, pz, sx, sy, sz, dx, dy, dz, projpx, projpy, projpz, t, sqrd);
-    return std::make_tuple(    npe::move(projpx),
-    npe::move(projpy),
-    npe::move(projpz),
-    npe::move(t),
-    npe::move(sqrd));
-} else if (dtype.type() == npe::type_f64) {
-    Scalar & projpx;
-    Scalar & projpy;
-    Scalar & projpz;
-    Scalar & t;
-    Scalar & sqrd;
-    igl::project_to_line(px, py, pz, sx, sy, sz, dx, dy, dz, projpx, projpy, projpz, t, sqrd);
-    return std::make_tuple(    npe::move(projpx),     npe::move(projpy),     npe::move(projpz),     npe::move(t),     npe::move(sqrd));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Scalar & projpx;
+  Scalar & projpy;
+  Scalar & projpz;
+  Scalar & t;
+  Scalar & sqrd;
+  igl::project_to_line(px, py, pz, sx, sy, sz, dx, dy, dz, projpx, projpy, projpz, t, sqrd);
+  return std::make_tuple(npe::move(projpx), npe::move(projpy), npe::move(projpz), npe::move(t), npe::move(sqrd));
 
 npe_end_code()
 #include <igl/project_to_line.h>
@@ -162,8 +121,6 @@ const char* ds_project_to_line = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -195,27 +152,14 @@ npe_arg(sz, Scalar)
 npe_arg(dx, Scalar)
 npe_arg(dy, Scalar)
 npe_arg(dz, Scalar)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Scalar & t;
-    Scalar & sqrd;
-    igl::project_to_line(px, py, pz, sx, sy, sz, dx, dy, dz, t, sqrd);
-    return std::make_tuple(    npe::move(t),
-    npe::move(sqrd));
-} else if (dtype.type() == npe::type_f64) {
-    Scalar & t;
-    Scalar & sqrd;
-    igl::project_to_line(px, py, pz, sx, sy, sz, dx, dy, dz, t, sqrd);
-    return std::make_tuple(    npe::move(t),     npe::move(sqrd));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Scalar & t;
+  Scalar & sqrd;
+  igl::project_to_line(px, py, pz, sx, sy, sz, dx, dy, dz, t, sqrd);
+  return std::make_tuple(npe::move(t), npe::move(sqrd));
 
 npe_end_code()
 

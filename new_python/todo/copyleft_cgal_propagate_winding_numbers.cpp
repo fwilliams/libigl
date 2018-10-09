@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/propagate_winding_numbers.h>
@@ -11,8 +7,6 @@ const char* ds_propagate_winding_numbers = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -55,27 +49,16 @@ Examples
 npe_function(propagate_winding_numbers)
 npe_doc(ds_propagate_winding_numbers)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(labels, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(labels, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 w;
-    igl::    copyleft::    cgal::propagate_winding_numbers(v, f, labels, w);
-    return npe::move(w);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 w;
-    igl::    copyleft::    cgal::propagate_winding_numbers(v, f, labels, w);
-    return npe::move(w);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> w;
+  igl::  copyleft::  cgal::propagate_winding_numbers(v, f, labels, w);
+  return npe::move(w);
 
 npe_end_code()
 
@@ -84,7 +67,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/propagate_winding_numbers.h>
 
 const char* ds_propagate_winding_numbers = R"igl_Qu8mg5v7(
@@ -92,8 +74,6 @@ const char* ds_propagate_winding_numbers = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -131,33 +111,22 @@ Examples
 npe_function(propagate_winding_numbers)
 npe_doc(ds_propagate_winding_numbers)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(u_e, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(u_e, dense_f32, dense_f64)
 npe_arg(u_e2_e, std::vector<std::vector<uE2EType> > &)
 npe_arg(num_patches, size_t)
-npe_arg(p, dense_f64)
+npe_arg(p, dense_f32, dense_f64)
 npe_arg(num_cells, size_t)
-npe_arg(c, dense_f64)
-npe_arg(labels, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(c, dense_f32, dense_f64)
+npe_arg(labels, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 w;
-    igl::    copyleft::    cgal::propagate_winding_numbers(v, f, u_e, u_e2_e, num_patches, p, num_cells, c, labels, w);
-    return npe::move(w);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 w;
-    igl::    copyleft::    cgal::propagate_winding_numbers(v, f, u_e, u_e2_e, num_patches, p, num_cells, c, labels, w);
-    return npe::move(w);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> w;
+  igl::  copyleft::  cgal::propagate_winding_numbers(v, f, u_e, u_e2_e, num_patches, p, num_cells, c, labels, w);
+  return npe::move(w);
 
 npe_end_code()
 

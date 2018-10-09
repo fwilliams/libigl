@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/create_shader_program.h>
 
 const char* ds_create_shader_program = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_create_shader_program = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -63,24 +56,13 @@ npe_arg(geom_source, std::string &)
 npe_arg(vert_source, std::string &)
 npe_arg(frag_source, std::string &)
 npe_arg(attrib, int &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int & id;
-    igl::    opengl::create_shader_program(geom_source, vert_source, frag_source, attrib, id);
-    return npe::move(id);
-} else if (dtype.type() == npe::type_f64) {
-    int & id;
-    igl::    opengl::create_shader_program(geom_source, vert_source, frag_source, attrib, id);
-    return npe::move(id);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int & id;
+  igl::  opengl::create_shader_program(geom_source, vert_source, frag_source, attrib, id);
+  return npe::move(id);
 
 npe_end_code()
 #include <igl/create_shader_program.h>
@@ -95,24 +77,13 @@ npe_doc(ds_create_shader_program)
 npe_arg(vert_source, std::string &)
 npe_arg(frag_source, std::string &)
 npe_arg(attrib, int &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int & id;
-    igl::    opengl::create_shader_program(vert_source, frag_source, attrib, id);
-    return npe::move(id);
-} else if (dtype.type() == npe::type_f64) {
-    int & id;
-    igl::    opengl::create_shader_program(vert_source, frag_source, attrib, id);
-    return npe::move(id);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int & id;
+  igl::  opengl::create_shader_program(vert_source, frag_source, attrib, id);
+  return npe::move(id);
 
 npe_end_code()
 

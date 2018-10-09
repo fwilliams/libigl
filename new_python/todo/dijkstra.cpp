@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/dijkstra_compute_paths.h>
 
 const char* ds_dijkstra_compute_paths = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_dijkstra_compute_paths = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -57,27 +50,14 @@ npe_doc(ds_dijkstra_compute_paths)
 npe_arg(source, IndexType &)
 npe_arg(targets, std::set<IndexType> &)
 npe_arg(vv, std::vector<std::vector<IndexType> > &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 min_distance;
-    dense_f32 previous;
-    igl::dijkstra_compute_paths(source, targets, vv, min_distance, previous);
-    return std::make_tuple(    npe::move(min_distance),
-    npe::move(previous));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 min_distance;
-    dense_f64 previous;
-    igl::dijkstra_compute_paths(source, targets, vv, min_distance, previous);
-    return std::make_tuple(    npe::move(min_distance),     npe::move(previous));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> min_distance;
+  EigenDense<npe_Scalar_> previous;
+  igl::dijkstra_compute_paths(source, targets, vv, min_distance, previous);
+  return std::make_tuple(npe::move(min_distance), npe::move(previous));
 
 npe_end_code()
 #include <igl/dijkstra_get_shortest_path_to.h>
@@ -87,8 +67,6 @@ const char* ds_dijkstra_get_shortest_path_to = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -120,25 +98,14 @@ npe_function(dijkstra_get_shortest_path_to)
 npe_doc(ds_dijkstra_get_shortest_path_to)
 
 npe_arg(vertex, IndexType &)
-npe_arg(previous, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(previous, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<IndexType> & path;
-    igl::dijkstra_get_shortest_path_to(vertex, previous, path);
-    return npe::move(path);
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<IndexType> & path;
-    igl::dijkstra_get_shortest_path_to(vertex, previous, path);
-    return npe::move(path);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<IndexType> & path;
+  igl::dijkstra_get_shortest_path_to(vertex, previous, path);
+  return npe::move(path);
 
 npe_end_code()
 

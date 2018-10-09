@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/launch_medit.h>
@@ -10,8 +7,6 @@ const char* ds_launch_medit = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -48,21 +43,16 @@ Examples
 npe_function(launch_medit)
 npe_doc(ds_launch_medit)
 
-npe_arg(v, dense_f64)
-npe_arg(t, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(t, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(wait, bool)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::launch_medit(v, t, f, wait);
-
-return
+  igl::launch_medit(v, t, f, wait);
+  return ;
 
 npe_end_code()
 

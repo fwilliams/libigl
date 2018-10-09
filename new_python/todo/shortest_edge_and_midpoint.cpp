@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/shortest_edge_and_midpoint.h>
 
 const char* ds_shortest_edge_and_midpoint = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_shortest_edge_and_midpoint = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -64,27 +57,14 @@ npe_arg(e, Eigen::MatrixXi &)
 npe_arg(, Eigen::VectorXi &)
 npe_arg(, Eigen::MatrixXi &)
 npe_arg(, Eigen::MatrixXi &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    double & cost;
-    Eigen::RowVectorXd & p;
-    igl::shortest_edge_and_midpoint(e, v, , e, , , , cost, p);
-    return std::make_tuple(    npe::move(cost),
-    npe::move(p));
-} else if (dtype.type() == npe::type_f64) {
-    double & cost;
-    Eigen::RowVectorXd & p;
-    igl::shortest_edge_and_midpoint(e, v, , e, , , , cost, p);
-    return std::make_tuple(    npe::move(cost),     npe::move(p));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  double & cost;
+  Eigen::RowVectorXd & p;
+  igl::shortest_edge_and_midpoint(e, v, , e, , , , cost, p);
+  return std::make_tuple(npe::move(cost), npe::move(p));
 
 npe_end_code()
 

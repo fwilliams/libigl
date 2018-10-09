@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/miq.h>
 
 const char* ds_miq = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_miq = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -62,58 +55,27 @@ Examples
 npe_function(miq)
 npe_doc(ds_miq)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(pd1, dense_f64)
-npe_arg(pd2, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(pd1, dense_f32, dense_f64)
+npe_arg(pd2, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 uv;
-    dense_f32 fuv;
-    double scale;
-    double stiffness;
-    bool direct_round;
-    int iter;
-    int local_iter;
-    bool do_round;
-    bool singularity_round;
-    std::vector<int> round_vertices;
-    std::vector<std::vector<int> > hard_features;
-    igl::    copyleft::    comiso::miq(v, f, pd1, pd2, uv, fuv, scale, stiffness, direct_round, iter, local_iter, do_round, singularity_round, round_vertices, hard_features);
-    return std::make_tuple(    npe::move(uv),
-    npe::move(fuv),
-    npe::move(scale),
-    npe::move(stiffness),
-    npe::move(direct_round),
-    npe::move(iter),
-    npe::move(local_iter),
-    npe::move(do_round),
-    npe::move(singularity_round),
-    npe::move(round_vertices),
-    npe::move(hard_features));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 uv;
-    dense_f64 fuv;
-    double scale;
-    double stiffness;
-    bool direct_round;
-    int iter;
-    int local_iter;
-    bool do_round;
-    bool singularity_round;
-    std::vector<int> round_vertices;
-    std::vector<std::vector<int> > hard_features;
-    igl::    copyleft::    comiso::miq(v, f, pd1, pd2, uv, fuv, scale, stiffness, direct_round, iter, local_iter, do_round, singularity_round, round_vertices, hard_features);
-    return std::make_tuple(    npe::move(uv),     npe::move(fuv),     npe::move(scale),     npe::move(stiffness),     npe::move(direct_round),     npe::move(iter),     npe::move(local_iter),     npe::move(do_round),     npe::move(singularity_round),     npe::move(round_vertices),     npe::move(hard_features));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> uv;
+  EigenDense<npe_Scalar_> fuv;
+  double scale;
+  double stiffness;
+  bool direct_round;
+  int iter;
+  int local_iter;
+  bool do_round;
+  bool singularity_round;
+  std::vector<int> round_vertices;
+  std::vector<std::vector<int> > hard_features;
+  igl::  copyleft::  comiso::miq(v, f, pd1, pd2, uv, fuv, scale, stiffness, direct_round, iter, local_iter, do_round, singularity_round, round_vertices, hard_features);
+  return std::make_tuple(npe::move(uv), npe::move(fuv), npe::move(scale), npe::move(stiffness), npe::move(direct_round), npe::move(iter), npe::move(local_iter), npe::move(do_round), npe::move(singularity_round), npe::move(round_vertices), npe::move(hard_features));
 
 npe_end_code()
 #include <igl/miq.h>
@@ -123,8 +85,6 @@ const char* ds_miq = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -154,61 +114,30 @@ Examples
 npe_function(miq)
 npe_doc(ds_miq)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(pd1_combed, dense_f64)
-npe_arg(pd2_combed, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(pd1_combed, dense_f32, dense_f64)
+npe_arg(pd2_combed, dense_f32, dense_f64)
 npe_arg(m_match, Eigen::Matrix<int, Eigen::Dynamic, 3> &)
 npe_arg(singular, Eigen::Matrix<int, Eigen::Dynamic, 1> &)
 npe_arg(seams, Eigen::Matrix<int, Eigen::Dynamic, 3> &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 uv;
-    dense_f32 fuv;
-    double gradient_size;
-    double stiffness;
-    bool direct_round;
-    int iter;
-    int local_iter;
-    bool do_round;
-    bool singularity_round;
-    std::vector<int> round_vertices;
-    std::vector<std::vector<int> > hard_features;
-    igl::    copyleft::    comiso::miq(v, f, pd1_combed, pd2_combed, m_match, singular, seams, uv, fuv, gradient_size, stiffness, direct_round, iter, local_iter, do_round, singularity_round, round_vertices, hard_features);
-    return std::make_tuple(    npe::move(uv),
-    npe::move(fuv),
-    npe::move(gradient_size),
-    npe::move(stiffness),
-    npe::move(direct_round),
-    npe::move(iter),
-    npe::move(local_iter),
-    npe::move(do_round),
-    npe::move(singularity_round),
-    npe::move(round_vertices),
-    npe::move(hard_features));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 uv;
-    dense_f64 fuv;
-    double gradient_size;
-    double stiffness;
-    bool direct_round;
-    int iter;
-    int local_iter;
-    bool do_round;
-    bool singularity_round;
-    std::vector<int> round_vertices;
-    std::vector<std::vector<int> > hard_features;
-    igl::    copyleft::    comiso::miq(v, f, pd1_combed, pd2_combed, m_match, singular, seams, uv, fuv, gradient_size, stiffness, direct_round, iter, local_iter, do_round, singularity_round, round_vertices, hard_features);
-    return std::make_tuple(    npe::move(uv),     npe::move(fuv),     npe::move(gradient_size),     npe::move(stiffness),     npe::move(direct_round),     npe::move(iter),     npe::move(local_iter),     npe::move(do_round),     npe::move(singularity_round),     npe::move(round_vertices),     npe::move(hard_features));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> uv;
+  EigenDense<npe_Scalar_> fuv;
+  double gradient_size;
+  double stiffness;
+  bool direct_round;
+  int iter;
+  int local_iter;
+  bool do_round;
+  bool singularity_round;
+  std::vector<int> round_vertices;
+  std::vector<std::vector<int> > hard_features;
+  igl::  copyleft::  comiso::miq(v, f, pd1_combed, pd2_combed, m_match, singular, seams, uv, fuv, gradient_size, stiffness, direct_round, iter, local_iter, do_round, singularity_round, round_vertices, hard_features);
+  return std::make_tuple(npe::move(uv), npe::move(fuv), npe::move(gradient_size), npe::move(stiffness), npe::move(direct_round), npe::move(iter), npe::move(local_iter), npe::move(do_round), npe::move(singularity_round), npe::move(round_vertices), npe::move(hard_features));
 
 npe_end_code()
 

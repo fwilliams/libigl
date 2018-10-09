@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/point_mesh_squared_distance.h>
 
 const char* ds_point_mesh_squared_distance = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_point_mesh_squared_distance = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -58,33 +51,18 @@ Examples
 npe_function(point_mesh_squared_distance)
 npe_doc(ds_point_mesh_squared_distance)
 
-npe_arg(p, dense_f64)
-npe_arg(v, dense_f64)
+npe_arg(p, dense_f32, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
 npe_arg(ele, Eigen::MatrixXi &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 sqr_d;
-    dense_f32 i;
-    dense_f32 c;
-    igl::point_mesh_squared_distance(p, v, ele, sqr_d, i, c);
-    return std::make_tuple(    npe::move(sqr_d),
-    npe::move(i),
-    npe::move(c));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 sqr_d;
-    dense_f64 i;
-    dense_f64 c;
-    igl::point_mesh_squared_distance(p, v, ele, sqr_d, i, c);
-    return std::make_tuple(    npe::move(sqr_d),     npe::move(i),     npe::move(c));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> sqr_d;
+  EigenDense<npe_Scalar_> i;
+  EigenDense<npe_Scalar_> c;
+  igl::point_mesh_squared_distance(p, v, ele, sqr_d, i, c);
+  return std::make_tuple(npe::move(sqr_d), npe::move(i), npe::move(c));
 
 npe_end_code()
 

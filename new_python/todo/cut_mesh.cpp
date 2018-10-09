@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/cut_mesh.h>
@@ -11,8 +7,6 @@ const char* ds_cut_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -35,30 +29,17 @@ Wrapper of the above with only vertices and faces as mesh input
 npe_function(cut_mesh)
 npe_doc(ds_cut_mesh)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(cuts, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(cuts, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vcut;
-    dense_f32 fcut;
-    igl::cut_mesh(v, f, cuts, vcut, fcut);
-    return std::make_tuple(    npe::move(vcut),
-    npe::move(fcut));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vcut;
-    dense_f64 fcut;
-    igl::cut_mesh(v, f, cuts, vcut, fcut);
-    return std::make_tuple(    npe::move(vcut),     npe::move(fcut));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vcut;
+  EigenDense<npe_Scalar_> fcut;
+  igl::cut_mesh(v, f, cuts, vcut, fcut);
+  return std::make_tuple(npe::move(vcut), npe::move(fcut));
 
 npe_end_code()
 
@@ -67,7 +48,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/cut_mesh.h>
 
 const char* ds_cut_mesh = R"igl_Qu8mg5v7(
@@ -75,8 +55,6 @@ const char* ds_cut_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -131,35 +109,22 @@ Examples
 npe_function(cut_mesh)
 npe_doc(ds_cut_mesh)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(vf, std::vector<std::vector<VFType> > &)
 npe_arg(v_fi, std::vector<std::vector<VFType> > &)
-npe_arg(tt, dense_f64)
-npe_arg(t_ti, dense_f64)
+npe_arg(tt, dense_f32, dense_f64)
+npe_arg(t_ti, dense_f32, dense_f64)
 npe_arg(v_border, std::vector<bool> &)
-npe_arg(cuts, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(cuts, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vcut;
-    dense_f32 fcut;
-    igl::cut_mesh(v, f, vf, v_fi, tt, t_ti, v_border, cuts, vcut, fcut);
-    return std::make_tuple(    npe::move(vcut),
-    npe::move(fcut));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vcut;
-    dense_f64 fcut;
-    igl::cut_mesh(v, f, vf, v_fi, tt, t_ti, v_border, cuts, vcut, fcut);
-    return std::make_tuple(    npe::move(vcut),     npe::move(fcut));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vcut;
+  EigenDense<npe_Scalar_> fcut;
+  igl::cut_mesh(v, f, vf, v_fi, tt, t_ti, v_border, cuts, vcut, fcut);
+  return std::make_tuple(npe::move(vcut), npe::move(fcut));
 
 npe_end_code()
 

@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/CANONICAL_VIEW_QUAT.h>
@@ -10,8 +7,6 @@ const char* ds_canonical_view_quat = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -39,27 +34,14 @@ Examples
 npe_function(canonical_view_quat)
 npe_doc(ds_canonical_view_quat)
 
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int i;
-    int j;
-    igl::CANONICAL_VIEW_QUAT(i, j);
-    return std::make_tuple(    npe::move(i),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    int i;
-    int j;
-    igl::CANONICAL_VIEW_QUAT(i, j);
-    return std::make_tuple(    npe::move(i),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int i;
+  int j;
+  igl::CANONICAL_VIEW_QUAT(i, j);
+  return std::make_tuple(npe::move(i), npe::move(j));
 
 npe_end_code()
 #include <igl/CANONICAL_VIEW_QUAT.h>
@@ -69,8 +51,6 @@ const char* ds_canonical_view_quat = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -93,27 +73,14 @@ Examples
 npe_function(canonical_view_quat)
 npe_doc(ds_canonical_view_quat)
 
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int i;
-    int j;
-    igl::CANONICAL_VIEW_QUAT(i, j);
-    return std::make_tuple(    npe::move(i),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    int i;
-    int j;
-    igl::CANONICAL_VIEW_QUAT(i, j);
-    return std::make_tuple(    npe::move(i),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int i;
+  int j;
+  igl::CANONICAL_VIEW_QUAT(i, j);
+  return std::make_tuple(npe::move(i), npe::move(j));
 
 npe_end_code()
 #include <igl/CANONICAL_VIEW_QUAT.h>
@@ -125,27 +92,14 @@ See CANONICAL_VIEW_QUAT for the documentation.
 npe_function(canonical_view_quat)
 npe_doc(ds_canonical_view_quat)
 
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int i;
-    int j;
-    igl::CANONICAL_VIEW_QUAT(i, j);
-    return std::make_tuple(    npe::move(i),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    int i;
-    int j;
-    igl::CANONICAL_VIEW_QUAT(i, j);
-    return std::make_tuple(    npe::move(i),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int i;
+  int j;
+  igl::CANONICAL_VIEW_QUAT(i, j);
+  return std::make_tuple(npe::move(i), npe::move(j));
 
 npe_end_code()
 

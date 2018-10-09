@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/point_in_circle.h>
 
 const char* ds_point_in_circle = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_point_in_circle = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -56,15 +49,10 @@ npe_arg(cy, double)
 npe_arg(r, double)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::point_in_circle(qx, qy, cx, cy, r);
-
-return
+  igl::point_in_circle(qx, qy, cx, cy, r);
+  return ;
 
 npe_end_code()
 

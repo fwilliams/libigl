@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/octree.h>
 
 const char* ds_octree = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_octree = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -69,34 +62,17 @@ Examples
 npe_function(octree)
 npe_doc(ds_octree)
 
-npe_arg(p, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(p, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<std::vector<IndexType> > & point_indices;
-    dense_f32 ch;
-    dense_f32 cn;
-    dense_f32 w;
-    igl::octree(p, point_indices, ch, cn, w);
-    return std::make_tuple(    npe::move(point_indices),
-    npe::move(ch),
-    npe::move(cn),
-    npe::move(w));
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<std::vector<IndexType> > & point_indices;
-    dense_f64 ch;
-    dense_f64 cn;
-    dense_f64 w;
-    igl::octree(p, point_indices, ch, cn, w);
-    return std::make_tuple(    npe::move(point_indices),     npe::move(ch),     npe::move(cn),     npe::move(w));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<std::vector<IndexType> > & point_indices;
+  EigenDense<npe_Scalar_> ch;
+  EigenDense<npe_Scalar_> cn;
+  EigenDense<npe_Scalar_> w;
+  igl::octree(p, point_indices, ch, cn, w);
+  return std::make_tuple(npe::move(point_indices), npe::move(ch), npe::move(cn), npe::move(w));
 
 npe_end_code()
 

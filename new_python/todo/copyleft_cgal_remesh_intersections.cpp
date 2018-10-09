@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/remesh_intersections.h>
 
 const char* ds_remesh_intersections = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_remesh_intersections = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -63,40 +56,21 @@ Examples
 npe_function(remesh_intersections)
 npe_doc(ds_remesh_intersections)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(t, std::vector<CGAL::Triangle_3<Kernel> > &)
 npe_arg(offending, std::map<typename DerivedF::Index, std::vector<std::pair<typename DerivedF::Index, CGAL::Object> > > &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    bool stitch_all;
-    dense_f32 vv;
-    dense_f32 ff;
-    dense_f32 j;
-    dense_f32 im;
-    igl::    copyleft::    cgal::remesh_intersections(v, f, t, offending, stitch_all, vv, ff, j, im);
-    return std::make_tuple(    npe::move(stitch_all),
-    npe::move(vv),
-    npe::move(ff),
-    npe::move(j),
-    npe::move(im));
-} else if (dtype.type() == npe::type_f64) {
-    bool stitch_all;
-    dense_f64 vv;
-    dense_f64 ff;
-    dense_f64 j;
-    dense_f64 im;
-    igl::    copyleft::    cgal::remesh_intersections(v, f, t, offending, stitch_all, vv, ff, j, im);
-    return std::make_tuple(    npe::move(stitch_all),     npe::move(vv),     npe::move(ff),     npe::move(j),     npe::move(im));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  bool stitch_all;
+  EigenDense<npe_Scalar_> vv;
+  EigenDense<npe_Scalar_> ff;
+  EigenDense<npe_Scalar_> j;
+  EigenDense<npe_Scalar_> im;
+  igl::  copyleft::  cgal::remesh_intersections(v, f, t, offending, stitch_all, vv, ff, j, im);
+  return std::make_tuple(npe::move(stitch_all), npe::move(vv), npe::move(ff), npe::move(j), npe::move(im));
 
 npe_end_code()
 #include <igl/remesh_intersections.h>
@@ -106,8 +80,6 @@ const char* ds_remesh_intersections = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -130,37 +102,20 @@ Examples
 npe_function(remesh_intersections)
 npe_doc(ds_remesh_intersections)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(t, std::vector<CGAL::Triangle_3<Kernel> > &)
 npe_arg(offending, std::map<typename DerivedF::Index, std::vector<std::pair<typename DerivedF::Index, CGAL::Object> > > &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vv;
-    dense_f32 ff;
-    dense_f32 j;
-    dense_f32 im;
-    igl::    copyleft::    cgal::remesh_intersections(v, f, t, offending, vv, ff, j, im);
-    return std::make_tuple(    npe::move(vv),
-    npe::move(ff),
-    npe::move(j),
-    npe::move(im));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vv;
-    dense_f64 ff;
-    dense_f64 j;
-    dense_f64 im;
-    igl::    copyleft::    cgal::remesh_intersections(v, f, t, offending, vv, ff, j, im);
-    return std::make_tuple(    npe::move(vv),     npe::move(ff),     npe::move(j),     npe::move(im));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vv;
+  EigenDense<npe_Scalar_> ff;
+  EigenDense<npe_Scalar_> j;
+  EigenDense<npe_Scalar_> im;
+  igl::  copyleft::  cgal::remesh_intersections(v, f, t, offending, vv, ff, j, im);
+  return std::make_tuple(npe::move(vv), npe::move(ff), npe::move(j), npe::move(im));
 
 npe_end_code()
 

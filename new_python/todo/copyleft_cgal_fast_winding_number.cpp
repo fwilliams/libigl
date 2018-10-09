@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/fast_winding_number.h>
@@ -11,8 +7,6 @@ const char* ds_fast_winding_number = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -41,27 +35,16 @@ Examples
 npe_function(fast_winding_number)
 npe_doc(ds_fast_winding_number)
 
-npe_arg(p, dense_f64)
-npe_arg(n, dense_f64)
-npe_arg(q, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(p, dense_f32, dense_f64)
+npe_arg(n, dense_f32, dense_f64)
+npe_arg(q, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 wn;
-    igl::    copyleft::    cgal::fast_winding_number(p, n, q, wn);
-    return npe::move(wn);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 wn;
-    igl::    copyleft::    cgal::fast_winding_number(p, n, q, wn);
-    return npe::move(wn);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> wn;
+  igl::  copyleft::  cgal::fast_winding_number(p, n, q, wn);
+  return npe::move(wn);
 
 npe_end_code()
 
@@ -70,7 +53,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/fast_winding_number.h>
 
 const char* ds_fast_winding_number = R"igl_Qu8mg5v7(
@@ -78,8 +60,6 @@ const char* ds_fast_winding_number = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -120,29 +100,18 @@ Examples
 npe_function(fast_winding_number)
 npe_doc(ds_fast_winding_number)
 
-npe_arg(p, dense_f64)
-npe_arg(n, dense_f64)
-npe_arg(q, dense_f64)
+npe_arg(p, dense_f32, dense_f64)
+npe_arg(n, dense_f32, dense_f64)
+npe_arg(q, dense_f32, dense_f64)
 npe_arg(expansion_order, int)
 npe_arg(beta, BetaType)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 wn;
-    igl::    copyleft::    cgal::fast_winding_number(p, n, q, expansion_order, beta, wn);
-    return npe::move(wn);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 wn;
-    igl::    copyleft::    cgal::fast_winding_number(p, n, q, expansion_order, beta, wn);
-    return npe::move(wn);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> wn;
+  igl::  copyleft::  cgal::fast_winding_number(p, n, q, expansion_order, beta, wn);
+  return npe::move(wn);
 
 npe_end_code()
 

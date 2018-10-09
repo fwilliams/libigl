@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/tetrahedralize.h>
 
 const char* ds_tetrahedralize = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_tetrahedralize = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -63,30 +56,15 @@ npe_doc(ds_tetrahedralize)
 npe_arg(v, int &)
 npe_arg(f, int &)
 npe_arg(switches, std::string)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int & tv;
-    int & tt;
-    int & tf;
-    igl::    copyleft::    tetgen::tetrahedralize(v, f, switches, tv, tt, tf);
-    return std::make_tuple(    npe::move(tv),
-    npe::move(tt),
-    npe::move(tf));
-} else if (dtype.type() == npe::type_f64) {
-    int & tv;
-    int & tt;
-    int & tf;
-    igl::    copyleft::    tetgen::tetrahedralize(v, f, switches, tv, tt, tf);
-    return std::make_tuple(    npe::move(tv),     npe::move(tt),     npe::move(tf));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int & tv;
+  int & tt;
+  int & tf;
+  igl::  copyleft::  tetgen::tetrahedralize(v, f, switches, tv, tt, tf);
+  return std::make_tuple(npe::move(tv), npe::move(tt), npe::move(tf));
 
 npe_end_code()
 #include <igl/tetrahedralize.h>
@@ -96,8 +74,6 @@ const char* ds_tetrahedralize = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -123,33 +99,18 @@ Examples
 npe_function(tetrahedralize)
 npe_doc(ds_tetrahedralize)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(switches, std::string)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 tv;
-    dense_f32 tt;
-    dense_f32 tf;
-    igl::    copyleft::    tetgen::tetrahedralize(v, f, switches, tv, tt, tf);
-    return std::make_tuple(    npe::move(tv),
-    npe::move(tt),
-    npe::move(tf));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 tv;
-    dense_f64 tt;
-    dense_f64 tf;
-    igl::    copyleft::    tetgen::tetrahedralize(v, f, switches, tv, tt, tf);
-    return std::make_tuple(    npe::move(tv),     npe::move(tt),     npe::move(tf));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> tv;
+  EigenDense<npe_Scalar_> tt;
+  EigenDense<npe_Scalar_> tf;
+  igl::  copyleft::  tetgen::tetrahedralize(v, f, switches, tv, tt, tf);
+  return std::make_tuple(npe::move(tv), npe::move(tt), npe::move(tf));
 
 npe_end_code()
 #include <igl/tetrahedralize.h>
@@ -159,8 +120,6 @@ const char* ds_tetrahedralize = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -208,33 +167,16 @@ npe_arg(f, int &)
 npe_arg(vm, int &)
 npe_arg(fm, int &)
 npe_arg(switches, std::string)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int & tv;
-    int & tt;
-    int & tf;
-    int & tm;
-    igl::    copyleft::    tetgen::tetrahedralize(v, f, vm, fm, switches, tv, tt, tf, tm);
-    return std::make_tuple(    npe::move(tv),
-    npe::move(tt),
-    npe::move(tf),
-    npe::move(tm));
-} else if (dtype.type() == npe::type_f64) {
-    int & tv;
-    int & tt;
-    int & tf;
-    int & tm;
-    igl::    copyleft::    tetgen::tetrahedralize(v, f, vm, fm, switches, tv, tt, tf, tm);
-    return std::make_tuple(    npe::move(tv),     npe::move(tt),     npe::move(tf),     npe::move(tm));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int & tv;
+  int & tt;
+  int & tf;
+  int & tm;
+  igl::  copyleft::  tetgen::tetrahedralize(v, f, vm, fm, switches, tv, tt, tf, tm);
+  return std::make_tuple(npe::move(tv), npe::move(tt), npe::move(tf), npe::move(tm));
 
 npe_end_code()
 #include <igl/tetrahedralize.h>
@@ -244,8 +186,6 @@ const char* ds_tetrahedralize = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -271,38 +211,21 @@ Examples
 npe_function(tetrahedralize)
 npe_doc(ds_tetrahedralize)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(vm, dense_f64)
-npe_arg(fm, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(vm, dense_f32, dense_f64)
+npe_arg(fm, dense_f32, dense_f64)
 npe_arg(switches, std::string)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 tv;
-    dense_f32 tt;
-    dense_f32 tf;
-    dense_f32 tm;
-    igl::    copyleft::    tetgen::tetrahedralize(v, f, vm, fm, switches, tv, tt, tf, tm);
-    return std::make_tuple(    npe::move(tv),
-    npe::move(tt),
-    npe::move(tf),
-    npe::move(tm));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 tv;
-    dense_f64 tt;
-    dense_f64 tf;
-    dense_f64 tm;
-    igl::    copyleft::    tetgen::tetrahedralize(v, f, vm, fm, switches, tv, tt, tf, tm);
-    return std::make_tuple(    npe::move(tv),     npe::move(tt),     npe::move(tf),     npe::move(tm));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> tv;
+  EigenDense<npe_Scalar_> tt;
+  EigenDense<npe_Scalar_> tf;
+  EigenDense<npe_Scalar_> tm;
+  igl::  copyleft::  tetgen::tetrahedralize(v, f, vm, fm, switches, tv, tt, tf, tm);
+  return std::make_tuple(npe::move(tv), npe::move(tt), npe::move(tf), npe::move(tm));
 
 npe_end_code()
 

@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/per_corner_normals.h>
 
 const char* ds_per_corner_normals = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_per_corner_normals = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -49,27 +42,16 @@ Examples
 npe_function(per_corner_normals)
 npe_doc(ds_per_corner_normals)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(corner_threshold, double)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 cn;
-    igl::per_corner_normals(v, f, corner_threshold, cn);
-    return npe::move(cn);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 cn;
-    igl::per_corner_normals(v, f, corner_threshold, cn);
-    return npe::move(cn);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> cn;
+  igl::per_corner_normals(v, f, corner_threshold, cn);
+  return npe::move(cn);
 
 npe_end_code()
 #include <igl/per_corner_normals.h>
@@ -79,8 +61,6 @@ const char* ds_per_corner_normals = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -104,28 +84,17 @@ Examples
 npe_function(per_corner_normals)
 npe_doc(ds_per_corner_normals)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(fn, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(fn, dense_f32, dense_f64)
 npe_arg(corner_threshold, double)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 cn;
-    igl::per_corner_normals(v, f, fn, corner_threshold, cn);
-    return npe::move(cn);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 cn;
-    igl::per_corner_normals(v, f, fn, corner_threshold, cn);
-    return npe::move(cn);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> cn;
+  igl::per_corner_normals(v, f, fn, corner_threshold, cn);
+  return npe::move(cn);
 
 npe_end_code()
 #include <igl/per_corner_normals.h>
@@ -135,8 +104,6 @@ const char* ds_per_corner_normals = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -160,29 +127,18 @@ Examples
 npe_function(per_corner_normals)
 npe_doc(ds_per_corner_normals)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(fn, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(fn, dense_f32, dense_f64)
 npe_arg(vf, std::vector<std::vector<IndexType> > &)
 npe_arg(corner_threshold, double)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 cn;
-    igl::per_corner_normals(v, f, fn, vf, corner_threshold, cn);
-    return npe::move(cn);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 cn;
-    igl::per_corner_normals(v, f, fn, vf, corner_threshold, cn);
-    return npe::move(cn);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> cn;
+  igl::per_corner_normals(v, f, fn, vf, corner_threshold, cn);
+  return npe::move(cn);
 
 npe_end_code()
 

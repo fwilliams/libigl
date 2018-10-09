@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/hessian_energy.h>
@@ -10,8 +7,6 @@ const char* ds_hessian_energy = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -47,26 +42,15 @@ Examples
 npe_function(hessian_energy)
 npe_doc(ds_hessian_energy)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Sparse_f32 q;
-    igl::hessian_energy(v, f, q);
-    return npe::move(q);
-} else if (dtype.type() == npe::type_f64) {
-    Sparse_f64 q;
-    igl::hessian_energy(v, f, q);
-    return npe::move(q);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Sparse_f64 q;
+  igl::hessian_energy(v, f, q);
+  return npe::move(q);
 
 npe_end_code()
 

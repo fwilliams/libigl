@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/intersect_with_half_space.h>
@@ -11,8 +7,6 @@ const char* ds_intersect_with_half_space = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -46,34 +40,19 @@ Examples
 npe_function(intersect_with_half_space)
 npe_doc(ds_intersect_with_half_space)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(p, dense_f64)
-npe_arg(n, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(p, dense_f32, dense_f64)
+npe_arg(n, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vc;
-    dense_f32 fc;
-    dense_f32 j;
-    igl::    copyleft::    cgal::intersect_with_half_space(v, f, p, n, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),
-    npe::move(fc),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vc;
-    dense_f64 fc;
-    dense_f64 j;
-    igl::    copyleft::    cgal::intersect_with_half_space(v, f, p, n, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),     npe::move(fc),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vc;
+  EigenDense<npe_Scalar_> fc;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::intersect_with_half_space(v, f, p, n, vc, fc, j);
+  return std::make_tuple(npe::move(vc), npe::move(fc), npe::move(j));
 
 npe_end_code()
 #include <igl/intersect_with_half_space.h>
@@ -83,8 +62,6 @@ const char* ds_intersect_with_half_space = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -116,33 +93,18 @@ Examples
 npe_function(intersect_with_half_space)
 npe_doc(ds_intersect_with_half_space)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(equ, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(equ, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vc;
-    dense_f32 fc;
-    dense_f32 j;
-    igl::    copyleft::    cgal::intersect_with_half_space(v, f, equ, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),
-    npe::move(fc),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vc;
-    dense_f64 fc;
-    dense_f64 j;
-    igl::    copyleft::    cgal::intersect_with_half_space(v, f, equ, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),     npe::move(fc),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vc;
+  EigenDense<npe_Scalar_> fc;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::intersect_with_half_space(v, f, equ, vc, fc, j);
+  return std::make_tuple(npe::move(vc), npe::move(fc), npe::move(j));
 
 npe_end_code()
 
@@ -151,7 +113,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/intersect_with_half_space.h>
 
 const char* ds_intersect_with_half_space = R"igl_Qu8mg5v7(
@@ -159,8 +120,6 @@ const char* ds_intersect_with_half_space = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -191,33 +150,18 @@ Examples
 npe_function(intersect_with_half_space)
 npe_doc(ds_intersect_with_half_space)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(p, CGAL::Plane_3<CGAL::Epeck> &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vc;
-    dense_f32 fc;
-    dense_f32 j;
-    igl::    copyleft::    cgal::intersect_with_half_space(v, f, p, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),
-    npe::move(fc),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vc;
-    dense_f64 fc;
-    dense_f64 j;
-    igl::    copyleft::    cgal::intersect_with_half_space(v, f, p, vc, fc, j);
-    return std::make_tuple(    npe::move(vc),     npe::move(fc),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vc;
+  EigenDense<npe_Scalar_> fc;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::intersect_with_half_space(v, f, p, vc, fc, j);
+  return std::make_tuple(npe::move(vc), npe::move(fc), npe::move(j));
 
 npe_end_code()
 

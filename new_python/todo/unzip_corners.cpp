@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/unzip_corners.h>
 
 const char* ds_unzip_corners = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_unzip_corners = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -68,30 +61,15 @@ npe_function(unzip_corners)
 npe_doc(ds_unzip_corners)
 
 npe_arg(a, std::vector<std::reference_wrapper<DerivedA> > &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 u;
-    dense_f32 g;
-    dense_f32 j;
-    igl::unzip_corners(a, u, g, j);
-    return std::make_tuple(    npe::move(u),
-    npe::move(g),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 u;
-    dense_f64 g;
-    dense_f64 j;
-    igl::unzip_corners(a, u, g, j);
-    return std::make_tuple(    npe::move(u),     npe::move(g),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> u;
+  EigenDense<npe_Scalar_> g;
+  EigenDense<npe_Scalar_> j;
+  igl::unzip_corners(a, u, g, j);
+  return std::make_tuple(npe::move(u), npe::move(g), npe::move(j));
 
 npe_end_code()
 

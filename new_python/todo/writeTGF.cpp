@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/writeTGF.h>
 
 const char* ds_write_tgf = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_write_tgf = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -56,15 +49,10 @@ npe_arg(c, std::vector<std::vector<double> > &)
 npe_arg(e, std::vector<std::vector<int> > &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::writeTGF(tgf_filename, c, e);
-
-return
+  igl::writeTGF(tgf_filename, c, e);
+  return ;
 
 npe_end_code()
 #include <igl/writeTGF.h>
@@ -81,15 +69,10 @@ npe_arg(c, Eigen::MatrixXd &)
 npe_arg(e, Eigen::MatrixXi &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::writeTGF(tgf_filename, c, e);
-
-return
+  igl::writeTGF(tgf_filename, c, e);
+  return ;
 
 npe_end_code()
 

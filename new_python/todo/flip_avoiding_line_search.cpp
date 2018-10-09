@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/flip_avoiding_line_search.h>
 
 const char* ds_flip_avoiding_line_search = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_flip_avoiding_line_search = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -61,33 +54,16 @@ npe_function(flip_avoiding_line_search)
 npe_doc(ds_flip_avoiding_line_search)
 
 npe_arg(f, Eigen::MatrixXi)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & cur_v;
-    Eigen::MatrixXd & dst_v;
-    std::function<double (Eigen::MatrixXd &)> energy;
-    double cur_energy;
-    igl::flip_avoiding_line_search(f, cur_v, dst_v, energy, cur_energy);
-    return std::make_tuple(    npe::move(cur_v),
-    npe::move(dst_v),
-    npe::move(energy),
-    npe::move(cur_energy));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & cur_v;
-    Eigen::MatrixXd & dst_v;
-    std::function<double (Eigen::MatrixXd &)> energy;
-    double cur_energy;
-    igl::flip_avoiding_line_search(f, cur_v, dst_v, energy, cur_energy);
-    return std::make_tuple(    npe::move(cur_v),     npe::move(dst_v),     npe::move(energy),     npe::move(cur_energy));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & cur_v;
+  Eigen::MatrixXd & dst_v;
+  std::function<double (Eigen::MatrixXd &)> energy;
+  double cur_energy;
+  igl::flip_avoiding_line_search(f, cur_v, dst_v, energy, cur_energy);
+  return std::make_tuple(npe::move(cur_v), npe::move(dst_v), npe::move(energy), npe::move(cur_energy));
 
 npe_end_code()
 

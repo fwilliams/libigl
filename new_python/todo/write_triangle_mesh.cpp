@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/write_triangle_mesh.h>
 
 const char* ds_write_triangle_mesh = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_write_triangle_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -55,20 +48,15 @@ npe_function(write_triangle_mesh)
 npe_doc(ds_write_triangle_mesh)
 
 npe_arg(str, std::string)
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(force_ascii, bool)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::write_triangle_mesh(str, v, f, force_ascii);
-
-return
+  igl::write_triangle_mesh(str, v, f, force_ascii);
+  return ;
 
 npe_end_code()
 

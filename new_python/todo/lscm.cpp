@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/lscm.h>
 
 const char* ds_lscm = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_lscm = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -64,24 +57,13 @@ npe_arg(v, Eigen::MatrixXd &)
 npe_arg(f, Eigen::MatrixXi &)
 npe_arg(b, Eigen::VectorXi &)
 npe_arg(bc, Eigen::MatrixXd &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & v_uv;
-    igl::lscm(v, f, b, bc, v_uv);
-    return npe::move(v_uv);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & v_uv;
-    igl::lscm(v, f, b, bc, v_uv);
-    return npe::move(v_uv);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & v_uv;
+  igl::lscm(v, f, b, bc, v_uv);
+  return npe::move(v_uv);
 
 npe_end_code()
 

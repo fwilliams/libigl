@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/outer_facet.h>
 
 const char* ds_outer_facet = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_outer_facet = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -59,30 +52,17 @@ Examples
 npe_function(outer_facet)
 npe_doc(ds_outer_facet)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(i, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(i, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    IndexType & f;
-    bool & flipped;
-    igl::    copyleft::    cgal::outer_facet(v, f, i, f, flipped);
-    return std::make_tuple(    npe::move(f),
-    npe::move(flipped));
-} else if (dtype.type() == npe::type_f64) {
-    IndexType & f;
-    bool & flipped;
-    igl::    copyleft::    cgal::outer_facet(v, f, i, f, flipped);
-    return std::make_tuple(    npe::move(f),     npe::move(flipped));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  IndexType & f;
+  bool & flipped;
+  igl::  copyleft::  cgal::outer_facet(v, f, i, f, flipped);
+  return std::make_tuple(npe::move(f), npe::move(flipped));
 
 npe_end_code()
 #include <igl/outer_facet.h>
@@ -92,8 +72,6 @@ const char* ds_outer_facet = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -132,31 +110,18 @@ Examples
 npe_function(outer_facet)
 npe_doc(ds_outer_facet)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(n, dense_f64)
-npe_arg(i, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(n, dense_f32, dense_f64)
+npe_arg(i, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    IndexType & f;
-    bool & flipped;
-    igl::    copyleft::    cgal::outer_facet(v, f, n, i, f, flipped);
-    return std::make_tuple(    npe::move(f),
-    npe::move(flipped));
-} else if (dtype.type() == npe::type_f64) {
-    IndexType & f;
-    bool & flipped;
-    igl::    copyleft::    cgal::outer_facet(v, f, n, i, f, flipped);
-    return std::make_tuple(    npe::move(f),     npe::move(flipped));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  IndexType & f;
+  bool & flipped;
+  igl::  copyleft::  cgal::outer_facet(v, f, n, i, f, flipped);
+  return std::make_tuple(npe::move(f), npe::move(flipped));
 
 npe_end_code()
 

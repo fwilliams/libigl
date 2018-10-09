@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/read_into_tetgenio.h>
 
 const char* ds_read_into_tetgenio = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_read_into_tetgenio = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -68,24 +61,13 @@ npe_function(read_into_tetgenio)
 npe_doc(ds_read_into_tetgenio)
 
 npe_arg(path, std::string &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int & in;
-    igl::    copyleft::    tetgen::read_into_tetgenio(path, in);
-    return npe::move(in);
-} else if (dtype.type() == npe::type_f64) {
-    int & in;
-    igl::    copyleft::    tetgen::read_into_tetgenio(path, in);
-    return npe::move(in);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int & in;
+  igl::  copyleft::  tetgen::read_into_tetgenio(path, in);
+  return npe::move(in);
 
 npe_end_code()
 

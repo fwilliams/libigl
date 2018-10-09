@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/normal_derivative.h>
@@ -10,8 +7,6 @@ const char* ds_normal_derivative = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -46,26 +41,15 @@ Examples
 npe_function(normal_derivative)
 npe_doc(ds_normal_derivative)
 
-npe_arg(v, dense_f64)
-npe_arg(ele, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(ele, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Sparse_f32 dd;
-    igl::normal_derivative(v, ele, dd);
-    return npe::move(dd);
-} else if (dtype.type() == npe::type_f64) {
-    Sparse_f64 dd;
-    igl::normal_derivative(v, ele, dd);
-    return npe::move(dd);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Sparse_f64 dd;
+  igl::normal_derivative(v, ele, dd);
+  return npe::move(dd);
 
 npe_end_code()
 

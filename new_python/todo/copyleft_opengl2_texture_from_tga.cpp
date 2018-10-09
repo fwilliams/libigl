@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/texture_from_tga.h>
 
 const char* ds_texture_from_tga = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_texture_from_tga = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -49,24 +42,13 @@ npe_function(texture_from_tga)
 npe_doc(ds_texture_from_tga)
 
 npe_arg(tga_file, std::string)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    GLuint & id;
-    igl::    opengl::texture_from_tga(tga_file, id);
-    return npe::move(id);
-} else if (dtype.type() == npe::type_f64) {
-    GLuint & id;
-    igl::    opengl::texture_from_tga(tga_file, id);
-    return npe::move(id);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  GLuint & id;
+  igl::  opengl::texture_from_tga(tga_file, id);
+  return npe::move(id);
 
 npe_end_code()
 

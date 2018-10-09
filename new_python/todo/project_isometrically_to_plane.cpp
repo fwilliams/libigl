@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/project_isometrically_to_plane.h>
@@ -10,8 +7,6 @@ const char* ds_project_isometrically_to_plane = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -45,32 +40,17 @@ Examples
 npe_function(project_isometrically_to_plane)
 npe_doc(ds_project_isometrically_to_plane)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 u;
-    dense_f32 uf;
-    Sparse_f32 i;
-    igl::project_isometrically_to_plane(v, f, u, uf, i);
-    return std::make_tuple(    npe::move(u),
-    npe::move(uf),
-    npe::move(i));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 u;
-    dense_f64 uf;
-    Sparse_f64 i;
-    igl::project_isometrically_to_plane(v, f, u, uf, i);
-    return std::make_tuple(    npe::move(u),     npe::move(uf),     npe::move(i));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> u;
+  EigenDense<npe_Scalar_> uf;
+  Sparse_f64 i;
+  igl::project_isometrically_to_plane(v, f, u, uf, i);
+  return std::make_tuple(npe::move(u), npe::move(uf), npe::move(i));
 
 npe_end_code()
 

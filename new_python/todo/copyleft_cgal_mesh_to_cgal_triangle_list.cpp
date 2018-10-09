@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/mesh_to_cgal_triangle_list.h>
 
 const char* ds_mesh_to_cgal_triangle_list = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_mesh_to_cgal_triangle_list = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -51,26 +44,15 @@ Examples
 npe_function(mesh_to_cgal_triangle_list)
 npe_doc(ds_mesh_to_cgal_triangle_list)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<CGAL::Triangle_3<Kernel> > & t;
-    igl::    copyleft::    cgal::mesh_to_cgal_triangle_list(v, f, t);
-    return npe::move(t);
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<CGAL::Triangle_3<Kernel> > & t;
-    igl::    copyleft::    cgal::mesh_to_cgal_triangle_list(v, f, t);
-    return npe::move(t);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<CGAL::Triangle_3<Kernel> > & t;
+  igl::  copyleft::  cgal::mesh_to_cgal_triangle_list(v, f, t);
+  return npe::move(t);
 
 npe_end_code()
 

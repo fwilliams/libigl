@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/order_facets_around_edge.h>
 
 const char* ds_order_facets_around_edge = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_order_facets_around_edge = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -59,36 +52,19 @@ Examples
 npe_function(order_facets_around_edge)
 npe_doc(ds_order_facets_around_edge)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(adj_faces, std::vector<int> &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    size_t s;
-    size_t d;
-    dense_f32 order;
-    bool debug;
-    igl::    copyleft::    cgal::order_facets_around_edge(v, f, adj_faces, s, d, order, debug);
-    return std::make_tuple(    npe::move(s),
-    npe::move(d),
-    npe::move(order),
-    npe::move(debug));
-} else if (dtype.type() == npe::type_f64) {
-    size_t s;
-    size_t d;
-    dense_f64 order;
-    bool debug;
-    igl::    copyleft::    cgal::order_facets_around_edge(v, f, adj_faces, s, d, order, debug);
-    return std::make_tuple(    npe::move(s),     npe::move(d),     npe::move(order),     npe::move(debug));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  size_t s;
+  size_t d;
+  EigenDense<npe_Scalar_> order;
+  bool debug;
+  igl::  copyleft::  cgal::order_facets_around_edge(v, f, adj_faces, s, d, order, debug);
+  return std::make_tuple(npe::move(s), npe::move(d), npe::move(order), npe::move(debug));
 
 npe_end_code()
 #include <igl/order_facets_around_edge.h>
@@ -98,8 +74,6 @@ const char* ds_order_facets_around_edge = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -125,34 +99,19 @@ Examples
 npe_function(order_facets_around_edge)
 npe_doc(ds_order_facets_around_edge)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(adj_faces, std::vector<int> &)
-npe_arg(pivot_point, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(pivot_point, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    size_t s;
-    size_t d;
-    dense_f32 order;
-    igl::    copyleft::    cgal::order_facets_around_edge(v, f, adj_faces, pivot_point, s, d, order);
-    return std::make_tuple(    npe::move(s),
-    npe::move(d),
-    npe::move(order));
-} else if (dtype.type() == npe::type_f64) {
-    size_t s;
-    size_t d;
-    dense_f64 order;
-    igl::    copyleft::    cgal::order_facets_around_edge(v, f, adj_faces, pivot_point, s, d, order);
-    return std::make_tuple(    npe::move(s),     npe::move(d),     npe::move(order));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  size_t s;
+  size_t d;
+  EigenDense<npe_Scalar_> order;
+  igl::  copyleft::  cgal::order_facets_around_edge(v, f, adj_faces, pivot_point, s, d, order);
+  return std::make_tuple(npe::move(s), npe::move(d), npe::move(order));
 
 npe_end_code()
 

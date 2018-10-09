@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/uniformly_sample_two_manifold.h>
 
 const char* ds_uniformly_sample_two_manifold = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_uniformly_sample_two_manifold = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -59,24 +52,13 @@ npe_arg(w, Eigen::MatrixXd &)
 npe_arg(f, Eigen::MatrixXi &)
 npe_arg(k, int)
 npe_arg(push, double)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & ws;
-    igl::uniformly_sample_two_manifold(w, f, k, push, ws);
-    return npe::move(ws);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & ws;
-    igl::uniformly_sample_two_manifold(w, f, k, push, ws);
-    return npe::move(ws);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & ws;
+  igl::uniformly_sample_two_manifold(w, f, k, push, ws);
+  return npe::move(ws);
 
 npe_end_code()
 #include <igl/uniformly_sample_two_manifold_at_vertices.h>
@@ -86,8 +68,6 @@ const char* ds_uniformly_sample_two_manifold_at_vertices = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -113,24 +93,13 @@ npe_doc(ds_uniformly_sample_two_manifold_at_vertices)
 npe_arg(ow, Eigen::MatrixXd &)
 npe_arg(k, int)
 npe_arg(push, double)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::VectorXi & s;
-    igl::uniformly_sample_two_manifold_at_vertices(ow, k, push, s);
-    return npe::move(s);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::VectorXi & s;
-    igl::uniformly_sample_two_manifold_at_vertices(ow, k, push, s);
-    return npe::move(s);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::VectorXi & s;
+  igl::uniformly_sample_two_manifold_at_vertices(ow, k, push, s);
+  return npe::move(s);
 
 npe_end_code()
 

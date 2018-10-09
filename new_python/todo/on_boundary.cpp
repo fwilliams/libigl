@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/on_boundary.h>
@@ -11,8 +7,6 @@ const char* ds_on_boundary = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -38,28 +32,15 @@ Examples
 npe_function(on_boundary)
 npe_doc(ds_on_boundary)
 
-npe_arg(t, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(t, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 i;
-    dense_f32 c;
-    igl::on_boundary(t, i, c);
-    return std::make_tuple(    npe::move(i),
-    npe::move(c));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 i;
-    dense_f64 c;
-    igl::on_boundary(t, i, c);
-    return std::make_tuple(    npe::move(i),     npe::move(c));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> i;
+  EigenDense<npe_Scalar_> c;
+  igl::on_boundary(t, i, c);
+  return std::make_tuple(npe::move(i), npe::move(c));
 
 npe_end_code()
 
@@ -68,7 +49,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/on_boundary.h>
 
 const char* ds_on_boundary = R"igl_Qu8mg5v7(
@@ -76,8 +56,6 @@ const char* ds_on_boundary = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -112,27 +90,14 @@ npe_function(on_boundary)
 npe_doc(ds_on_boundary)
 
 npe_arg(t, std::vector<std::vector<IntegerT> > &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<bool> & i;
-    std::vector<std::vector<bool> > & c;
-    igl::on_boundary(t, i, c);
-    return std::make_tuple(    npe::move(i),
-    npe::move(c));
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<bool> & i;
-    std::vector<std::vector<bool> > & c;
-    igl::on_boundary(t, i, c);
-    return std::make_tuple(    npe::move(i),     npe::move(c));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<bool> & i;
+  std::vector<std::vector<bool> > & c;
+  igl::on_boundary(t, i, c);
+  return std::make_tuple(npe::move(i), npe::move(c));
 
 npe_end_code()
 

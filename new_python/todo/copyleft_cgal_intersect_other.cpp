@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/intersect_other.h>
 
 const char* ds_intersect_other = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_intersect_other = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -60,41 +53,22 @@ Examples
 npe_function(intersect_other)
 npe_doc(ds_intersect_other)
 
-npe_arg(va, dense_f64)
-npe_arg(fa, dense_f64)
-npe_arg(vb, dense_f64)
-npe_arg(fb, dense_f64)
+npe_arg(va, dense_f32, dense_f64)
+npe_arg(fa, dense_f32, dense_f64)
+npe_arg(vb, dense_f32, dense_f64)
+npe_arg(fb, dense_f32, dense_f64)
 npe_arg(params, igl::copyleft::cgal::RemeshSelfIntersectionsParam &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 if;
-    dense_f32 vvab;
-    dense_f32 ffab;
-    dense_f32 jab;
-    dense_f32 imab;
-    igl::    copyleft::    cgal::intersect_other(va, fa, vb, fb, params, if, vvab, ffab, jab, imab);
-    return std::make_tuple(    npe::move(if),
-    npe::move(vvab),
-    npe::move(ffab),
-    npe::move(jab),
-    npe::move(imab));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 if;
-    dense_f64 vvab;
-    dense_f64 ffab;
-    dense_f64 jab;
-    dense_f64 imab;
-    igl::    copyleft::    cgal::intersect_other(va, fa, vb, fb, params, if, vvab, ffab, jab, imab);
-    return std::make_tuple(    npe::move(if),     npe::move(vvab),     npe::move(ffab),     npe::move(jab),     npe::move(imab));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> if;
+  EigenDense<npe_Scalar_> vvab;
+  EigenDense<npe_Scalar_> ffab;
+  EigenDense<npe_Scalar_> jab;
+  EigenDense<npe_Scalar_> imab;
+  igl::  copyleft::  cgal::intersect_other(va, fa, vb, fb, params, if, vvab, ffab, jab, imab);
+  return std::make_tuple(npe::move(if), npe::move(vvab), npe::move(ffab), npe::move(jab), npe::move(imab));
 
 npe_end_code()
 #include <igl/intersect_other.h>
@@ -104,8 +78,6 @@ const char* ds_intersect_other = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -146,24 +118,13 @@ npe_arg(fa, Eigen::MatrixXi &)
 npe_arg(vb, Eigen::MatrixXd &)
 npe_arg(fb, Eigen::MatrixXi &)
 npe_arg(first_only, bool)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXi & if;
-    igl::    copyleft::    cgal::intersect_other(va, fa, vb, fb, first_only, if);
-    return npe::move(if);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXi & if;
-    igl::    copyleft::    cgal::intersect_other(va, fa, vb, fb, first_only, if);
-    return npe::move(if);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXi & if;
+  igl::  copyleft::  cgal::intersect_other(va, fa, vb, fb, first_only, if);
+  return npe::move(if);
 
 npe_end_code()
 

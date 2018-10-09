@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/polygon_mesh_to_triangle_mesh.h>
@@ -10,8 +7,6 @@ const char* ds_polygon_mesh_to_triangle_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -49,24 +44,13 @@ npe_function(polygon_mesh_to_triangle_mesh)
 npe_doc(ds_polygon_mesh_to_triangle_mesh)
 
 npe_arg(v_f, std::vector<std::vector<int> > &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_i32 f;
-    igl::polygon_mesh_to_triangle_mesh(v_f, f);
-    return npe::move(f);
-} else if (dtype.type() == npe::type_f64) {
-    dense_i32 f;
-    igl::polygon_mesh_to_triangle_mesh(v_f, f);
-    return npe::move(f);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> f;
+  igl::polygon_mesh_to_triangle_mesh(v_f, f);
+  return npe::move(f);
 
 npe_end_code()
 #include <igl/polygon_mesh_to_triangle_mesh.h>
@@ -78,25 +62,14 @@ See polygon_mesh_to_triangle_mesh for the documentation.
 npe_function(polygon_mesh_to_triangle_mesh)
 npe_doc(ds_polygon_mesh_to_triangle_mesh)
 
-npe_arg(p, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(p, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_i32 f;
-    igl::polygon_mesh_to_triangle_mesh(p, f);
-    return npe::move(f);
-} else if (dtype.type() == npe::type_f64) {
-    dense_i32 f;
-    igl::polygon_mesh_to_triangle_mesh(p, f);
-    return npe::move(f);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> f;
+  igl::polygon_mesh_to_triangle_mesh(p, f);
+  return npe::move(f);
 
 npe_end_code()
 

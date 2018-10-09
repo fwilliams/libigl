@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/marching_cubes.h>
@@ -10,8 +7,6 @@ const char* ds_marching_cubes = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -57,32 +52,19 @@ Examples
 npe_function(marching_cubes)
 npe_doc(ds_marching_cubes)
 
-npe_arg(values, dense_f64)
-npe_arg(points, dense_f64)
+npe_arg(values, dense_f32, dense_f64)
+npe_arg(points, dense_f32, dense_f64)
 npe_arg(x_res, unsigned int)
 npe_arg(y_res, unsigned int)
 npe_arg(z_res, unsigned int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 vertices;
-    dense_f32 faces;
-    igl::    copyleft::marching_cubes(values, points, x_res, y_res, z_res, vertices, faces);
-    return std::make_tuple(    npe::move(vertices),
-    npe::move(faces));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 vertices;
-    dense_f64 faces;
-    igl::    copyleft::marching_cubes(values, points, x_res, y_res, z_res, vertices, faces);
-    return std::make_tuple(    npe::move(vertices),     npe::move(faces));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> vertices;
+  EigenDense<npe_Scalar_> faces;
+  igl::  copyleft::marching_cubes(values, points, x_res, y_res, z_res, vertices, faces);
+  return std::make_tuple(npe::move(vertices), npe::move(faces));
 
 npe_end_code()
 

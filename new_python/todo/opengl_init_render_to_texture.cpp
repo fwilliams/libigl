@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/init_render_to_texture.h>
 
 const char* ds_init_render_to_texture = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_init_render_to_texture = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -85,30 +78,15 @@ npe_doc(ds_init_render_to_texture)
 npe_arg(width, size_t)
 npe_arg(height, size_t)
 npe_arg(depth_texture, bool)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int & tex_id;
-    int & fbo_id;
-    int & d_id;
-    igl::    opengl::init_render_to_texture(width, height, depth_texture, tex_id, fbo_id, d_id);
-    return std::make_tuple(    npe::move(tex_id),
-    npe::move(fbo_id),
-    npe::move(d_id));
-} else if (dtype.type() == npe::type_f64) {
-    int & tex_id;
-    int & fbo_id;
-    int & d_id;
-    igl::    opengl::init_render_to_texture(width, height, depth_texture, tex_id, fbo_id, d_id);
-    return std::make_tuple(    npe::move(tex_id),     npe::move(fbo_id),     npe::move(d_id));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int & tex_id;
+  int & fbo_id;
+  int & d_id;
+  igl::  opengl::init_render_to_texture(width, height, depth_texture, tex_id, fbo_id, d_id);
+  return std::make_tuple(npe::move(tex_id), npe::move(fbo_id), npe::move(d_id));
 
 npe_end_code()
 #include <igl/init_render_to_texture.h>
@@ -118,8 +96,6 @@ const char* ds_init_render_to_texture = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -144,30 +120,15 @@ npe_doc(ds_init_render_to_texture)
 
 npe_arg(width, size_t)
 npe_arg(height, size_t)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int & tex_id;
-    int & fbo_id;
-    int & dfbo_id;
-    igl::    opengl::init_render_to_texture(width, height, tex_id, fbo_id, dfbo_id);
-    return std::make_tuple(    npe::move(tex_id),
-    npe::move(fbo_id),
-    npe::move(dfbo_id));
-} else if (dtype.type() == npe::type_f64) {
-    int & tex_id;
-    int & fbo_id;
-    int & dfbo_id;
-    igl::    opengl::init_render_to_texture(width, height, tex_id, fbo_id, dfbo_id);
-    return std::make_tuple(    npe::move(tex_id),     npe::move(fbo_id),     npe::move(dfbo_id));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int & tex_id;
+  int & fbo_id;
+  int & dfbo_id;
+  igl::  opengl::init_render_to_texture(width, height, tex_id, fbo_id, dfbo_id);
+  return std::make_tuple(npe::move(tex_id), npe::move(fbo_id), npe::move(dfbo_id));
 
 npe_end_code()
 

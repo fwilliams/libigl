@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/slice_tets.h>
@@ -13,33 +9,18 @@ See slice_tets for the documentation.
 npe_function(slice_tets)
 npe_doc(ds_slice_tets)
 
-npe_arg(v, dense_f64)
-npe_arg(t, dense_f64)
-npe_arg(s, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(t, dense_f32, dense_f64)
+npe_arg(s, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 sv;
-    dense_f32 sf;
-    dense_f32 j;
-    igl::slice_tets(v, t, s, sv, sf, j);
-    return std::make_tuple(    npe::move(sv),
-    npe::move(sf),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 sv;
-    dense_f64 sf;
-    dense_f64 j;
-    igl::slice_tets(v, t, s, sv, sf, j);
-    return std::make_tuple(    npe::move(sv),     npe::move(sf),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> sv;
+  EigenDense<npe_Scalar_> sf;
+  EigenDense<npe_Scalar_> j;
+  igl::slice_tets(v, t, s, sv, sf, j);
+  return std::make_tuple(npe::move(sv), npe::move(sf), npe::move(j));
 
 npe_end_code()
 #include <igl/slice_tets.h>
@@ -49,8 +30,6 @@ const char* ds_slice_tets = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -76,39 +55,20 @@ Examples
 npe_function(slice_tets)
 npe_doc(ds_slice_tets)
 
-npe_arg(v, dense_f64)
-npe_arg(t, dense_f64)
-npe_arg(s, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(t, dense_f32, dense_f64)
+npe_arg(s, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 sv;
-    dense_f32 sf;
-    dense_f32 j;
-    dense_f32 s_e;
-    dense_f32 lambda;
-    igl::slice_tets(v, t, s, sv, sf, j, s_e, lambda);
-    return std::make_tuple(    npe::move(sv),
-    npe::move(sf),
-    npe::move(j),
-    npe::move(s_e),
-    npe::move(lambda));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 sv;
-    dense_f64 sf;
-    dense_f64 j;
-    dense_f64 s_e;
-    dense_f64 lambda;
-    igl::slice_tets(v, t, s, sv, sf, j, s_e, lambda);
-    return std::make_tuple(    npe::move(sv),     npe::move(sf),     npe::move(j),     npe::move(s_e),     npe::move(lambda));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> sv;
+  EigenDense<npe_Scalar_> sf;
+  EigenDense<npe_Scalar_> j;
+  EigenDense<npe_Scalar_> s_e;
+  EigenDense<npe_Scalar_> lambda;
+  igl::slice_tets(v, t, s, sv, sf, j, s_e, lambda);
+  return std::make_tuple(npe::move(sv), npe::move(sf), npe::move(j), npe::move(s_e), npe::move(lambda));
 
 npe_end_code()
 
@@ -117,7 +77,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/slice_tets.h>
 
 const char* ds_slice_tets = R"igl_Qu8mg5v7(
@@ -125,8 +84,6 @@ const char* ds_slice_tets = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -163,36 +120,19 @@ Examples
 npe_function(slice_tets)
 npe_doc(ds_slice_tets)
 
-npe_arg(v, dense_f64)
-npe_arg(t, dense_f64)
-npe_arg(s, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(t, dense_f32, dense_f64)
+npe_arg(s, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 sv;
-    dense_f32 sf;
-    dense_f32 j;
-    Eigen::SparseMatrix<BCType> & bc;
-    igl::slice_tets(v, t, s, sv, sf, j, bc);
-    return std::make_tuple(    npe::move(sv),
-    npe::move(sf),
-    npe::move(j),
-    npe::move(bc));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 sv;
-    dense_f64 sf;
-    dense_f64 j;
-    Eigen::SparseMatrix<BCType> & bc;
-    igl::slice_tets(v, t, s, sv, sf, j, bc);
-    return std::make_tuple(    npe::move(sv),     npe::move(sf),     npe::move(j),     npe::move(bc));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> sv;
+  EigenDense<npe_Scalar_> sf;
+  EigenDense<npe_Scalar_> j;
+  Eigen::SparseMatrix<BCType> & bc;
+  igl::slice_tets(v, t, s, sv, sf, j, bc);
+  return std::make_tuple(npe::move(sv), npe::move(sf), npe::move(j), npe::move(bc));
 
 npe_end_code()
 

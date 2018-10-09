@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/facet_components.h>
@@ -11,8 +7,6 @@ const char* ds_facet_components = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -40,25 +34,14 @@ Examples
 npe_function(facet_components)
 npe_doc(ds_facet_components)
 
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 c;
-    igl::facet_components(f, c);
-    return npe::move(c);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 c;
-    igl::facet_components(f, c);
-    return npe::move(c);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> c;
+  igl::facet_components(f, c);
+  return npe::move(c);
 
 npe_end_code()
 
@@ -67,7 +50,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/facet_components.h>
 
 const char* ds_facet_components = R"igl_Qu8mg5v7(
@@ -75,8 +57,6 @@ const char* ds_facet_components = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -105,27 +85,14 @@ npe_function(facet_components)
 npe_doc(ds_facet_components)
 
 npe_arg(tt, std::vector<std::vector<std::vector<TTIndex> > > &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 c;
-    dense_f32 counts;
-    igl::facet_components(tt, c, counts);
-    return std::make_tuple(    npe::move(c),
-    npe::move(counts));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 c;
-    dense_f64 counts;
-    igl::facet_components(tt, c, counts);
-    return std::make_tuple(    npe::move(c),     npe::move(counts));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> c;
+  EigenDense<npe_Scalar_> counts;
+  igl::facet_components(tt, c, counts);
+  return std::make_tuple(npe::move(c), npe::move(counts));
 
 npe_end_code()
 

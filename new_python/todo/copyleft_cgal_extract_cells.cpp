@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/extract_cells.h>
@@ -11,8 +7,6 @@ const char* ds_extract_cells = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -46,26 +40,15 @@ Examples
 npe_function(extract_cells)
 npe_doc(ds_extract_cells)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 cells;
-    igl::    copyleft::    cgal::extract_cells(v, f, cells);
-    return npe::move(cells);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 cells;
-    igl::    copyleft::    cgal::extract_cells(v, f, cells);
-    return npe::move(cells);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> cells;
+  igl::  copyleft::  cgal::extract_cells(v, f, cells);
+  return npe::move(cells);
 
 npe_end_code()
 
@@ -74,7 +57,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/extract_cells.h>
 
 const char* ds_extract_cells = R"igl_Qu8mg5v7(
@@ -82,8 +64,6 @@ const char* ds_extract_cells = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -121,31 +101,20 @@ Examples
 npe_function(extract_cells)
 npe_doc(ds_extract_cells)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(p, dense_f64)
-npe_arg(e, dense_f64)
-npe_arg(u_e, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(p, dense_f32, dense_f64)
+npe_arg(e, dense_f32, dense_f64)
+npe_arg(u_e, dense_f32, dense_f64)
 npe_arg(u_e2_e, std::vector<std::vector<uE2EType> > &)
-npe_arg(emap, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(emap, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 cells;
-    igl::    copyleft::    cgal::extract_cells(v, f, p, e, u_e, u_e2_e, emap, cells);
-    return npe::move(cells);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 cells;
-    igl::    copyleft::    cgal::extract_cells(v, f, p, e, u_e, u_e2_e, emap, cells);
-    return npe::move(cells);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> cells;
+  igl::  copyleft::  cgal::extract_cells(v, f, p, e, u_e, u_e2_e, emap, cells);
+  return npe::move(cells);
 
 npe_end_code()
 #include <igl/extract_cells_single_component.h>
@@ -155,8 +124,6 @@ const char* ds_extract_cells_single_component = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -194,30 +161,19 @@ Examples
 npe_function(extract_cells_single_component)
 npe_doc(ds_extract_cells_single_component)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(p, dense_f64)
-npe_arg(u_e, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(p, dense_f32, dense_f64)
+npe_arg(u_e, dense_f32, dense_f64)
 npe_arg(u_e2_e, std::vector<std::vector<uE2EType> > &)
-npe_arg(emap, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(emap, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 cells;
-    igl::    copyleft::    cgal::extract_cells_single_component(v, f, p, u_e, u_e2_e, emap, cells);
-    return npe::move(cells);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 cells;
-    igl::    copyleft::    cgal::extract_cells_single_component(v, f, p, u_e, u_e2_e, emap, cells);
-    return npe::move(cells);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> cells;
+  igl::  copyleft::  cgal::extract_cells_single_component(v, f, p, u_e, u_e2_e, emap, cells);
+  return npe::move(cells);
 
 npe_end_code()
 

@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/is_boundary_edge.h>
@@ -10,8 +7,6 @@ const char* ds_is_boundary_edge = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -43,26 +38,15 @@ Examples
 npe_function(is_boundary_edge)
 npe_doc(ds_is_boundary_edge)
 
-npe_arg(e, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(e, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 b;
-    igl::is_boundary_edge(e, f, b);
-    return npe::move(b);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 b;
-    igl::is_boundary_edge(e, f, b);
-    return npe::move(b);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> b;
+  igl::is_boundary_edge(e, f, b);
+  return npe::move(b);
 
 npe_end_code()
 #include <igl/is_boundary_edge.h>
@@ -72,8 +56,6 @@ const char* ds_is_boundary_edge = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -98,31 +80,16 @@ Examples
 npe_function(is_boundary_edge)
 npe_doc(ds_is_boundary_edge)
 
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 b;
-    dense_f32 e;
-    dense_f32 emap;
-    igl::is_boundary_edge(f, b, e, emap);
-    return std::make_tuple(    npe::move(b),
-    npe::move(e),
-    npe::move(emap));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 b;
-    dense_f64 e;
-    dense_f64 emap;
-    igl::is_boundary_edge(f, b, e, emap);
-    return std::make_tuple(    npe::move(b),     npe::move(e),     npe::move(emap));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> b;
+  EigenDense<npe_Scalar_> e;
+  EigenDense<npe_Scalar_> emap;
+  igl::is_boundary_edge(f, b, e, emap);
+  return std::make_tuple(npe::move(b), npe::move(e), npe::move(emap));
 
 npe_end_code()
 

@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/background_window.h>
 
 const char* ds_background_window = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_background_window = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -52,24 +45,13 @@ Examples
 npe_function(background_window)
 npe_doc(ds_background_window)
 
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    int *& window;
-    igl::    opengl::    glfw::background_window(window);
-    return npe::move(window);
-} else if (dtype.type() == npe::type_f64) {
-    int *& window;
-    igl::    opengl::    glfw::background_window(window);
-    return npe::move(window);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  int *& window;
+  igl::  opengl::  glfw::background_window(window);
+  return npe::move(window);
 
 npe_end_code()
 

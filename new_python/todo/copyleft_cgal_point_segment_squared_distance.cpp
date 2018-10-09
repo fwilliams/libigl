@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/point_segment_squared_distance.h>
 
 const char* ds_point_segment_squared_distance = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_point_segment_squared_distance = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -52,27 +45,14 @@ npe_doc(ds_point_segment_squared_distance)
 
 npe_arg(p1, CGAL::Point_3<Kernel> &)
 npe_arg(s2, CGAL::Segment_3<Kernel> &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    CGAL::Point_3<Kernel> & p2;
-    typename Kernel::FT & d;
-    igl::    copyleft::    cgal::point_segment_squared_distance(p1, s2, p2, d);
-    return std::make_tuple(    npe::move(p2),
-    npe::move(d));
-} else if (dtype.type() == npe::type_f64) {
-    CGAL::Point_3<Kernel> & p2;
-    typename Kernel::FT & d;
-    igl::    copyleft::    cgal::point_segment_squared_distance(p1, s2, p2, d);
-    return std::make_tuple(    npe::move(p2),     npe::move(d));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  CGAL::Point_3<Kernel> & p2;
+  typename Kernel::FT & d;
+  igl::  copyleft::  cgal::point_segment_squared_distance(p1, s2, p2, d);
+  return std::make_tuple(npe::move(p2), npe::move(d));
 
 npe_end_code()
 

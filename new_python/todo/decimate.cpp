@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/decimate.h>
 
 const char* ds_decimate = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_decimate = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -58,33 +51,16 @@ npe_doc(ds_decimate)
 npe_arg(v, Eigen::MatrixXd &)
 npe_arg(f, Eigen::MatrixXi &)
 npe_arg(max_m, size_t)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & u;
-    Eigen::MatrixXi & g;
-    Eigen::VectorXi & j;
-    Eigen::VectorXi & i;
-    igl::decimate(v, f, max_m, u, g, j, i);
-    return std::make_tuple(    npe::move(u),
-    npe::move(g),
-    npe::move(j),
-    npe::move(i));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & u;
-    Eigen::MatrixXi & g;
-    Eigen::VectorXi & j;
-    Eigen::VectorXi & i;
-    igl::decimate(v, f, max_m, u, g, j, i);
-    return std::make_tuple(    npe::move(u),     npe::move(g),     npe::move(j),     npe::move(i));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & u;
+  Eigen::MatrixXi & g;
+  Eigen::VectorXi & j;
+  Eigen::VectorXi & i;
+  igl::decimate(v, f, max_m, u, g, j, i);
+  return std::make_tuple(npe::move(u), npe::move(g), npe::move(j), npe::move(i));
 
 npe_end_code()
 #include <igl/decimate.h>
@@ -94,8 +70,6 @@ const char* ds_decimate = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -129,30 +103,15 @@ npe_doc(ds_decimate)
 npe_arg(v, Eigen::MatrixXd &)
 npe_arg(f, Eigen::MatrixXi &)
 npe_arg(max_m, size_t)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & u;
-    Eigen::MatrixXi & g;
-    Eigen::VectorXi & j;
-    igl::decimate(v, f, max_m, u, g, j);
-    return std::make_tuple(    npe::move(u),
-    npe::move(g),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & u;
-    Eigen::MatrixXi & g;
-    Eigen::VectorXi & j;
-    igl::decimate(v, f, max_m, u, g, j);
-    return std::make_tuple(    npe::move(u),     npe::move(g),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & u;
+  Eigen::MatrixXi & g;
+  Eigen::VectorXi & j;
+  igl::decimate(v, f, max_m, u, g, j);
+  return std::make_tuple(npe::move(u), npe::move(g), npe::move(j));
 
 npe_end_code()
 #include <igl/decimate.h>
@@ -162,8 +121,6 @@ const char* ds_decimate = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -203,33 +160,16 @@ npe_arg(v, Eigen::MatrixXd &)
 npe_arg(f, Eigen::MatrixXi &)
 npe_arg(cost_and_placement, std::function<void (const int, const Eigen::MatrixXd &, const Eigen::MatrixXi &, const Eigen::MatrixXi &, const Eigen::VectorXi &, const Eigen::MatrixXi &, const Eigen::MatrixXi &, double &, Eigen::RowVectorXd &)> &)
 npe_arg(stopping_condition, std::function<bool (const Eigen::MatrixXd &, const Eigen::MatrixXi &, const Eigen::MatrixXi &, const Eigen::VectorXi &, const Eigen::MatrixXi &, const Eigen::MatrixXi &, const std::set<std::pair<double, int> > &, const std::vector<std::set<std::pair<double, int> >::iterator> &, const Eigen::MatrixXd &, const int, const int, const int, const int, const int)> &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & u;
-    Eigen::MatrixXi & g;
-    Eigen::VectorXi & j;
-    Eigen::VectorXi & i;
-    igl::decimate(v, f, cost_and_placement, stopping_condition, u, g, j, i);
-    return std::make_tuple(    npe::move(u),
-    npe::move(g),
-    npe::move(j),
-    npe::move(i));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & u;
-    Eigen::MatrixXi & g;
-    Eigen::VectorXi & j;
-    Eigen::VectorXi & i;
-    igl::decimate(v, f, cost_and_placement, stopping_condition, u, g, j, i);
-    return std::make_tuple(    npe::move(u),     npe::move(g),     npe::move(j),     npe::move(i));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & u;
+  Eigen::MatrixXi & g;
+  Eigen::VectorXi & j;
+  Eigen::VectorXi & i;
+  igl::decimate(v, f, cost_and_placement, stopping_condition, u, g, j, i);
+  return std::make_tuple(npe::move(u), npe::move(g), npe::move(j), npe::move(i));
 
 npe_end_code()
 #include <igl/decimate.h>
@@ -239,8 +179,6 @@ const char* ds_decimate = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -274,33 +212,16 @@ npe_arg(cost_and_placement, std::function<void (const int, const Eigen::MatrixXd
 npe_arg(stopping_condition, std::function<bool (const Eigen::MatrixXd &, const Eigen::MatrixXi &, const Eigen::MatrixXi &, const Eigen::VectorXi &, const Eigen::MatrixXi &, const Eigen::MatrixXi &, const std::set<std::pair<double, int> > &, const std::vector<std::set<std::pair<double, int> >::iterator> &, const Eigen::MatrixXd &, const int, const int, const int, const int, const int)> &)
 npe_arg(pre_collapse, std::function<bool (const Eigen::MatrixXd &, const Eigen::MatrixXi &, const Eigen::MatrixXi &, const Eigen::VectorXi &, const Eigen::MatrixXi &, const Eigen::MatrixXi &, const std::set<std::pair<double, int> > &, const std::vector<std::set<std::pair<double, int> >::iterator> &, const Eigen::MatrixXd &, const int)> &)
 npe_arg(post_collapse, std::function<void (const Eigen::MatrixXd &, const Eigen::MatrixXi &, const Eigen::MatrixXi &, const Eigen::VectorXi &, const Eigen::MatrixXi &, const Eigen::MatrixXi &, const std::set<std::pair<double, int> > &, const std::vector<std::set<std::pair<double, int> >::iterator> &, const Eigen::MatrixXd &, const int, const int, const int, const int, const int, const bool)> &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & u;
-    Eigen::MatrixXi & g;
-    Eigen::VectorXi & j;
-    Eigen::VectorXi & i;
-    igl::decimate(v, f, cost_and_placement, stopping_condition, pre_collapse, post_collapse, u, g, j, i);
-    return std::make_tuple(    npe::move(u),
-    npe::move(g),
-    npe::move(j),
-    npe::move(i));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & u;
-    Eigen::MatrixXi & g;
-    Eigen::VectorXi & j;
-    Eigen::VectorXi & i;
-    igl::decimate(v, f, cost_and_placement, stopping_condition, pre_collapse, post_collapse, u, g, j, i);
-    return std::make_tuple(    npe::move(u),     npe::move(g),     npe::move(j),     npe::move(i));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & u;
+  Eigen::MatrixXi & g;
+  Eigen::VectorXi & j;
+  Eigen::VectorXi & i;
+  igl::decimate(v, f, cost_and_placement, stopping_condition, pre_collapse, post_collapse, u, g, j, i);
+  return std::make_tuple(npe::move(u), npe::move(g), npe::move(j), npe::move(i));
 
 npe_end_code()
 #include <igl/decimate.h>
@@ -310,8 +231,6 @@ const char* ds_decimate = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -350,33 +269,16 @@ npe_arg(e, Eigen::MatrixXi &)
 npe_arg(emap, Eigen::VectorXi &)
 npe_arg(ef, Eigen::MatrixXi &)
 npe_arg(ei, Eigen::MatrixXi &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::MatrixXd & u;
-    Eigen::MatrixXi & g;
-    Eigen::VectorXi & j;
-    Eigen::VectorXi & i;
-    igl::decimate(v, f, cost_and_placement, stopping_condition, pre_collapse, post_collapse, e, emap, ef, ei, u, g, j, i);
-    return std::make_tuple(    npe::move(u),
-    npe::move(g),
-    npe::move(j),
-    npe::move(i));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::MatrixXd & u;
-    Eigen::MatrixXi & g;
-    Eigen::VectorXi & j;
-    Eigen::VectorXi & i;
-    igl::decimate(v, f, cost_and_placement, stopping_condition, pre_collapse, post_collapse, e, emap, ef, ei, u, g, j, i);
-    return std::make_tuple(    npe::move(u),     npe::move(g),     npe::move(j),     npe::move(i));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::MatrixXd & u;
+  Eigen::MatrixXi & g;
+  Eigen::VectorXi & j;
+  Eigen::VectorXi & i;
+  igl::decimate(v, f, cost_and_placement, stopping_condition, pre_collapse, post_collapse, e, emap, ef, ei, u, g, j, i);
+  return std::make_tuple(npe::move(u), npe::move(g), npe::move(j), npe::move(i));
 
 npe_end_code()
 

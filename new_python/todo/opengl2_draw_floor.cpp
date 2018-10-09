@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/draw_floor.h>
 
 const char* ds_draw_floor = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_draw_floor = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -72,15 +65,10 @@ npe_arg(grid_size_x, int)
 npe_arg(grid_size_y, int)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_floor(color_a, color_b, grid_size_x, grid_size_y);
-
-return
+  igl::  opengl2::draw_floor(color_a, color_b, grid_size_x, grid_size_y);
+  return ;
 
 npe_end_code()
 #include <igl/draw_floor_outline.h>
@@ -98,15 +86,10 @@ npe_arg(grid_size_x, int)
 npe_arg(grid_size_y, int)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_floor_outline(color_a, color_b, grid_size_x, grid_size_y);
-
-return
+  igl::  opengl2::draw_floor_outline(color_a, color_b, grid_size_x, grid_size_y);
+  return ;
 
 npe_end_code()
 

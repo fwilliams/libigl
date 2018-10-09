@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/crouzeix_raviart_cotmatrix.h>
 
 const char* ds_crouzeix_raviart_cotmatrix = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_crouzeix_raviart_cotmatrix = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -56,32 +49,17 @@ Examples
 npe_function(crouzeix_raviart_cotmatrix)
 npe_doc(ds_crouzeix_raviart_cotmatrix)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::SparseMatrix<LT> & l;
-    dense_f32 e;
-    dense_f32 emap;
-    igl::crouzeix_raviart_cotmatrix(v, f, l, e, emap);
-    return std::make_tuple(    npe::move(l),
-    npe::move(e),
-    npe::move(emap));
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::SparseMatrix<LT> & l;
-    dense_f64 e;
-    dense_f64 emap;
-    igl::crouzeix_raviart_cotmatrix(v, f, l, e, emap);
-    return std::make_tuple(    npe::move(l),     npe::move(e),     npe::move(emap));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::SparseMatrix<LT> & l;
+  EigenDense<npe_Scalar_> e;
+  EigenDense<npe_Scalar_> emap;
+  igl::crouzeix_raviart_cotmatrix(v, f, l, e, emap);
+  return std::make_tuple(npe::move(l), npe::move(e), npe::move(emap));
 
 npe_end_code()
 #include <igl/crouzeix_raviart_cotmatrix.h>
@@ -91,8 +69,6 @@ const char* ds_crouzeix_raviart_cotmatrix = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -115,28 +91,17 @@ Examples
 npe_function(crouzeix_raviart_cotmatrix)
 npe_doc(ds_crouzeix_raviart_cotmatrix)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(e, dense_f64)
-npe_arg(emap, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(e, dense_f32, dense_f64)
+npe_arg(emap, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::SparseMatrix<LT> & l;
-    igl::crouzeix_raviart_cotmatrix(v, f, e, emap, l);
-    return npe::move(l);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::SparseMatrix<LT> & l;
-    igl::crouzeix_raviart_cotmatrix(v, f, e, emap, l);
-    return npe::move(l);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::SparseMatrix<LT> & l;
+  igl::crouzeix_raviart_cotmatrix(v, f, e, emap, l);
+  return npe::move(l);
 
 npe_end_code()
 

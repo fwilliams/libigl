@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/remove_duplicate_vertices.h>
 
 const char* ds_remove_duplicate_vertices = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_remove_duplicate_vertices = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -59,32 +52,17 @@ Examples
 npe_function(remove_duplicate_vertices)
 npe_doc(ds_remove_duplicate_vertices)
 
-npe_arg(v, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
 npe_arg(epsilon, double)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 sv;
-    dense_f32 svi;
-    dense_f32 svj;
-    igl::remove_duplicate_vertices(v, epsilon, sv, svi, svj);
-    return std::make_tuple(    npe::move(sv),
-    npe::move(svi),
-    npe::move(svj));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 sv;
-    dense_f64 svi;
-    dense_f64 svj;
-    igl::remove_duplicate_vertices(v, epsilon, sv, svi, svj);
-    return std::make_tuple(    npe::move(sv),     npe::move(svi),     npe::move(svj));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> sv;
+  EigenDense<npe_Scalar_> svi;
+  EigenDense<npe_Scalar_> svj;
+  igl::remove_duplicate_vertices(v, epsilon, sv, svi, svj);
+  return std::make_tuple(npe::move(sv), npe::move(svi), npe::move(svj));
 
 npe_end_code()
 #include <igl/remove_duplicate_vertices.h>
@@ -94,8 +72,6 @@ const char* ds_remove_duplicate_vertices = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -118,36 +94,19 @@ Examples
 npe_function(remove_duplicate_vertices)
 npe_doc(ds_remove_duplicate_vertices)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(epsilon, double)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 sv;
-    dense_f32 svi;
-    dense_f32 svj;
-    dense_f32 sf;
-    igl::remove_duplicate_vertices(v, f, epsilon, sv, svi, svj, sf);
-    return std::make_tuple(    npe::move(sv),
-    npe::move(svi),
-    npe::move(svj),
-    npe::move(sf));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 sv;
-    dense_f64 svi;
-    dense_f64 svj;
-    dense_f64 sf;
-    igl::remove_duplicate_vertices(v, f, epsilon, sv, svi, svj, sf);
-    return std::make_tuple(    npe::move(sv),     npe::move(svi),     npe::move(svj),     npe::move(sf));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> sv;
+  EigenDense<npe_Scalar_> svi;
+  EigenDense<npe_Scalar_> svj;
+  EigenDense<npe_Scalar_> sf;
+  igl::remove_duplicate_vertices(v, f, epsilon, sv, svi, svj, sf);
+  return std::make_tuple(npe::move(sv), npe::move(svi), npe::move(svj), npe::move(sf));
 
 npe_end_code()
 

@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/harmonic.h>
@@ -11,8 +7,6 @@ const char* ds_harmonic = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -46,29 +40,18 @@ Examples
 npe_function(harmonic)
 npe_doc(ds_harmonic)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(b, dense_f64)
-npe_arg(bc, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(b, dense_f32, dense_f64)
+npe_arg(bc, dense_f32, dense_f64)
 npe_arg(k, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 w;
-    igl::harmonic(v, f, b, bc, k, w);
-    return npe::move(w);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 w;
-    igl::harmonic(v, f, b, bc, k, w);
-    return npe::move(w);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> w;
+  igl::harmonic(v, f, b, bc, k, w);
+  return npe::move(w);
 
 npe_end_code()
 #include <igl/harmonic.h>
@@ -78,8 +61,6 @@ const char* ds_harmonic = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -111,28 +92,17 @@ Examples
 npe_function(harmonic)
 npe_doc(ds_harmonic)
 
-npe_arg(f, dense_i32)
-npe_arg(b, dense_f64)
-npe_arg(bc, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(b, dense_f32, dense_f64)
+npe_arg(bc, dense_f32, dense_f64)
 npe_arg(k, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 w;
-    igl::harmonic(f, b, bc, k, w);
-    return npe::move(w);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 w;
-    igl::harmonic(f, b, bc, k, w);
-    return npe::move(w);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> w;
+  igl::harmonic(f, b, bc, k, w);
+  return npe::move(w);
 
 npe_end_code()
 
@@ -141,7 +111,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/harmonic.h>
 
 const char* ds_harmonic = R"igl_Qu8mg5v7(
@@ -149,8 +118,6 @@ const char* ds_harmonic = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -184,27 +151,16 @@ npe_doc(ds_harmonic)
 
 npe_arg(l, Eigen::SparseMatrix<DerivedL> &)
 npe_arg(m, Eigen::SparseMatrix<DerivedM> &)
-npe_arg(b, dense_f64)
-npe_arg(bc, dense_f64)
+npe_arg(b, dense_f32, dense_f64)
+npe_arg(bc, dense_f32, dense_f64)
 npe_arg(k, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 w;
-    igl::harmonic(l, m, b, bc, k, w);
-    return npe::move(w);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 w;
-    igl::harmonic(l, m, b, bc, k, w);
-    return npe::move(w);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> w;
+  igl::harmonic(l, m, b, bc, k, w);
+  return npe::move(w);
 
 npe_end_code()
 #include <igl/harmonic.h>
@@ -214,8 +170,6 @@ const char* ds_harmonic = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -249,24 +203,13 @@ npe_doc(ds_harmonic)
 npe_arg(l, Eigen::SparseMatrix<DerivedL> &)
 npe_arg(m, Eigen::SparseMatrix<DerivedM> &)
 npe_arg(k, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::SparseMatrix<DerivedQ> & q;
-    igl::harmonic(l, m, k, q);
-    return npe::move(q);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::SparseMatrix<DerivedQ> & q;
-    igl::harmonic(l, m, k, q);
-    return npe::move(q);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::SparseMatrix<DerivedQ> & q;
+  igl::harmonic(l, m, k, q);
+  return npe::move(q);
 
 npe_end_code()
 #include <igl/harmonic.h>
@@ -276,8 +219,6 @@ const char* ds_harmonic = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -305,27 +246,16 @@ Examples
 npe_function(harmonic)
 npe_doc(ds_harmonic)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 npe_arg(k, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Eigen::SparseMatrix<DerivedQ> & q;
-    igl::harmonic(v, f, k, q);
-    return npe::move(q);
-} else if (dtype.type() == npe::type_f64) {
-    Eigen::SparseMatrix<DerivedQ> & q;
-    igl::harmonic(v, f, k, q);
-    return npe::move(q);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Eigen::SparseMatrix<DerivedQ> & q;
+  igl::harmonic(v, f, k, q);
+  return npe::move(q);
 
 npe_end_code()
 

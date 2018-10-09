@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/readSTL.h>
 
 const char* ds_read_stl = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_read_stl = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -60,30 +53,15 @@ npe_function(read_stl)
 npe_doc(ds_read_stl)
 
 npe_arg(filename, std::string &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 v;
-    dense_i32 f;
-    dense_f32 n;
-    igl::readSTL(filename, v, f, n);
-    return std::make_tuple(    npe::move(v),
-    npe::move(f),
-    npe::move(n));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 v;
-    dense_i32 f;
-    dense_f64 n;
-    igl::readSTL(filename, v, f, n);
-    return std::make_tuple(    npe::move(v),     npe::move(f),     npe::move(n));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> v;
+  EigenDense<npe_Scalar_> f;
+  EigenDense<npe_Scalar_> n;
+  igl::readSTL(filename, v, f, n);
+  return std::make_tuple(npe::move(v), npe::move(f), npe::move(n));
 
 npe_end_code()
 #include <igl/readSTL.h>
@@ -93,8 +71,6 @@ const char* ds_read_stl = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -120,33 +96,16 @@ Examples
 npe_function(read_stl)
 npe_doc(ds_read_stl)
 
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    FILE * stl_file;
-    std::vector<std::vector<TypeV> > & v;
-    std::vector<std::vector<TypeF> > & f;
-    std::vector<std::vector<TypeN> > & n;
-    igl::readSTL(stl_file, v, f, n);
-    return std::make_tuple(    npe::move(stl_file),
-    npe::move(v),
-    npe::move(f),
-    npe::move(n));
-} else if (dtype.type() == npe::type_f64) {
-    FILE * stl_file;
-    std::vector<std::vector<TypeV> > & v;
-    std::vector<std::vector<TypeF> > & f;
-    std::vector<std::vector<TypeN> > & n;
-    igl::readSTL(stl_file, v, f, n);
-    return std::make_tuple(    npe::move(stl_file),     npe::move(v),     npe::move(f),     npe::move(n));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  FILE * stl_file;
+  std::vector<std::vector<TypeV> > & v;
+  std::vector<std::vector<TypeF> > & f;
+  std::vector<std::vector<TypeN> > & n;
+  igl::readSTL(stl_file, v, f, n);
+  return std::make_tuple(npe::move(stl_file), npe::move(v), npe::move(f), npe::move(n));
 
 npe_end_code()
 #include <igl/readSTL.h>
@@ -159,30 +118,15 @@ npe_function(read_stl)
 npe_doc(ds_read_stl)
 
 npe_arg(filename, std::string &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    std::vector<std::vector<TypeV> > & v;
-    std::vector<std::vector<TypeF> > & f;
-    std::vector<std::vector<TypeN> > & n;
-    igl::readSTL(filename, v, f, n);
-    return std::make_tuple(    npe::move(v),
-    npe::move(f),
-    npe::move(n));
-} else if (dtype.type() == npe::type_f64) {
-    std::vector<std::vector<TypeV> > & v;
-    std::vector<std::vector<TypeF> > & f;
-    std::vector<std::vector<TypeN> > & n;
-    igl::readSTL(filename, v, f, n);
-    return std::make_tuple(    npe::move(v),     npe::move(f),     npe::move(n));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  std::vector<std::vector<TypeV> > & v;
+  std::vector<std::vector<TypeF> > & f;
+  std::vector<std::vector<TypeN> > & n;
+  igl::readSTL(filename, v, f, n);
+  return std::make_tuple(npe::move(v), npe::move(f), npe::move(n));
 
 npe_end_code()
 

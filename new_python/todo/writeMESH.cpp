@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/writeMESH.h>
 
 const char* ds_write_mesh = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_write_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -59,15 +52,10 @@ npe_arg(t, std::vector<std::vector<int> > &)
 npe_arg(f, std::vector<std::vector<int> > &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::writeMESH(mesh_file_name, v, t, f);
-
-return
+  igl::writeMESH(mesh_file_name, v, t, f);
+  return ;
 
 npe_end_code()
 #include <igl/writeMESH.h>
@@ -77,8 +65,6 @@ const char* ds_write_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -110,20 +96,15 @@ npe_function(write_mesh)
 npe_doc(ds_write_mesh)
 
 npe_arg(str, std::string)
-npe_arg(v, dense_f64)
-npe_arg(t, dense_f64)
-npe_arg(f, dense_i32)
-
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(t, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-
-igl::writeMESH(str, v, t, f);
-
-return
+  igl::writeMESH(str, v, t, f);
+  return ;
 
 npe_end_code()
 

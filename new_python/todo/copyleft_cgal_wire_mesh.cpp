@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/wire_mesh.h>
 
 const char* ds_wire_mesh = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_wire_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -59,35 +52,20 @@ Examples
 npe_function(wire_mesh)
 npe_doc(ds_wire_mesh)
 
-npe_arg(wv, dense_f64)
-npe_arg(we, dense_f64)
+npe_arg(wv, dense_f32, dense_f64)
+npe_arg(we, dense_f32, dense_f64)
 npe_arg(th, double)
 npe_arg(poly_size, int)
 npe_arg(solid, bool)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 v;
-    dense_i32 f;
-    dense_f32 j;
-    igl::    copyleft::    cgal::wire_mesh(wv, we, th, poly_size, solid, v, f, j);
-    return std::make_tuple(    npe::move(v),
-    npe::move(f),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 v;
-    dense_i32 f;
-    dense_f64 j;
-    igl::    copyleft::    cgal::wire_mesh(wv, we, th, poly_size, solid, v, f, j);
-    return std::make_tuple(    npe::move(v),     npe::move(f),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> v;
+  EigenDense<npe_Scalar_> f;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::wire_mesh(wv, we, th, poly_size, solid, v, f, j);
+  return std::make_tuple(npe::move(v), npe::move(f), npe::move(j));
 
 npe_end_code()
 #include <igl/wire_mesh.h>
@@ -97,8 +75,6 @@ const char* ds_wire_mesh = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -121,34 +97,19 @@ Examples
 npe_function(wire_mesh)
 npe_doc(ds_wire_mesh)
 
-npe_arg(wv, dense_f64)
-npe_arg(we, dense_f64)
+npe_arg(wv, dense_f32, dense_f64)
+npe_arg(we, dense_f32, dense_f64)
 npe_arg(th, double)
 npe_arg(poly_size, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 v;
-    dense_i32 f;
-    dense_f32 j;
-    igl::    copyleft::    cgal::wire_mesh(wv, we, th, poly_size, v, f, j);
-    return std::make_tuple(    npe::move(v),
-    npe::move(f),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 v;
-    dense_i32 f;
-    dense_f64 j;
-    igl::    copyleft::    cgal::wire_mesh(wv, we, th, poly_size, v, f, j);
-    return std::make_tuple(    npe::move(v),     npe::move(f),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> v;
+  EigenDense<npe_Scalar_> f;
+  EigenDense<npe_Scalar_> j;
+  igl::  copyleft::  cgal::wire_mesh(wv, we, th, poly_size, v, f, j);
+  return std::make_tuple(npe::move(v), npe::move(f), npe::move(j));
 
 npe_end_code()
 

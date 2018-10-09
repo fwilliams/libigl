@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/parallel_transport_angles.h>
 
 const char* ds_parallel_transport_angles = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_parallel_transport_angles = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -53,29 +46,18 @@ Examples
 npe_function(parallel_transport_angles)
 npe_doc(ds_parallel_transport_angles)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_arg(fn, dense_f64)
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
+npe_arg(fn, dense_f32, dense_f64)
 npe_arg(e2_f, Eigen::MatrixXi &)
 npe_arg(f2_e, Eigen::MatrixXi &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 k;
-    igl::parallel_transport_angles(v, f, fn, e2_f, f2_e, k);
-    return npe::move(k);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 k;
-    igl::parallel_transport_angles(v, f, fn, e2_f, f2_e, k);
-    return npe::move(k);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> k;
+  igl::parallel_transport_angles(v, f, fn, e2_f, f2_e, k);
+  return npe::move(k);
 
 npe_end_code()
 

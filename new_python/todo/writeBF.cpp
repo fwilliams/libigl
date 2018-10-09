@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/writeBF.h>
 
 const char* ds_write_bf = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_write_bf = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -50,20 +43,15 @@ npe_function(write_bf)
 npe_doc(ds_write_bf)
 
 npe_arg(filename, std::string &)
-npe_arg(wi, dense_f64)
-npe_arg(p, dense_f64)
-npe_arg(o, dense_f64)
-
+npe_arg(wi, dense_f32, dense_f64)
+npe_arg(p, dense_f32, dense_f64)
+npe_arg(o, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-
-igl::writeBF(filename, wi, p, o);
-
-return
+  igl::writeBF(filename, wi, p, o);
+  return ;
 
 npe_end_code()
 

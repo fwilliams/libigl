@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/component_inside_component.h>
@@ -10,8 +7,6 @@ const char* ds_component_inside_component = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -51,23 +46,18 @@ Examples
 npe_function(component_inside_component)
 npe_doc(ds_component_inside_component)
 
-npe_arg(v1, dense_f64)
-npe_arg(f1, dense_f64)
-npe_arg(i1, dense_f64)
-npe_arg(v2, dense_f64)
-npe_arg(f2, dense_f64)
-npe_arg(i2, dense_f64)
-
+npe_arg(v1, dense_f32, dense_f64)
+npe_arg(f1, dense_f32, dense_f64)
+npe_arg(i1, dense_f32, dense_f64)
+npe_arg(v2, dense_f32, dense_f64)
+npe_arg(f2, dense_f32, dense_f64)
+npe_arg(i2, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-
-igl::copyleft::cgal::component_inside_component(v1, f1, i1, v2, f2, i2);
-
-return
+  igl::  copyleft::  cgal::component_inside_component(v1, f1, i1, v2, f2, i2);
+  return ;
 
 npe_end_code()
 #include <igl/component_inside_component.h>
@@ -77,8 +67,6 @@ const char* ds_component_inside_component = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -115,21 +103,16 @@ Examples
 npe_function(component_inside_component)
 npe_doc(ds_component_inside_component)
 
-npe_arg(v1, dense_f64)
-npe_arg(f1, dense_f64)
-npe_arg(v2, dense_f64)
-npe_arg(f2, dense_f64)
-
+npe_arg(v1, dense_f32, dense_f64)
+npe_arg(f1, dense_f32, dense_f64)
+npe_arg(v2, dense_f32, dense_f64)
+npe_arg(f2, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-
-igl::copyleft::cgal::component_inside_component(v1, f1, v2, f2);
-
-return
+  igl::  copyleft::  cgal::component_inside_component(v1, f1, v2, f2);
+  return ;
 
 npe_end_code()
 

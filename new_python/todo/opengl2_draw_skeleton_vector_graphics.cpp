@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/draw_skeleton_vector_graphics.h>
@@ -13,20 +9,15 @@ See draw_skeleton_vector_graphics for the documentation.
 npe_function(draw_skeleton_vector_graphics)
 npe_doc(ds_draw_skeleton_vector_graphics)
 
-npe_arg(c, dense_f64)
-npe_arg(be, dense_f64)
-npe_arg(t, dense_f64)
-
+npe_arg(c, dense_f32, dense_f64)
+npe_arg(be, dense_f32, dense_f64)
+npe_arg(t, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_skeleton_vector_graphics(c, be, t);
-
-return
+  igl::  opengl2::draw_skeleton_vector_graphics(c, be, t);
+  return ;
 
 npe_end_code()
 
@@ -35,7 +26,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/draw_skeleton_vector_graphics.h>
 
 const char* ds_draw_skeleton_vector_graphics = R"igl_Qu8mg5v7(
@@ -43,8 +33,6 @@ const char* ds_draw_skeleton_vector_graphics = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -80,15 +68,10 @@ npe_arg(point_color, float *)
 npe_arg(line_color, float *)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_skeleton_vector_graphics(c, be, point_color, line_color);
-
-return
+  igl::  opengl2::draw_skeleton_vector_graphics(c, be, point_color, line_color);
+  return ;
 
 npe_end_code()
 #include <igl/draw_skeleton_vector_graphics.h>
@@ -98,8 +81,6 @@ const char* ds_draw_skeleton_vector_graphics = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -126,15 +107,10 @@ npe_arg(c, Eigen::MatrixXd &)
 npe_arg(be, Eigen::MatrixXi &)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_skeleton_vector_graphics(c, be);
-
-return
+  igl::  opengl2::draw_skeleton_vector_graphics(c, be);
+  return ;
 
 npe_end_code()
 #include <igl/draw_skeleton_vector_graphics.h>
@@ -144,8 +120,6 @@ const char* ds_draw_skeleton_vector_graphics = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -168,22 +142,17 @@ Examples
 npe_function(draw_skeleton_vector_graphics)
 npe_doc(ds_draw_skeleton_vector_graphics)
 
-npe_arg(c, dense_f64)
-npe_arg(be, dense_f64)
-npe_arg(t, dense_f64)
+npe_arg(c, dense_f32, dense_f64)
+npe_arg(be, dense_f32, dense_f64)
+npe_arg(t, dense_f32, dense_f64)
 npe_arg(point_color, float *)
 npe_arg(line_color, float *)
 
 
-
 npe_begin_code()
-using namespace std;
 
-
-
-igl::opengl2::draw_skeleton_vector_graphics(c, be, t, point_color, line_color);
-
-return
+  igl::  opengl2::draw_skeleton_vector_graphics(c, be, t, point_color, line_color);
+  return ;
 
 npe_end_code()
 

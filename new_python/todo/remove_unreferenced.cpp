@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/remove_unreferenced.h>
@@ -11,8 +7,6 @@ const char* ds_remove_unreferenced = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -45,32 +39,17 @@ Examples
 npe_function(remove_unreferenced)
 npe_doc(ds_remove_unreferenced)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 nv;
-    dense_f32 nf;
-    dense_f32 i;
-    igl::remove_unreferenced(v, f, nv, nf, i);
-    return std::make_tuple(    npe::move(nv),
-    npe::move(nf),
-    npe::move(i));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 nv;
-    dense_f64 nf;
-    dense_f64 i;
-    igl::remove_unreferenced(v, f, nv, nf, i);
-    return std::make_tuple(    npe::move(nv),     npe::move(nf),     npe::move(i));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> nv;
+  EigenDense<npe_Scalar_> nf;
+  EigenDense<npe_Scalar_> i;
+  igl::remove_unreferenced(v, f, nv, nf, i);
+  return std::make_tuple(npe::move(nv), npe::move(nf), npe::move(i));
 
 npe_end_code()
 #include <igl/remove_unreferenced.h>
@@ -82,35 +61,18 @@ See remove_unreferenced for the documentation.
 npe_function(remove_unreferenced)
 npe_doc(ds_remove_unreferenced)
 
-npe_arg(v, dense_f64)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(v, dense_f32, dense_f64)
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 nv;
-    dense_f32 nf;
-    dense_f32 i;
-    dense_f32 j;
-    igl::remove_unreferenced(v, f, nv, nf, i, j);
-    return std::make_tuple(    npe::move(nv),
-    npe::move(nf),
-    npe::move(i),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 nv;
-    dense_f64 nf;
-    dense_f64 i;
-    dense_f64 j;
-    igl::remove_unreferenced(v, f, nv, nf, i, j);
-    return std::make_tuple(    npe::move(nv),     npe::move(nf),     npe::move(i),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> nv;
+  EigenDense<npe_Scalar_> nf;
+  EigenDense<npe_Scalar_> i;
+  EigenDense<npe_Scalar_> j;
+  igl::remove_unreferenced(v, f, nv, nf, i, j);
+  return std::make_tuple(npe::move(nv), npe::move(nf), npe::move(i), npe::move(j));
 
 npe_end_code()
 
@@ -119,7 +81,6 @@ npe_end_code()
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/remove_unreferenced.h>
 
 const char* ds_remove_unreferenced = R"igl_Qu8mg5v7(
@@ -127,8 +88,6 @@ const char* ds_remove_unreferenced = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -159,28 +118,15 @@ npe_function(remove_unreferenced)
 npe_doc(ds_remove_unreferenced)
 
 npe_arg(n, size_t)
-npe_arg(f, dense_i32)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(f, dense_i32, dense_i64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 i;
-    dense_f32 j;
-    igl::remove_unreferenced(n, f, i, j);
-    return std::make_tuple(    npe::move(i),
-    npe::move(j));
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 i;
-    dense_f64 j;
-    igl::remove_unreferenced(n, f, i, j);
-    return std::make_tuple(    npe::move(i),     npe::move(j));
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> i;
+  EigenDense<npe_Scalar_> j;
+  igl::remove_unreferenced(n, f, i, j);
+  return std::make_tuple(npe::move(i), npe::move(j));
 
 npe_end_code()
 

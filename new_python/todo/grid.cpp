@@ -1,6 +1,3 @@
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 #include <igl/grid.h>
@@ -10,8 +7,6 @@ const char* ds_grid = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -41,25 +36,14 @@ Examples
 npe_function(grid)
 npe_doc(ds_grid)
 
-npe_arg(res, dense_f64)
-npe_default_arg(dtype, npe::dtype, "float64")
+npe_arg(res, dense_f32, dense_f64)
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    dense_f32 gv;
-    igl::grid(res, gv);
-    return npe::move(gv);
-} else if (dtype.type() == npe::type_f64) {
-    dense_f64 gv;
-    igl::grid(res, gv);
-    return npe::move(gv);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  EigenDense<npe_Scalar_> gv;
+  igl::grid(res, gv);
+  return npe::move(gv);
 
 npe_end_code()
 

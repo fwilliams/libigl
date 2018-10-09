@@ -1,7 +1,3 @@
-// COMPLETE BINDINGS ========================
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
 #include <npe.h>
 #include <typedefs.h>
 
@@ -10,7 +6,6 @@
 
 
 
-// INCOMPLETE BINDINGS ========================
 #include <igl/group_sum_matrix.h>
 
 const char* ds_group_sum_matrix = R"igl_Qu8mg5v7(
@@ -18,8 +13,6 @@ const char* ds_group_sum_matrix = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -57,24 +50,13 @@ npe_doc(ds_group_sum_matrix)
 
 npe_arg(g, Eigen::Matrix<int, Eigen::Dynamic, 1> &)
 npe_arg(k, int)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Sparse_f32 a;
-    igl::group_sum_matrix(g, k, a);
-    return npe::move(a);
-} else if (dtype.type() == npe::type_f64) {
-    Sparse_f64 a;
-    igl::group_sum_matrix(g, k, a);
-    return npe::move(a);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Sparse_f64 a;
+  igl::group_sum_matrix(g, k, a);
+  return npe::move(a);
 
 npe_end_code()
 #include <igl/group_sum_matrix.h>
@@ -84,8 +66,6 @@ const char* ds_group_sum_matrix = R"igl_Qu8mg5v7(
 Parameters
 ----------
 
-dtype : data-type of the returned objects, optional. Default is `float64`.
-(All integer return types are `int32` by default.)
 
 Returns
 -------
@@ -109,24 +89,13 @@ npe_function(group_sum_matrix)
 npe_doc(ds_group_sum_matrix)
 
 npe_arg(g, Eigen::Matrix<int, Eigen::Dynamic, 1> &)
-npe_default_arg(dtype, npe::dtype, "float64")
 
 
 npe_begin_code()
-using namespace std;
 
-
-if (dtype.type() == npe::type_f32) {
-    Sparse_f32 a;
-    igl::group_sum_matrix(g, a);
-    return npe::move(a);
-} else if (dtype.type() == npe::type_f64) {
-    Sparse_f64 a;
-    igl::group_sum_matrix(g, a);
-    return npe::move(a);
-} else {
-    throw pybind11::type_error("Only float32 and float64 dtypes are supported.");
-}
+  Sparse_f64 a;
+  igl::group_sum_matrix(g, a);
+  return npe::move(a);
 
 npe_end_code()
 
