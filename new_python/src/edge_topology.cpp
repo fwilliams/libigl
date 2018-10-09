@@ -8,8 +8,7 @@
 
 
 const char *ds_edge_topology = R"igl_Qu8mg5v7(
-Initialize Edges and their topological relations (assumes an edge-manifold
-   mesh)
+Initialize Edges and their topological relations (assumes an edge-manifold mesh)
 
 Parameters
 ----------
@@ -38,7 +37,7 @@ Examples
 
 npe_function(edge_topology)
 npe_doc(ds_edge_topology)
-npe_arg(v, dense_f64)
+npe_arg(v, dense_f64, dense_f32)
 npe_arg(f, dense_i32)
 // npe_arg(v, dense_f64, dense_f32)
 // npe_arg(f, dense_i32, dense_i64)

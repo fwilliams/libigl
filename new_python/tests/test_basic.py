@@ -248,12 +248,10 @@ class TestBasic(unittest.TestCase):
         self.assertEqual(a.shape, (self.f1.shape[0], self.f1.shape[0]))
 
     def test_edge_topology(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        ev, fe, ef = igl.edge_topology(v,f)
-
-        self.assertEqual(fe.shape, (f.shape[0],3))
+        ev, fe, ef = igl.edge_topology(self.v1, self.f1)
+        self.assertEqual(fe.shape, self.f1.shape)
         self.assertEqual(ef.shape, (ev.shape[0],2))
-        self.assertEqual(np.max(ev), v.shape[0] - 1)
+        self.assertEqual(np.max(ev), self.v1.shape[0] - 1)
         self.assertEqual(np.min(ef), 0)
 
 if __name__ == '__main__':
