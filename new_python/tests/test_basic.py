@@ -19,7 +19,7 @@ class TestBasic(unittest.TestCase):
         self.t = np.random.rand(10, 4)
         self.f = np.random.randint(0, 10, size=(20, 3), dtype="int32")
         self.g = np.random.randint(0, 10, size=(20, 4), dtype="int32")
-        # TODO add manifold/proper test data
+        self.v1, self.f1, self.n1 = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
 
     def test_module(self):
         # Extract all implemented functions from the module
@@ -152,41 +152,35 @@ class TestBasic(unittest.TestCase):
         self.assertTrue(os.path.isfile("test.obj"))
 
     def test_adjacency_list(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        a = igl.adjacency_list(f)
-        self.assertEqual(len(a), v.shape[0])
+        a = igl.adjacency_list(self.f1)
+        self.assertEqual(len(a), self.v1.shape[0])
 
     def test_arap_linear_block(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        kd = igl.arap_linear_block(v, f, d=2, energy=0)
+        kd = igl.arap_linear_block(self.v1, self.f1, d=2, energy=0)
         self.assertTrue(kd.shape[0] > 0)
-        kd = igl.arap_linear_block_elements(v, f, d=2)
+        kd = igl.arap_linear_block_elements(self.v1, self.f1, d=2)
         self.assertTrue(kd.shape[0] > 0)
-        kd = igl.arap_linear_block_spokes(v, f, d=2)
+        kd = igl.arap_linear_block_spokes(self.v1, self.f1, d=2)
         self.assertTrue(kd.shape[0] > 0)
-        kd = igl.arap_linear_block_spokes_and_rims(v, f, d=2)
+        kd = igl.arap_linear_block_spokes_and_rims(self.v1, self.f1, d=2)
         self.assertTrue(kd.shape[0] > 0)
 
     def test_arap_rhs(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        k = igl.arap_rhs(v, f, d=2, energy=0)
+        k = igl.arap_rhs(self.v1, self.f1, d=2, energy=0)
         self.assertTrue(k.shape[0] > 0)
 
     def test_average_onto_vertices(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        s = np.random.rand(f.shape[0])
-        sf = igl.average_onto_faces(f, s)
-        self.assertEqual(sf.shape[0], f.shape[0])
+        s = np.random.rand(self.f1.shape[0])
+        sf = igl.average_onto_faces(self.f1, s)
+        self.assertEqual(sf.shape[0], self.f1.shape[0])
 
     def test_average_onto_vertices(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        s = np.random.rand(f.shape[0])
-        sv = igl.average_onto_vertices(v, f, s)
-        self.assertEqual(sv.shape[0], v.shape[0])
+        s = np.random.rand(self.f1.shape[0])
+        sv = igl.average_onto_vertices(self.v1, self.f1, s)
+        self.assertEqual(sv.shape[0], self.v1.shape[0])
 
     def test_barycentric_coordinates(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        a, b, c = v[f[:, 0]], v[f[:, 1]], v[f[:, 2]]
+        a, b, c = self.v1[self.f1[:, 0]], self.v1[self.f1[:, 1]], self.v1[self.f1[:, 2]]
         bc = igl.barycentric_coordinates_tri(a, a, b, c)
         self.assertEqual(bc.shape, a.shape)
         expected_bc = np.zeros(a.shape)
@@ -198,20 +192,18 @@ class TestBasic(unittest.TestCase):
         self.assertEqual(bc.shape, (a.shape[0], 4))
 
     def test_components(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        a = igl.adjacency_matrix(f)
+        a = igl.adjacency_matrix(self.f1)
         c, count = igl.components(a)
-        self.assertEqual(c.shape[0], v.shape[0])
+        self.assertEqual(c.shape[0], self.v1.shape[0])
 
-        c = igl.components_from_faces(f)
-        self.assertEqual(c.shape[0], f.shape[0])
+        c = igl.components_from_faces(self.f1)
+        self.assertEqual(c.shape[0], self.f1.shape[0])
 
     def test_bfs(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        a = igl.adjacency_matrix(f)
+        a = igl.adjacency_matrix(self.f1)
         p, d = igl.bfs(a, 0)
-        self.assertEqual(p.shape, (v.shape[0],))
-        self.assertEqual(p.shape, (v.shape[0],))
+        self.assertEqual(p.shape, (self.v1.shape[0],))
+        self.assertEqual(p.shape, (self.v1.shape[0],))
 
         try:
             p, d, = igl.bfs(a, -1)
@@ -239,24 +231,21 @@ class TestBasic(unittest.TestCase):
         self.assertTrue(np.array_equal(d, -np.ones(10)))
 
     def test_bfs_orient(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        ff, c = igl.bfs_orient(f)
-        self.assertEqual(ff.shape, f.shape)
-        self.assertEqual(c.shape, (f.shape[0],))
-        self.assertTrue(np.array_equal(f, ff))
+        ff, c = igl.bfs_orient(self.f1)
+        self.assertEqual(ff.shape, self.f1.shape)
+        self.assertEqual(c.shape, (self.f1.shape[0],))
+        self.assertTrue(np.array_equal(self.f1, ff))
 
     def test_oriented_facets(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        e = igl.oriented_facets(f)
-        self.assertTrue(e.shape[0] > f.shape[0])
-        self.assertTrue(0 <= np.max(e) < v.shape[0])
+        e = igl.oriented_facets(self.f1)
+        self.assertTrue(e.shape[0] > self.f1.shape[0])
+        self.assertTrue(0 <= np.max(e) < self.v1.shape[0])
 
     def test_orientable_patches(self):
-        v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
-        c, a = igl.orientable_patches(f)
+        c, a = igl.orientable_patches(self.f1)
 
-        self.assertTrue(np.array_equal(c, np.zeros(f.shape[0])))
-        self.assertEqual(a.shape, (f.shape[0], f.shape[0]))
+        self.assertTrue(np.array_equal(c, np.zeros(self.f1.shape[0])))
+        self.assertEqual(a.shape, (self.f1.shape[0], self.f1.shape[0]))
 
     def test_edge_topology(self):
         v, f, n = igl.read_off(os.path.join(igl.TUTORIAL_PATH, "bunny.off"))
