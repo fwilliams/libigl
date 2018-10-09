@@ -7,17 +7,23 @@
 // obtain one at http://mozilla.org/MPL/2.0/.
 #include "slice.h"
 #include "colon.h"
+#include "traits.h"
 
 #include <vector>
 #include <unsupported/Eigen/SparseExtra>
 
-template <typename TX, typename TY>
+template <
+  typename TX,
+  typename TY,
+  typename DerivedRC>
 IGL_INLINE void igl::slice(
   const Eigen::SparseMatrix<TX>& X,
-  const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
-  const Eigen::Matrix<int,Eigen::Dynamic,1> & C,
+  const Eigen::MatrixBase<DerivedRC> & R,
+  const Eigen::MatrixBase<DerivedRC> & C,
   Eigen::SparseMatrix<TY>& Y)
 {
+  static_assert(igl::is_column_vector<DerivedRC>::value, "slice arguments R and C must be column vectors");
+  static_assert(igl::is_index_matrix<DerivedRC>::value, "slice arguments R and C must be column vectors of signed integer scalars");
 #if 1
   int xm = X.rows();
   int xn = X.cols();
@@ -134,13 +140,16 @@ IGL_INLINE void igl::slice(
 #endif
 }
 
-template <typename MatX, typename DerivedR, typename MatY>
+template <typename DerivedX, typename DerivedR, typename DerivedY>
 IGL_INLINE void igl::slice(
-  const MatX& X,
-  const Eigen::DenseBase<DerivedR> & R,
+  const Eigen::MatrixBase<DerivedX>& X,
+  const Eigen::MatrixBase<DerivedR> & R,
   const int dim,
-  MatY& Y)
+  Eigen::PlainObjectBase<DerivedY>& Y)
 {
+  static_assert(igl::is_column_vector<DerivedR>::value, "slice arguments R must be a column vector");
+  static_assert(igl::is_index_matrix<DerivedR>::value, "slice arguments R must be a column vectors of signed integer scalars");
+
   Eigen::Matrix<typename DerivedR::Scalar,Eigen::Dynamic,1> C;
   switch(dim)
   {
@@ -170,15 +179,16 @@ IGL_INLINE void igl::slice(
 
 template <
   typename DerivedX,
-  typename DerivedR,
-  typename DerivedC,
+  typename DerivedRC,
   typename DerivedY>
 IGL_INLINE void igl::slice(
-  const Eigen::DenseBase<DerivedX> & X,
-  const Eigen::DenseBase<DerivedR> & R,
-  const Eigen::DenseBase<DerivedC> & C,
+  const Eigen::MatrixBase<DerivedX> & X,
+  const Eigen::MatrixBase<DerivedRC> & R,
+  const Eigen::MatrixBase<DerivedRC> & C,
   Eigen::PlainObjectBase<DerivedY> & Y)
 {
+  static_assert(igl::is_column_vector<DerivedRC>::value, "slice arguments R and C must be column vectors");
+  static_assert(igl::is_index_matrix<DerivedRC>::value, "slice arguments R and C must be column vectors of signed integer scalars");
 #ifndef NDEBUG
   int xm = X.rows();
   int xn = X.cols();
@@ -211,35 +221,41 @@ IGL_INLINE void igl::slice(
 }
 
 
-template <typename DerivedX, typename DerivedY>
+template <typename DerivedX, typename DerivedY, typename DerivedR>
 IGL_INLINE void igl::slice(
-  const Eigen::DenseBase<DerivedX> & X,
-  const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
+  const Eigen::MatrixBase<DerivedX> & X,
+  const Eigen::MatrixBase<DerivedR> & R,
   Eigen::PlainObjectBase<DerivedY> & Y)
 {
+  static_assert(igl::is_column_vector<DerivedR>::value, "slice arguments R must be a column vector");
+  static_assert(igl::is_index_matrix<DerivedR>::value, "slice arguments R must be a column vectors of signed integer scalars");
+
   // phony column indices
-  Eigen::Matrix<int,Eigen::Dynamic,1> C;
+  DerivedR C;
   C.resize(1);
   C(0) = 0;
   return igl::slice(X,R,C,Y);
 }
 
-template <typename DerivedX>
+template <typename DerivedX, typename DerivedR>
 IGL_INLINE DerivedX igl::slice(
-  const Eigen::DenseBase<DerivedX> & X,
-  const Eigen::Matrix<int,Eigen::Dynamic,1> & R)
+  const Eigen::MatrixBase<DerivedX> & X,
+  const Eigen::MatrixBase<DerivedR> & R)
 {
+  static_assert(DerivedR::ColsAtCompileTime == 1, "slice argument R must be a column vectors");
   DerivedX Y;
   igl::slice(X,R,Y);
   return Y;
 }
 
-template <typename DerivedX>
+template <typename DerivedX, typename DerivedR>
 IGL_INLINE DerivedX igl::slice(
-  const Eigen::DenseBase<DerivedX>& X,
-  const Eigen::Matrix<int,Eigen::Dynamic,1> & R,
+  const Eigen::MatrixBase<DerivedX>& X,
+  const Eigen::MatrixBase<DerivedR> & R,
   const int dim)
 {
+  static_assert(igl::is_column_vector<DerivedR>::value, "slice arguments R must be a column vector");
+  static_assert(igl::is_index_matrix<DerivedR>::value, "slice arguments R must be a column vectors of signed integer scalars");
   DerivedX Y;
   igl::slice(X,R,dim,Y);
   return Y;

@@ -38,9 +38,7 @@ Examples
 npe_function(edge_topology)
 npe_doc(ds_edge_topology)
 npe_arg(v, dense_f64, dense_f32)
-npe_arg(f, dense_i32)
-// npe_arg(v, dense_f64, dense_f32)
-// npe_arg(f, dense_i32, dense_i64)
+npe_arg(f, dense_i32, dense_i64)
 npe_begin_code()
 
 using namespace std;
