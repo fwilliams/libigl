@@ -2,11 +2,6 @@
 #include <typedefs.h>
 #include <igl/edge_topology.h>
 
-#include <tuple>
-#include <Eigen/Core>
-#include <Eigen/Sparse>
-
-
 const char *ds_edge_topology = R"igl_Qu8mg5v7(
 Initialize Edges and their topological relations (assumes an edge-manifold mesh)
 
@@ -41,9 +36,8 @@ npe_arg(v, dense_f64, dense_f32)
 npe_arg(f, dense_i32, dense_i64)
 npe_begin_code()
 
-using namespace std;
-npe_Matrix_f ev, fe, ef;
-igl::edge_topology(v, f, ev, fe, ef);
+  npe_Matrix_f ev, fe, ef;
+  igl::edge_topology(v, f, ev, fe, ef);
 
 return std::make_tuple(npe::move(ev), npe::move(fe), npe::move(ef));
 
