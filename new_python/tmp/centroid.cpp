@@ -38,7 +38,7 @@ npe_arg(f, dense_i32, dense_i64)
 
 npe_begin_code()
 
-  EigenDense<npe_Scalar_v> c;
+  npe_Matrix_v c;
   npe_Scalar_v vol;
   igl::centroid(v, f, c, vol);
   return std::make_tuple(npe::move(c), vol);

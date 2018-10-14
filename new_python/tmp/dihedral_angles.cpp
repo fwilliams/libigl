@@ -3,7 +3,7 @@
 #include <igl/dihedral_angles.h>
 
 const char* ds_dihedral_angles = R"igl_Qu8mg5v7(
-Compute dihedral angles for all tets of a given tet mesh (V,T).
+Compute dihedral angles for all tets of a given tet mesh (v, t).
 
 Parameters
 ----------
@@ -36,8 +36,8 @@ npe_arg(t, dense_i32, dense_i64)
 
 npe_begin_code()
 
-  EigenDense<npe_Scalar_v> theta;
-  EigenDense<npe_Scalar_v> cos_theta;
+  npe_Matrix_v theta;
+  npe_Matrix_v cos_theta;
   igl::dihedral_angles(v, t, theta, cos_theta);
   return std::make_tuple(npe::move(theta), npe::move(cos_theta));
 
@@ -55,8 +55,8 @@ npe_arg(t, dense_i32, dense_i64)
 
 npe_begin_code()
 
-  EigenDense<npe_Scalar_v> theta;
-  EigenDense<npe_Scalar_v> cos_theta;
+  npe_Matrix_v theta;
+  npe_Matrix_v cos_theta;
   igl::dihedral_angles_intrinsic(v, t, theta, cos_theta);
   return std::make_tuple(npe::move(theta), npe::move(cos_theta));
 
