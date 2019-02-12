@@ -80,8 +80,8 @@ static void glfw_char_mods_callback(GLFWwindow* window, unsigned int codepoint, 
 
 static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int modifier)
 {
-  if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    glfwSetWindowShouldClose(window, GL_TRUE);
+  //if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+  //  glfwSetWindowShouldClose(window, GL_TRUE);
 
   if (action == GLFW_PRESS)
     __viewer->key_down(key, modifier);
@@ -488,6 +488,7 @@ namespace glfw
       }
     }
 
+    /*
     switch(unicode_key)
     {
       case 'A':
@@ -557,6 +558,7 @@ namespace glfw
         return true;
       default: break;//do nothing
     }
+    */
     return false;
   }
 
