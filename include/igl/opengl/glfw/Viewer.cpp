@@ -151,14 +151,14 @@ namespace glfw
     {
       GLFWmonitor *monitor = glfwGetPrimaryMonitor();
       const GLFWvidmode *mode = glfwGetVideoMode(monitor);
-      window = glfwCreateWindow(mode->width,mode->height,"libigl viewer",monitor,nullptr);
+      window = glfwCreateWindow(mode->width,mode->height,"Unwind",monitor,nullptr);
     }
     else
     {
       if (core.viewport.tail<2>().any()) {
-        window = glfwCreateWindow(core.viewport(2),core.viewport(3),"libigl viewer",nullptr,nullptr);
+        window = glfwCreateWindow(core.viewport(2),core.viewport(3),"Unwind",nullptr,nullptr);
       } else {
-        window = glfwCreateWindow(1280,800,"libigl viewer",nullptr,nullptr);
+        window = glfwCreateWindow(1280,800,"Unwind",nullptr,nullptr);
       }
     }
     if (!window)
